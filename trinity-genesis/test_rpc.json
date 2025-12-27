@@ -1,0 +1,1 @@
+{"jsonrpc": "2.0", "method": "Brain.think", "params": {"prompt": "Identify yourself and confirm you are running on Strix Halo."}, "id": 1}

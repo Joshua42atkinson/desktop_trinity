@@ -1,0 +1,29 @@
+# Markdown Grammar for GBNF
+# Used for documentation and content generation
+
+root ::= md-content+
+
+md-content ::= 
+    heading |
+    paragraph |
+    code-block |
+    list |
+    blockquote |
+    horizontal-rule |
+    link |
+    newline
+
+heading ::= "#"+ " " text newline
+paragraph ::= text newline
+code-block ::= "```" identifier? newline code-content "```" newline
+code-content ::= [^`]* | ("`" [^`]) | ("``" [^`])
+list ::= list-item+
+list-item ::= list-marker " " text newline
+list-marker ::= "-" | "*" | [0-9]+ "."
+blockquote ::= ">" " "? text newline
+horizontal-rule ::= ("---" | "***" | "___") newline
+link ::= "[" text "](" url ")"
+url ::= [a-zA-Z0-9:/.#?&=_-]+
+text ::= [^\n]+
+identifier ::= [a-zA-Z_][a-zA-Z0-9_]*
+newline ::= "\n"

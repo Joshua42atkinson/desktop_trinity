@@ -1,0 +1,24 @@
+{
+  "name": "day_dream",
+  "version": "1.0.0",
+  "description": "**A Headless Instructional Engine for Transformational Learning**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshua42atkinson/Day_Dream.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Joshua42atkinson/Day_Dream/issues"
+  },
+  "homepage": "https://github.com/Joshua42atkinson/Day_Dream#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.18"
+  }
+}

@@ -1,0 +1,28 @@
+[package]
+name = "common"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Main serialization library, used by everything
+serde = { version = "1.0", features = ["derive"] }
+
+# Used by our static loaders to parse the .json files
+serde_json = "1.0"
+
+# Used for `Lazy::new` to load static data once
+once_cell = "1.19"
+
+# --- Leptos/SQLx Integration ---
+leptos = { version = "0.8.0-rc3" }
+bevy_ecs = { version = "0.14", optional = true }
+sqlx = { version = "*", features = [ # Pinned version
+    "runtime-tokio-rustls",
+    "postgres",
+    "chrono",
+], optional = true }
+chrono = { version = "*", features = ["serde"], optional = true }
+
+
+[features]
+ssr = ["leptos/ssr", "bevy_ecs", "sqlx", "chrono"]

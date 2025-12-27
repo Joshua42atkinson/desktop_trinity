@@ -1,0 +1,37 @@
+[package]
+name = "trinity-memory-service"
+version = "0.1.0"
+edition = "2021"
+description = "Distributed memory service for Trinity AI OS"
+
+[dependencies]
+# Web framework
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.5", features = ["cors"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Vector database
+sled = "0.34"
+
+# Embedding (hash-based for simplicity, upgradable to real model)
+uuid = { version = "1.8", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Home directory
+dirs = "5"
+
+[[bin]]
+name = "trinity-memory-service"
+path = "src/main.rs"

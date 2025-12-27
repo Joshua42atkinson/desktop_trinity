@@ -1,0 +1,109 @@
+[workspace]
+members = [
+    "frontend",
+    "backend",
+    "common",
+    "trinity-core",
+    "trinity-desktop",
+    "trinity-memory-service",
+    "Quadradical",
+]
+resolver = "2"
+
+# Defines a multi-package leptos project.
+[[workspace.metadata.leptos]]
+# The name of the project.
+name = "daydream"
+
+# The package that contains the server binary.
+bin-package = "backend"
+
+# The package that contains the frontend wasm binary.
+lib-package = "frontend"
+
+# The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle.
+output-name = "daydream"
+
+# The site root folder is where cargo-leptos generate all output.
+site-root = "target/site"
+
+# The site-pkg-dir is where cargo-leptos generate the JS/WASM bundle.
+site-pkg-dir = "pkg"
+
+# The browserlist query used for optimizing the CSS.
+browserquery = "defaults"
+
+# The style file is the input for Tailwind CSS.
+style-file = "style/main.css"
+
+# Assets source dir. All files found here will be copied and synchronized to site-root.
+assets-dir = "public"
+
+# The IP and port (ex: 127.0.0.1:3000) where the server serves the content.
+site-addr = "0.0.0.0:3000"
+
+# The port to use for automatic reload monitoring
+reload-port = 3001
+
+# The command to use when running end-to-end tests. It will run in the browser rather than headless.
+end2end-cmd = "npx playwright test"
+
+# The browser to use for end-to-end testing. Can be 'chromium', 'firefox', 'webkit' or 'all'.
+end2end-browser = "chromium"
+
+# The command to use to run tests headless
+end2end-cmd-headless = "npx playwright test"
+
+[workspace.dependencies]
+# Async Runtime
+tokio = { version = "1", features = ["full"] }
+futures = "0.3"
+
+# ECS & App Runtime
+bevy = { version = "0.14", default-features = true }
+bevy_egui = "0.28"
+
+# Error Handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# AI / Inference (Candle) - 0.9.2-alpha for rand 0.9 compatibility with leptos
+candle-core = { version = "0.9.2-alpha.2" }
+candle-nn = { version = "0.9.2-alpha.2" }
+candle-transformers = { version = "0.9.2-alpha.2" }
+tokenizers = "0.21"
+
+# Utils
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+directories = "5"
+dashmap = "5"
+
+# Vector DB & Persistence (sled - no arrow conflicts)
+sled = "0.34"
+
+# Database (embedded SQLite - no server required)
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+# Patched crates for AMD GPU (HIP/ROCm) support
+[patch.crates-io]
+llama-cpp-2 = { path = "patches/llama-cpp-2" }
+llama-cpp-sys-2 = { path = "patches/llama-cpp-sys-2" }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = false
+
+[profile.dev]
+opt-level = 1 # Slightly faster debug builds

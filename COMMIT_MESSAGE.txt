@@ -1,0 +1,12 @@
+feat(authoring): polish UI, graph management, and single-exe deployment
+
+- Added "Add Node" button to toolbar.
+- Added "Delete Node" button to Property Editor.
+- Upgraded connection lines to Bezier curves with arrowheads.
+- Added grid background pattern to NodeCanvas.
+- Fixed backend 500 error when running without database (Simulation Mode).
+- Fixed frontend build errors related to Action Send bounds.
+- Implemented Single Executable deployment:
+    - Added `rust-embed` to backend to bundle frontend assets.
+    - Updated `main.rs` to serve static assets with SPA fallback.
+    - Created `build_release.ps1` automation script.

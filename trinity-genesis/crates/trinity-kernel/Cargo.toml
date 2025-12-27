@@ -1,0 +1,62 @@
+[package]
+name = "trinity-kernel"
+version.workspace = true
+edition.workspace = true
+description = "Core library for Trinity Genesis - LLM inference, memory, and device management"
+
+[features]
+default = []
+desktop = ["llama-cpp-2"]
+inference = []
+rocm = []
+
+[dependencies]
+# Async
+tokio = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+rodio = { version = "0.19", optional = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Error handling
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+
+# AI / Inference
+# Using Vulkan for stable inference on Strix Halo (better token gen, simpler than ROCm)
+llama-cpp-2 = { version = "0.1", optional = true, features = ["vulkan"] }
+reqwest = { version = "0.12", features = ["json"] }
+candle-core = { workspace = true }
+candle-nn = { workspace = true }
+candle-transformers = { workspace = true }
+
+# Utils
+uuid = { workspace = true }
+chrono = { workspace = true }
+directories = { workspace = true }
+dashmap = { workspace = true }
+
+# Vector storage (embedded)
+# Database
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+
+# System Info
+sysinfo = "0.33"
+dirs = { workspace = true }
+
+# Web / Network
+scraper = { workspace = true }
+
+# WebAssembly Runtime (Autopoiesis)
+wasmtime = "28"
+wit-bindgen = "0.36"
+
+[dev-dependencies]
+tempfile = "3.10"

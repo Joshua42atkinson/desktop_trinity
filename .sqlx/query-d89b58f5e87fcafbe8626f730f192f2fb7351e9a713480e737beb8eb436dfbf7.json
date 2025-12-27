@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO player_mastery (player_id, word_id, times_used, is_mastered)\n             VALUES ($1, $2, 1, false)\n             ON CONFLICT (player_id, word_id)\n             DO UPDATE SET\n                times_used = player_mastery.times_used + 1,\n                is_mastered = (player_mastery.times_used + 1) >= 3,\n                last_used_at = NOW()\n             RETURNING is_mastered",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "is_mastered",
+        "type_info": "Bool"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "d89b58f5e87fcafbe8626f730f192f2fb7351e9a713480e737beb8eb436dfbf7"
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadradical Dashboard | Trinity AI OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">Q</div>
+                <span class="logo-text">Quadradical</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📋</span> Task Queue
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">🧪</span> Experiments
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">⚙️</span> Settings
+                </a>
+            </nav>
+            <div class="system-status">
+                <div class="status-indicator online"></div>
+                <div class="status-info">
+                    <div class="status-label">Local Node</div>
+                    <div class="status-value">Connected</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search tasks or files...">
+                </div>
+                <div class="user-profile">
+                    <div class="model-badge">73B Behemoth</div>
+                    <div class="notification-bell">🔔</div>
+                </div>
+            </header>
+
+            <section class="dashboard-grid">
+                <!-- Status Row -->
+                <div class="stat-card glass animate-slide-up" style="animation-delay: 0.1s;">
+                    <div class="stat-icon">📥</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total TODOs</div>
+                        <div class="stat-value" id="total-todos">507</div>
+                    </div>
+                </div>
+                <div class="stat-card glass animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="stat-icon icon-cyan">🔨</div>
+                    <div class="stat-content">
+                        <div class="stat-label">In Progress</div>
+                        <div class="stat-value" id="active-tasks">1</div>
+                    </div>
+                </div>
+                <div class="stat-card glass animate-slide-up" style="animation-delay: 0.3s;">
+                    <div class="stat-icon icon-green">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Completed</div>
+                        <div class="stat-value" id="completed-tasks">12</div>
+                    </div>
+                </div>
+                <div class="stat-card glass animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="stat-icon icon-violet">🧠</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Thinking Mode</div>
+                        <div class="stat-value">Deep Inference</div>
+                    </div>
+                </div>
+
+                <!-- Main Work Area -->
+                <div class="large-card glass task-list-container animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="card-header">
+                        <h2>Current Task Stream</h2>
+                        <button class="btn-refresh">Refresh Stream</button>
+                    </div>
+                    <div class="task-stream" id="task-stream">
+                        <!-- Tasks will be injected here -->
+                        <div class="task-item active">
+                            <div class="task-marker"></div>
+                            <div class="task-info">
+                                <div class="task-title">Refining Autopoietic Loop Integration Tests</div>
+                                <div class="task-meta">high-priority • crates/trinity-kernel/tests/autopoietic.rs</div>
+                            </div>
+                            <div class="task-status">Thinking...</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-marker marker-pending"></div>
+                            <div class="task-info">
+                                <div class="task-title">Implement actual SDXL inference with candle (L233)</div>
+                                <div class="task-meta">normal-priority • crates/trinity-skills/src/media/image_gen.rs</div>
+                            </div>
+                            <div class="task-status status-pending">Queued</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-marker marker-pending"></div>
+                            <div class="task-info">
+                                <div class="task-title">Actually spawn particle entities (L206)</div>
+                                <div class="task-meta">normal-priority • crates/trinity-body/src/effects.rs</div>
+                            </div>
+                            <div class="task-status status-pending">Queued</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal / Thought Log -->
+                <div class="large-card glass terminal-log animate-slide-up" style="animation-delay: 0.6s;">
+                    <div class="card-header">
+                        <h2>Autonomous Consciousness</h2>
+                        <div class="brain-activity">
+                            <div class="pulse"></div>
+                            Activity: 84%
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminal-body">
+                        <div class="term-line prompt">quadradical::think >> analyzing workspace context...</div>
+                        <div class="term-line">   found 507 TODO items across 48 files.</div>
+                        <div class="term-line">   prioritizing autopoietic stability fixes.</div>
+                        <div class="term-line prompt">quadradical::eval >> inspecting crates/trinity-kernel/src/autopoietic.rs</div>
+                        <div class="term-line success">   ✓ logic verified. emitting mutation request.</div>
+                        <div class="term-line info">   waiting for compiler feedback...</div>
+                        <div class="term-line blink">_</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

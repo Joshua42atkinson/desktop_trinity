@@ -1,0 +1,80 @@
+[package]
+name = "frontend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Core Framework - Pinned to 0.8.12 for stability
+leptos = { version = "0.8.0-rc3", features = ["nightly", "csr"] }
+leptos_router = { version = "0.8.0-rc3" }
+leptos_meta = { version = "0.8.0-rc3" }
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen = "0.2.93"
+gloo-net = "0.5"
+serde_json = "1.0"
+js-sys = "0.3"
+common = { path = "../common" }
+web-sys = { version = "0.3", features = [
+    "MouseEvent",
+    "Element",
+    "SvgElement",
+    "DomRect",
+    "HtmlFormElement",
+    "FormData",
+    "Event",
+] }
+console_error_panic_hook = "0.1"
+console_log = "1.0"
+log = "0.4"
+wasm-bindgen-futures = "0.4"
+uuid = { version = "1.18.1", features = ["v4", "serde", "js"] }
+urlencoding = "2.1"
+futures = "0.3"
+gloo-timers = { version = "0.3", features = ["futures"] }
+
+# SSR-only dependencies (not for WASM)
+[dependencies.sqlx]
+version = "0.8.6"
+features = ["postgres", "runtime-tokio-rustls", "chrono", "uuid"]
+optional = true
+
+[dependencies.reqwest]
+version = "0.12"
+features = ["json"]
+optional = true
+
+# Server-Side Rendering (SSR) Dependencies
+[dependencies.axum]
+version = "0.8"
+optional = true
+
+[dependencies.leptos_axum]
+version = "0.8.0-rc3"
+optional = true
+
+[dependencies.tokio]
+version = "1.37"
+features = ["full"]
+optional = true
+
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+# Fixes WASM runtime error by using browser's JS-based randomness source
+getrandom = { version = "0.2", features = ["js"] }
+
+[features]
+hydrate = ["leptos/hydrate"]
+ssr = [
+    "dep:axum",
+    "dep:tokio",
+    "dep:leptos_axum",
+    "leptos/ssr",
+    "leptos_meta/ssr",
+    "leptos_router/ssr",
+]
+
+[[bin]]
+name = "frontend_bin"
+path = "src/main.rs"

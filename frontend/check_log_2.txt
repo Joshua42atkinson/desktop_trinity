@@ -1,0 +1,17 @@
+warning: unused import: `once_cell::sync::Lazy`
+ --> common\src\lib.rs:8:5
+  |
+8 | use once_cell::sync::Lazy;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `common` (lib) generated 1 warning (run `cargo fix --lib -p common` to apply 1 suggestion)
+    Checking frontend v0.1.0 (C:\Users\Trinity\Documents\daydream\Day_Dream\frontend)
+error: unexpected closing delimiter: `}`
+ --> frontend\src\pages\authoring.rs:1:1
+  |
+1 | }
+  | ^ unexpected closing delimiter
+
+error: could not compile `frontend` (lib) due to 1 previous error

@@ -1,0 +1,49 @@
+{
+    "Q_THE_WAY_IS_SHUT": {
+        "title": "The Way is Shut",
+        "chapter_theme": "The Ordinary World",
+        "description": "The path ahead is blocked by a mysterious, shimmering barrier. Two pedestals stand before it, one glowing with a soft blue light, the other with a fiery red.",
+        "starting_step": "STEP_01_CHOOSE_PEDESTAL",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_CHOOSE_PEDESTAL": {
+                "description": "You must choose a pedestal to touch.",
+                "choices": [
+                    {
+                        "text": "Touch the blue pedestal.",
+                        "command": "touch blue pedestal",
+                        "next_step": "STEP_02_BLUE_PATH"
+                    },
+                    {
+                        "text": "Touch the red pedestal.",
+                        "command": "touch red pedestal",
+                        "next_step": "STEP_02_RED_PATH"
+                    }
+                ],
+                "step_reward": null,
+                "is_major_plot_point": true
+            },
+            "STEP_02_BLUE_PATH": {
+                "description": "You chose the path of wisdom. The barrier fades, revealing a library filled with ancient tomes.",
+                "choices": [],
+                "step_reward": {
+                    "type": "info",
+                    "details": "You have gained new insight."
+                },
+                "is_major_plot_point": false
+            },
+            "STEP_02_RED_PATH": {
+                "description": "You chose the path of courage. The barrier shatters, revealing a training ground with weapons of every description.",
+                "choices": [],
+                "step_reward": {
+                    "type": "info",
+                    "details": "You feel a surge of strength."
+                },
+                "is_major_plot_point": false
+            }
+        }
+    }
+}

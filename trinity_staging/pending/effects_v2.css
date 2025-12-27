@@ -1,0 +1,297 @@
+```css
+/* /home/joshua/antigravity/trinity_overnight_work/css/trinity-particles.css */
+
+/* --------------------------------------------------------------
+   Trinity UI – Particle & Ambient Effects (Concept 2)
+   Author: <Your Name>
+   License: MIT
+   -------------------------------------------------------------- */
+
+:root {
+    /* Core colors */
+    --trinity-primary   : #0ff;          /* Neon cyan */
+    --trinity-accent    : #ff00ff;       /* Magenta accent */
+    --trinity-bg        : #01010a;       /* Deep space background */
+    --trinity-glow      : rgba(0,255,255,.12);
+}
+
+/* --------------------------------------------------------------
+   Global layout helpers
+   -------------------------------------------------------------- */
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: var(--trinity-bg);
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #fff;
+}
+
+/* Container that holds all canvas layers */
+.trinity-canvas-wrapper {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;          /* let UI elements receive clicks */
+    z-index: -1;                    /* keep behind UI */
+}
+
+/* --------------------------------------------------------------
+   Particle System – Floating Code Bits
+   -------------------------------------------------------------- */
+
+.canvas-particles {
+    width: 100%;
+    height: 100%;
+}
+
+/* --------------------------------------------------------------
+   Neural Network Visualizer (SVG overlay)
+   -------------------------------------------------------------- */
+
+#neural-network {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .45;
+}
+
+/* Nodes */
+.nn-node {
+    fill: var(--trinity-primary);
+    r: 4;
+    filter: url(#glow);
+}
+
+/* Links */
+.nn-link {
+    stroke: var(--trinity-accent);
+    stroke-width: 1.2;
+    opacity: .6;
+}
+
+/* --------------------------------------------------------------
+   Data Stream – Horizontal flow ribbons
+   -------------------------------------------------------------- */
+
+.stream-ribbon {
+    position: absolute;
+    left: -200px;               /* start off-screen */
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--trinity-primary),
+        transparent);
+    filter: blur(1.5px);
+    animation: streamMove 8s linear infinite;
+}
+
+/* Randomize speed & vertical position via CSS variables */
+.stream-ribbon[data-index] {
+    --delay   : calc(var(--i) * .12s);
+    --duration: calc(6s + (var(--i) % 4) * 2s);
+    top: calc((var(--i) % 20) * 5vh);
+    animation-delay: var(--delay);
+    animation-duration: var(--duration);
+}
+
+/* Animation */
+@keyframes streamMove {
+    from { transform: translateX(0); }
+    to   { transform: translateX(120vw); }
+}
+
+/* --------------------------------------------------------------
+   Ambient Glow – Pulsating background
+   -------------------------------------------------------------- */
+
+.glow-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%,
+        var(--trinity-glow),
+        transparent 70%);
+    animation: pulseGlow 12s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%,100% { opacity: .15; }
+    50%     { opacity: .35; }
+}
+
+/* --------------------------------------------------------------
+   Loading Spinner – Personality infused
+   -------------------------------------------------------------- */
+
+.trinity-spinner {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+}
+.trinity-spinner::before,
+.trinity-spinner::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:4px solid transparent;
+}
+.trinity-spinner::before{
+    border-top-color:var(--trinity-primary);
+    animation: spin 1.2s linear infinite;
+}
+.trinity-spinner::after{
+    border-bottom-color:var(--trinity-accent);
+    animation: spinReverse 0.9s linear infinite;
+}
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+@keyframes spinReverse{
+    to{transform:rotate(-360deg);}
+}
+
+/* --------------------------------------------------------------
+   Utility – Fade in/out for UI elements
+   -------------------------------------------------------------- */
+
+.fade-in {
+    animation: fadeIn .6s forwards;
+}
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(8px);}
+    to  {opacity:1; transform:none;}
+}
+```
+
+
+```javascript
+/* /home/joshua/antigravity/trinity_overnight_work/js/trinity-particles.js */
+
+/* --------------------------------------------------------------
+   Trinity UI – Particle & Neural Network Engine
+   Dependencies: none (pure Canvas + SVG)
+   -------------------------------------------------------------- */
+
+(() => {
+    const FPS = 60;
+    const PARTICLE_COUNT = 120;
+    const CODE_CHARACTERS = "01<>/\\{}[]();_+-=*".split("");
+
+    /* ------------------------------------------------------------------
+       Helper – random utilities
+       ------------------------------------------------------------------ */
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+
+    /* ------------------------------------------------------------------
+       Canvas Setup – Floating Code Particles
+       ------------------------------------------------------------------ */
+    const canvas = document.createElement('canvas');
+    canvas.className = 'canvas-particles';
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    /* Particle definition */
+    class CodeParticle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = rand(0, canvas.width);
+            this.y = rand(-canvas.height, 0);
+            this.speedY = rand(0.4, 1.2);
+            this.size = rand(10, 22);
+            this.char = pick(CODE_CHARACTERS);
+            this.opacity = rand(0.3, 0.85);
+        }
+        update() {
+            this.y += this.speedY;
+            if (this.y - this.size > canvas.height) this.reset();
+        }
+        draw() {
+            ctx.font = `${this.size}px monospace`;
+            ctx.fillStyle = `rgba(0,255,255,${this.opacity})`;
+            ctx.fillText(this.char, this.x, this.y);
+        }
+    }
+
+    const particles = Array.from({length: PARTICLE_COUNT}, () => new CodeParticle());
+
+    function renderParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+            p.update();
+            p.draw();
+        }
+    }
+
+    /* ------------------------------------------------------------------
+       SVG Neural Network Visualizer
+       ------------------------------------------------------------------ */
+    const svgNS = "http://www.w3.org/2000/svg";
+    const nnSvg = document.createElementNS(svgNS, 'svg');
+    nnSvg.setAttribute('id', 'neural-network');
+    nnSvg.setAttribute('width', '100%');
+    nnSvg.setAttribute('height', '100%');
+
+    // Define glow filter
+    const defs = document.createElementNS(svgNS, 'defs');
+    const filter = document.createElementNS(svgNS, 'filter');
+    filter.id = "glow";
+    const feGaussian = document.createElementNS(svgNS, 'feGaussianBlur');
+    feGaussian.setAttribute('stdDeviation', '2.5');
+    const feMerge = document.createElementNS(svgNS, 'feMerge');
+    const feMergeNode1 = document.createElementNS(svgNS, 'feMergeNode');
+    const feMergeNode2 = document.createElementNS(svgNS, 'feMergeNode');
+    feMerge.append(feMergeNode1, feMergeNode2);
+    filter.append(feGaussian, feMerge);
+    defs.append(filter);
+    nnSvg.append(defs);
+
+    // Parameters
+    const NODE_COUNT_X = 12;
+    const NODE_COUNT_Y = 8;
+    const nodes = [];
+
+    function createNetwork() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const gapX = w / (NODE_COUNT_X + 1);
+        const gapY = h / (NODE_COUNT_Y + 1);
+
+        // Clear previous
+        while (nnSvg.lastChild && nnSvg.lastChild !== defs) {
+            nnSvg.removeChild(nnSvg.lastChild);
+        }
+
+        // Create nodes
+        for (let i = 0; i < NODE_COUNT_X; i++) {
+            for (let j = 0; j < NODE_COUNT_Y; j++) {
+                const cx = gapX * (i + 1);
+                const cy = gapY * (j + 1);
+                const node = document.createElementNS(svgNS, 'circle');
+                node.classList.add('nn-node');
+                node.setAttribute('cx', cx);
+                node.setAttribute('cy', cy);
+                nnSvg.appendChild(node);
+                nodes.push({cx, cy, el: node});
+            }
+        }
+
+        // Create random links
+        const linkCount = NODE_COUNT_X * NODE_COUNT_Y * 1.5;
+        for (let i = 0; i < linkCount; i++) {
+            const a = nodes[Math.floor(Math.random() * nodes.length)];
+            const b = nodes[Math.floor(Math.random() * nodes.length)];
+            if (a === b) continue;
+
+            const line = document.createElementNS(svgNS, 'line');
+            line.classList.add

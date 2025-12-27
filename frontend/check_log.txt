@@ -1,0 +1,47 @@
+    Checking leptos_dom v0.8.7
+    Checking leptos_server v0.8.5
+    Checking common v0.1.0 (C:\Users\Trinity\Documents\daydream\Day_Dream\common)
+error[E0432]: unresolved import `chrono`
+ --> common\src\reflection.rs:1:5
+  |
+1 | use chrono::Utc;
+  |     ^^^^^^ use of unresolved module or unlinked crate `chrono`
+  |
+  = help: if you wanted to use a crate named `chrono`, use `cargo add chrono` to add it to your `Cargo.toml`
+
+error[E0432]: unresolved import `sqlx`
+ --> common\src\reflection.rs:3:5
+  |
+3 | use sqlx::PgPool;
+  |     ^^^^ use of unresolved module or unlinked crate `sqlx`
+  |
+  = help: if you wanted to use a crate named `sqlx`, use `cargo add sqlx` to add it to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `sqlx`
+  --> common\src\reflection.rs:18:5
+   |
+18 |     sqlx::query!(
+   |     ^^^^ use of unresolved module or unlinked crate `sqlx`
+
+warning: unused import: `once_cell::sync::Lazy`
+ --> common\src\lib.rs:8:5
+  |
+8 | use once_cell::sync::Lazy;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+    Checking leptos v0.8.12
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `sqlx`
+  --> common\src\reflection.rs:17:17
+   |
+17 | ) -> Result<(), sqlx::Error> {
+   |                 ^^^^ use of unresolved module or unlinked crate `sqlx`
+   |
+   = help: if you wanted to use a crate named `sqlx`, use `cargo add sqlx` to add it to your `Cargo.toml`
+
+Some errors have detailed explanations: E0432, E0433.
+For more information about an error, try `rustc --explain E0432`.
+warning: `common` (lib) generated 1 warning
+error: could not compile `common` (lib) due to 4 previous errors; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,41 @@
+# Build artifacts
+/target/
+**/target/
+node_modules/
+frontend/dist/
+
+# Large binaries and models
+models/
+**/*.gguf
+**/*.bin
+**/*.pt
+**/*.weights
+**/*.onnx
+
+# Data and Logs
+*.log
+**/*.log
+.trinity_data/
+trinity_reports/
+trinity_overnight_work/
+day_dream/
+_archive/
+llama-cpp-hip-temp/
+llama.cpp/
+trinity-genesis/target/
+trinity-genesis/brain.log
+trinity-genesis/*.pid
+trinity-genesis/*.gguf
+trinity-genesis/SOURCE_CODE_DUMP.md
+
+# Environment and Secrets
+.env
+**/.env
+.git/
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary files
+*.tmp
+*.swp

@@ -1,0 +1,37 @@
+# Trinity Genesis Cargo Configuration
+
+[doc]
+# Open docs in browser after generation  
+browser = "firefox"
+
+[alias]
+# Generate comprehensive docs for all workspace crates
+docs = "doc --workspace --document-private-items --no-deps --open"
+
+# Quick doc build without opening
+docs-quiet = "doc --workspace --no-deps"
+
+# Run all tests including doc tests
+test-all = "test --workspace --all-features"
+
+# Build with all features (for full functionality)
+build-full = "build --workspace --all-features"
+
+# Check the whole workspace
+check-all = "check --workspace --all-features"
+
+[build]
+# Use mold linker if available for faster builds
+# Uncomment if you have mold installed:
+# rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
+[target.x86_64-unknown-linux-gnu]
+# ROCm/HIP linker flags for AMD GPU support
+rustflags = [
+    # Enable debug info for profiling
+    # "-C", "debuginfo=2",
+]
+
+[env]
+# AMD Strix Halo GPU architecture override
+HSA_OVERRIDE_GFX_VERSION = "11.0.0"

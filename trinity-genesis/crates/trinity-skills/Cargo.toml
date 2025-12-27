@@ -1,0 +1,45 @@
+[package]
+name = "trinity-skills"
+version.workspace = true
+edition.workspace = true
+description = "Agent skill plugins for Trinity Genesis - coder, writer, artist, etc."
+
+[features]
+default = []
+bevy = []    # Enable Bevy ECS plugin components
+
+[dependencies]
+# Internal crates
+trinity-kernel = { workspace = true }
+trinity-protocol = { workspace = true }
+
+# ECS
+bevy = { workspace = true }
+
+# Async Runtime
+tokio = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Error handling
+anyhow = { workspace = true }
+
+# Web / Network
+reqwest = { workspace = true }
+scraper = { workspace = true }
+dirs = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# Image encoding
+png = "0.17"
+base64 = "0.22"
+
+[dev-dependencies]
+tempfile = "3.10"

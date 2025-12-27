@@ -1,0 +1,33 @@
+[package]
+name = "trinity-coder"
+version.workspace = true
+edition.workspace = true
+description = "Specialized Coder node - Running Overthinking Rustacean Behemoth"
+
+[[bin]]
+name = "trinity-coder"
+path = "src/main.rs"
+
+[features]
+default = ["rocm"]
+rocm = ["trinity-kernel/rocm", "trinity-kernel/desktop"]
+
+[dependencies]
+# Internal crates
+trinity-kernel = { workspace = true, features = ["desktop", "inference"] }
+trinity-protocol = { workspace = true }
+
+# Async Runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# RPC & Networking
+tarpc = { workspace = true }
+tokio-serde = { workspace = true }
+
+# Utils
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+dirs = { workspace = true }
+serde = { workspace = true }

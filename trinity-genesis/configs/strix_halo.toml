@@ -1,0 +1,27 @@
+# Trinity Genesis - Strix Halo Configuration
+# GMK Tech Evo 2 with AMD Ryzen AI Max 395+
+
+[node]
+type = "Brain"
+
+[model]
+path = "/home/joshua/antigravity/models/smart_model.gguf"
+n_gpu_layers = 999
+context_size = 131072                                     # Max context for Llama 4
+batch_size = 512
+n_threads = 16
+
+[memory]
+vector_store_path = "/home/joshua/.trinity/vectors"
+embedding_dim = 384
+max_recall = 20
+
+[network]
+listen_addr = "0.0.0.0:9000"
+body_addr = "100.84.217.60:9000"
+
+[hardware]
+# ROCm environment for Strix Halo
+gfx_version = "gfx1151"
+vram_gb = 96
+system_ram_gb = 128

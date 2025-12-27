@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Trinity AI
+Comment=Open Trinity AI Control Center
+Exec=/home/joshua/antigravity/trinity-genesis/target/release/trinity-body
+Icon=/home/joshua/antigravity/trinity-genesis/assets/trinity-icon.png
+Terminal=false
+Categories=Development;AI;
+StartupWMClass=trinity-body

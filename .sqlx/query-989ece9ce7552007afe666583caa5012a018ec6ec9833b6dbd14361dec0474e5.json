@@ -1,0 +1,46 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT id, word, definition, context_tag, complexity_tier\n             FROM vocabulary_words\n             WHERE context_tag = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "word",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "definition",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "context_tag",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "complexity_tier",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "989ece9ce7552007afe666583caa5012a018ec6ec9833b6dbd14361dec0474e5"
+}

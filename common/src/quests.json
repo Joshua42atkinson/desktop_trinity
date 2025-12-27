@@ -1,0 +1,288 @@
+{
+    "Q_B1_FAULTY_FOUNTAIN": {
+        "title": "The Faulty Fountain",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "As an Inventor new to Thetopia, you observe the Town Square, noting inefficiencies. The central data fountain sputters erratically – a clear system flaw. Analyzing and repairing this disorder could be a logical first step towards establishing purpose.",
+        "starting_step": "STEP_01_ANALYZE_FOUNTAIN",
+        "completion_reward": {
+            "type": "relationship",
+            "target": "Thetopia Populace",
+            "change": 1,
+            "details": "Fixing the fountain seems to have improved the general mood slightly. You notice fewer annoyed glances directed your way."
+        },
+        "steps": {
+            "STEP_01_ANALYZE_FOUNTAIN": {
+                "description": "Approach the sputtering data fountain in the Town Square. Describe how you perceive its malfunction and use your analytical skills (perhaps related to your 'Integrated Systems' ability?) to diagnose the problem.",
+                "trigger_condition": "ai_check:fountain_analysis_described",
+                "step_reward": {
+                    "type": "info",
+                    "set_flag": {"fountain_analyzed": true},
+                    "silent": true
+                },
+                "next_step": "STEP_02_IDENTIFY_PARTS",
+                "is_major_plot_point": false
+            },
+            "STEP_02_IDENTIFY_PARTS": {
+                "description": "Based on your analysis (now that `fountain_analyzed` flag is True), determine the specific component(s) needed for the repair. Perhaps consult your internal schematics or observe the fountain's mechanism closely.",
+                "trigger_condition": "ai_check:fountain_parts_identified",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You determine a 'Hydro-Spanner' and a 'Type-3 Cogwheel' seem necessary.",
+                    "set_flag": {"fountain_parts_identified": true},
+                    "silent": false
+                },
+                "next_step": "STEP_03_ACQUIRE_PARTS",
+                "is_major_plot_point": false
+            },
+            "STEP_03_ACQUIRE_PARTS": {
+                "description": "Acquire the needed Hydro-Spanner and Type-3 Cogwheel. Perhaps Maker's Alley has parts, or maybe ask the Info-Broker?",
+                "trigger_condition": "inventory_has:Hydro-Spanner and Type-3 Cogwheel",
+                "step_reward": null,
+                "next_step": "STEP_04_ATTEMPT_REPAIR",
+                "is_major_plot_point": false
+            },
+            "STEP_04_ATTEMPT_REPAIR": {
+                "description": "With the necessary parts in hand, attempt to repair the data fountain using your 'Tinker' ability and the acquired components. Describe your repair process.",
+                "trigger_condition": "ai_check:repair_attempt_made",
+                "step_reward": {
+                    "type": "info",
+                    "set_flag": {"repair_attempted": true},
+                    "silent": true
+                },
+                "next_step": "STEP_05_CHECK_RESULTS",
+                "is_major_plot_point": false
+            },
+            "STEP_05_CHECK_RESULTS": {
+                "description": "Observe the data fountain. Did the repair work? Is the data flowing smoothly now?",
+                "trigger_condition": "ai_check:fountain_repair_successful",
+                "step_reward": {
+                    "type": "fate_points",
+                    "value": 1,
+                    "silent": true
+                },
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    },
+    "Q_T1_FIRST_IMPRESSIONS": {
+        "title": "First Impressions",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "You arrive in the bustling, chaotic Thetopia Town Square, a stark contrast to the quiet forests you barely remember. Your companion porcupine trembles slightly. Take a moment to get your bearings and describe your initial reaction to this strange new place.",
+        "starting_step": "STEP_01_OBSERVE_SQUARE",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_OBSERVE_SQUARE": {
+                "description": "Look around the Town Square. Describe what catches your eye first – the shimmering pavement, the murmuring fountain, the diverse inhabitants. How does your large, natural Sasquatch form feel in this artificial place? How does your porcupine companion react?",
+                "trigger_condition": "ai_check:initial_description_provided",
+                "step_reward": null,
+                "next_step": "STEP_02_FIND_ANCHOR",
+                "is_major_plot_point": false
+            },
+            "STEP_02_FIND_ANCHOR": {
+                "description": "Amidst the strangeness, find one element that feels somewhat familiar or grounding. Is it a patch of synthesized moss, the sight of Guard Captain Elena's disciplined presence, or something else? Describe what you focus on.",
+                "trigger_condition": "ai_check:anchor_point_described",
+                "step_reward": null,
+                "next_step": "STEP_03_FOCUS_SENSES",
+                "is_major_plot_point": false
+            },
+            "STEP_03_FOCUS_SENSES": {
+                "description": "Focus your senses, particularly smell and hearing. What distinct sound or scent cuts through the general background noise? Perhaps the synthesized bread from Bakery Street, or the metallic tang from Maker's Alley? Describe the specific sensation.",
+                "trigger_condition": "ai_check:specific_sensation_identified",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You've managed to isolate a specific sensory detail amidst the chaos.",
+                    "silent": true
+                },
+                "next_step": "STEP_04_CONSIDER_ACTION",
+                "is_major_plot_point": false
+            },
+            "STEP_04_CONSIDER_ACTION": {
+                "description": "Based on your observations and focused sense, what is your first instinctual action as a Soldier? Secure your position, investigate the scent/sound, or perhaps just continue observing warily? Describe your intended first move.",
+                "trigger_condition": "ai_check:first_action_described",
+                "step_reward": null,
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    },
+    "Q_P1_SIZING_UP_THE_MARK": {
+        "title": "Sizing Up the Mark",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "You arrive in Thetopia's Town Square, a whirlwind of potential opportunities. The 'lucky' coin feels warm in your pocket. Take stock of the situation – who looks important, who looks distracted, what looks valuable or interestingly 'lost'?",
+        "starting_step": "STEP_01_SCAN_THE_CROWD",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_SCAN_THE_CROWD": {
+                "description": "Scan the crowd in the Town Square. Describe your initial assessment from your Leprechaun perspective – focus on movement, exchanges, unattended items. How does your small stature affect your view or allow you to go unnoticed?",
+                "trigger_condition": "ai_check:initial_scan_described",
+                "step_reward": null,
+                "next_step": "STEP_02_ASSESS_VALUE",
+                "is_major_plot_point": false
+            },
+            "STEP_02_ASSESS_VALUE": {
+                "description": "What seems most 'valuable' right now? Not just monetary value, but potential value for information (like Info-Broker Pip might have), amusement, or leverage. Describe the most tempting target.",
+                "trigger_condition": "ai_check:value_assessed_described",
+                "step_reward": null,
+                "next_step": "STEP_03_IDENTIFY_OPPORTUNITY",
+                "is_major_plot_point": false
+            },
+            "STEP_03_IDENTIFY_OPPORTUNITY": {
+                "description": "Focus on one specific person (like the Info-Broker or Guard Captain), item (maybe something near the fountain?), or conversation that seems like the most promising 'opportunity' for your Rascal talents. What makes it stand out?",
+                "trigger_condition": "ai_check:opportunity_identified",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You've zeroed in on a potentially interesting situation.",
+                    "silent": true
+                },
+                "next_step": "STEP_04_PLAN_APPROACH",
+                "is_major_plot_point": false
+            },
+            "STEP_04_PLAN_APPROACH": {
+                "description": "How would you approach this opportunity? Use your 'Quick Wits'? Try a 'Fortunate Find'? Or perhaps just a charming distraction? Describe your initial plan.",
+                "trigger_condition": "ai_check:approach_planned_described",
+                "step_reward": null,
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    },
+    "Q_W1_FEELING_THE_ROOM": {
+        "title": "Feeling the Room",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "You arrive in Thetopia Square, a place buzzing with chaotic energy but also hidden anxieties. As a Counselor focused on 'Becoming Awesome', take a moment to sense the emotional atmosphere and present yourself.",
+        "starting_step": "STEP_01_OBSERVE_EMOTIONS",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_OBSERVE_EMOTIONS": {
+                "description": "Observe the inhabitants of the Town Square. Describe the general emotional 'vibe' you pick up using your empathic senses. How does your own warm, perhaps slightly unusual, Opossuman appearance and demeanor project into this scene?",
+                "trigger_condition": "ai_check:emotions_described",
+                "step_reward": null,
+                "next_step": "STEP_02_PROJECT_CALM",
+                "is_major_plot_point": false
+            },
+            "STEP_02_PROJECT_CALM": {
+                "description": "Subtly project a sense of calm or welcome using your Counselor's presence. Describe how you carry yourself, maybe offering a gentle nod or smile to passersby. Do any individuals react noticeably?",
+                "trigger_condition": "ai_check:calm_projected_described",
+                "step_reward": null,
+                "next_step": "STEP_03_FIND_FOCUS",
+                "is_major_plot_point": false
+            },
+            "STEP_03_FIND_FOCUS": {
+                "description": "Identify one individual who seems particularly troubled, lost, or perhaps receptive to your calming presence amidst the crowd. What draws your attention to them specifically?",
+                "trigger_condition": "ai_check:focus_individual_identified",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You've found someone who might benefit from your guidance.",
+                    "silent": true
+                },
+                "next_step": "STEP_04_CONSIDER_OPENING",
+                "is_major_plot_point": false
+            },
+            "STEP_04_CONSIDER_OPENING": {
+                "description": "How would you initiate contact? A direct approach? Offer a small token (like seeds from your boon)? Or simply make eye contact and offer a warm greeting? Describe your intended opening move to help them on their path to 'Becoming Awesome'.",
+                "trigger_condition": "ai_check:opening_move_described",
+                "step_reward": null,
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    },
+    "Q_K1_TASTING_THE_AETHER": {
+        "title": "Tasting the Aether",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "You flow into Thetopia's Town Square, a nexus of strange energies from discarded ideas. As an Archanist attuned to magical flows, your first task is to understand the ambient 'flavor' of this place.",
+        "starting_step": "STEP_01_SENSE_AMBIENCE",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_SENSE_AMBIENCE": {
+                "description": "Extend your senses (or pseudopods?). Describe the overall magical or energetic 'feel' of the Town Square. Is it buzzing, stagnant, sharp, chaotic? How does your amorphous Slime nature interact with the environment?",
+                "trigger_condition": "ai_check:ambience_described",
+                "step_reward": null,
+                "next_step": "STEP_02_DIFFERENTIATE_SOURCES",
+                "is_major_plot_point": false
+            },
+            "STEP_02_DIFFERENTIATE_SOURCES": {
+                "description": "Try to differentiate the various energy signatures. Can you distinguish the data fountain's murmur from the whispers of the nearby Willow Plaza, or the crackle from Maker's Alley? Describe the different 'flavors' you detect.",
+                "trigger_condition": "ai_check:sources_differentiated_described",
+                "step_reward": null,
+                "next_step": "STEP_03_PINPOINT_FOCUS",
+                "is_major_plot_point": false
+            },
+            "STEP_03_PINPOINT_FOCUS": {
+                "description": "Identify the single strongest, most unusual, or most appealing source of energy you can detect nearby. What does it feel like (e.g., sharp, humming, erratic, warm)? Describe the specific signature.",
+                "trigger_condition": "ai_check:energy_source_identified",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You've locked onto a significant energy signature.",
+                    "silent": true
+                },
+                "next_step": "STEP_04_CONSIDER_INTERACTION",
+                "is_major_plot_point": false
+            },
+            "STEP_04_CONSIDER_INTERACTION": {
+                "description": "How might you interact with this energy signature? Attempt to 'Absorb Magic'? Use your 'Arcane Affinity'? Or simply observe it more closely? Describe your intended next step.",
+                "trigger_condition": "ai_check:interaction_intent_described",
+                "step_reward": null,
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    },
+    "Q_S1_ESTABLISHING_PRESENCE": {
+        "title": "Establishing Presence",
+        "chapter_theme": "The Ordinary World / Call to Adventure",
+        "description": "You arrive methodically in Thetopia's Town Square. As a proponent of Law and Order, understanding the environment requires careful observation and establishing a stable position.",
+        "starting_step": "STEP_01_FIND_POSITION",
+        "completion_reward": {
+            "type": "fate_points",
+            "value": 1
+        },
+        "steps": {
+            "STEP_01_FIND_POSITION": {
+                "description": "Find a suitable, stable location within the Town Square from which to observe. Describe the spot you choose and why it appeals to your Tortisian sense of order. Describe your posture and appearance as you settle in.",
+                "trigger_condition": "ai_check:position_described",
+                "step_reward": null,
+                "next_step": "STEP_02_INITIAL_OBSERVATION",
+                "is_major_plot_point": false
+            },
+            "STEP_02_INITIAL_OBSERVATION": {
+                "description": "From your chosen position, make one specific observation about the flow of traffic or interaction patterns. Is there a discernible pattern, or pure chaos? Describe what you see.",
+                "trigger_condition": "ai_check:initial_observation_made",
+                "step_reward": null,
+                "next_step": "STEP_03_IDENTIFY_RULE",
+                "is_major_plot_point": false
+            },
+            "STEP_03_IDENTIFY_RULE": {
+                "description": "Based on your observation, try to deduce one apparent 'rule' (spoken or unspoken) governing behavior in the square. It might relate to interacting with Guards, using the fountain, or bartering. What rule do you hypothesize?",
+                "trigger_condition": "ai_check:rule_hypothesized",
+                "step_reward": {
+                    "type": "info",
+                    "details": "You've begun your systematic analysis of Thetopia's social dynamics.",
+                    "silent": true
+                },
+                "next_step": "STEP_04_PLAN_VERIFICATION",
+                "is_major_plot_point": false
+            },
+            "STEP_04_PLAN_VERIFICATION": {
+                "description": "How might you verify this hypothesized rule? Further observation? Asking someone (like Guard Captain Elena or Professor Quill)? Or perhaps a small, controlled test? Describe your next logical step according to Law and Order.",
+                "trigger_condition": "ai_check:verification_planned_described",
+                "step_reward": null,
+                "next_step": null,
+                "is_major_plot_point": true
+            }
+        }
+    }
+}

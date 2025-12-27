@@ -1,0 +1,68 @@
+[
+    {
+      "id": "totem",
+      "name": "Totem",
+      "race_name": "Sasquatch",
+      "class_name": "Soldier",
+      "philosophy_name": "Pointlessnesses",
+      "boon": "Trembling Porcupine Companion",
+      "backstory": "Totem is from a deep cave on the side of a mountain surrounded by a large forest and comes to Thetopia in search of food beyond the mushrooms and moss he is used to. Totem can't remember how old he is and only focuses on the past month. When he tries to remember anything from earlier it's foggy at best. Totem doesn't know if he has a family or not. Sasquatches are solitary creatures and only venture into communities to fulfill their longing for unique food. Totem is unique among Sasquaches because he is very social and likes to talk to people about food. Totem knows he is a soldier and chooses to help protect nature.",
+      "starting_quest_id": "Q_T1_FIRST_IMPRESSIONS",
+      "display_desc": "A forgetful but friendly Sasquatch Soldier seeking new tastes and protecting nature, accompanied by a porcupine."
+    },
+    {
+      "id": "pip_quickwit",
+      "name": "Pip Quickwit",
+      "race_name": "Leprechaun",
+      "class_name": "Rascal",
+      "philosophy_name": "Pointlessnesses",
+      "boon": "A \"Lucky\" Tarnished Copper Coin (Seems to occasionally distract others)",
+      "backstory": "Pip doesn't remember where they *really* came from, just that they \"found\" themselves near Thetopia with a strange coin. They believe meaning is fleeting and focus on opportunities in the present. Pip enjoys observing people, finding shortcuts, and acquiring \"misplaced\" shiny things, though not maliciously - more out of opportunistic curiosity. They talk fast and think faster, always looking for an angle or an interesting tidbit of information.",
+      "starting_quest_id": "Q_P1_SIZING_UP_THE_MARK",
+      "display_desc": "A fast-talking Leprechaun Rascal living for the moment, always looking for an opportunity with a 'lucky' coin."
+    },
+    {
+      "id": "bolt",
+      "name": "Unit 734 (\"Bolt\")",
+      "race_name": "Android",
+      "class_name": "Inventor",
+      "philosophy_name": "Law and Order",
+      "boon": "Multi-tool Device (Slightly damaged, basic functions work: screwdriver, pliers, small light)",
+      "backstory": "Bolt activated in a scrap heap outside Thetopia with fragmented directives mentioning \"system integrity\" and \"component optimization.\" It seeks purpose by applying logic and order to the chaos of Dumpster Planet, starting with Thetopia. It believes in understanding systems to improve them and finds comfort in repairing or building things. Its multi-tool feels familiar, possibly a key to its past function.",
+      "starting_quest_id": "Q_B1_FAULTY_FOUNTAIN",
+      "display_desc": "A logical Android Inventor seeking purpose through order and repair, equipped with a familiar multi-tool."
+    },
+    {
+      "id": "mama_willow",
+      "name": "Mama Willow",
+      "race_name": "Opossuman",
+      "class_name": "Counselor",
+      "philosophy_name": "Becoming Awesome",
+      "boon": "Pouch of Assorted Comforting Seeds (Effect unknown, but they smell nice)",
+      "backstory": "Mama Willow feels a strong protective instinct towards the newcomers and disparate entities of Thetopia. She emerged from a cluster of resilient Opossuman concepts focused on community and care. She believes everyone has potential (\"inner awesome\") and wants to help others find stability and purpose within the community. She often carries seeds, hoping to plant metaphorical (and sometimes literal) roots of well-being.",
+      "starting_quest_id": "Q_W1_FEELING_THE_ROOM",
+      "display_desc": "A caring Opossuman Counselor nurturing the potential in others, offering comfort (and seeds)."
+    },
+    {
+      "id": "klex",
+      "name": "Klex",
+      "race_name": "Slime",
+      "class_name": "Archanist",
+      "philosophy_name": "Pointlessnesses",
+      "boon": "A Smooth, Resonating Stone (Vibrates faintly near strong emotions or energy)",
+      "backstory": "Klex oozed into existence from a pool of raw conceptual residue mixed with forgotten arcane energy. It doesn't perceive rigid forms or goals as important, finding fascination in the ebb and flow of energy and information itself. Drawn to Thetopia's relative stability, it seeks interesting energy sources to observe or absorb, guided by the vibrations of its resonating stone. It communicates through gestures, simple words, and changes in its translucent form.",
+      "starting_quest_id": "Q_K1_TASTING_THE_AETHER",
+      "display_desc": "An amorphous Slime Archanist fascinated by energy flows, guided by a resonating stone."
+    },
+    {
+      "id": "shelldon",
+      "name": "Shelldon",
+      "race_name": "Tortisian",
+      "class_name": "Counselor",
+      "philosophy_name": "Law and Order",
+      "boon": "Set of Polishing Cloths (For maintaining one's shell or perhaps other surfaces)",
+      "backstory": "Shelldon represents the concept of meticulous order and preservation. They believe structure and well-maintained systems (both physical and social) are crucial for survival and purpose on Dumpster Planet. They arrived in Thetopia seeking to understand its rules and contribute to its stability. Shelldon finds satisfaction in careful observation, offering measured advice, and keeping things tidy, starting with their own artistic shell.",
+      "starting_quest_id": "Q_S1_ESTABLISHING_PRESENCE",
+      "display_desc": "A meticulous Tortisian Counselor seeking to understand and maintain order, starting with a polished shell."
+    }
+  ]

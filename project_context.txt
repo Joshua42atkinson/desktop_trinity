@@ -1,0 +1,46 @@
+# Daydream 3.0: Master Project Context & Architecture
+
+## 1. Project Overview
+**Mission:** "Daydream" is a next-generation instructional design platform and "creator's sandbox". It empowers educators to build narrative-driven Intelligent Tutoring Systems (ITS) without coding expertise.
+**Pedagogy:** Built on Cognitive Load Theory (CLT), Self-Determination Theory (SDT), and Vygotskian Sociocultural Theory.
+**License:** GNU GPLv3 (Open Source).
+**Status:** Phase 1 (Authoring Core) - In Progress.
+
+## 2. Technical Architecture (The "Unconventional" Stack)
+The project uses a high-performance, privacy-first Rust stack:
+*   **Backend:** Axum (Async Web Server) + Bevy ECS (Sync Game Engine).
+*   **Frontend:** Leptos (Rust -> WASM).
+*   **Database:** PostgreSQL (via SQLx).
+*   **Compute:** `tokio::task::spawn_blocking` for heavy AI/DB tasks.
+*   **Bridge:** `bevy_defer` connects Async Axum to Sync Bevy.
+
+## 3. Implementation Status
+
+### Phase 0: Technical Spike (Completed)
+*   **Goal:** De-risk the Axum-Bevy integration.
+*   **Outcome:**
+    *   `bevy_defer` bridge implemented in `backend/src/main.rs`.
+    *   `spawn_blocking` pattern implemented in `backend/src/handlers/ai.rs`.
+    *   Verified via `scripts/test_phase_0.sh`.
+
+### Phase 1: The Authoring Core (In Progress)
+*   **Goal:** Create a visual, node-based editor for interactive narratives.
+*   **Frontend Modules:**
+    *   `components/authoring/node_canvas.rs`: Main visual editor with SVG connections.
+    *   `components/authoring/story_node.rs`: Draggable node component.
+    *   `pages/authoring.rs`: The authoring environment page.
+*   **Backend Modules:**
+    *   `handlers/expert.rs`: In-memory graph storage (Mock DB).
+    *   `routes/expert.rs`: API endpoints (`/api/expert/graph`).
+*   **Shared Modules:**
+    *   `common/src/expert.rs`: Shared `StoryNode`, `StoryGraph`, and `Connection` structs.
+
+## 4. Current Roadmap (Immediate Next Steps)
+1.  **Property Editor:** Create a side panel to edit node content (Title, Text).
+2.  **Save Functionality:** Implement persistence for the graph.
+3.  **Database Integration:** Replace in-memory mock store with PostgreSQL.
+
+## 5. Key Architectural Patterns
+*   **The Bridge:** NEVER call blocking Bevy code directly from Axum. Use `app_state.async_world.run(...)`.
+*   **The Compute:** NEVER call blocking AI/DB code directly from Axum. Use `tokio::task::spawn_blocking(...)`.
+*   **Shared Types:** All data shared between FE and BE must be defined in `common/src/lib.rs` (or submodules like `expert.rs`).

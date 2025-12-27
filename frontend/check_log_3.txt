@@ -1,0 +1,1840 @@
+   Compiling serde v1.0.228
+    Checking any_spawner v0.3.0
+    Checking wasm-streams v0.4.2
+    Checking hydration_context v0.3.0
+    Checking gloo-utils v0.2.0
+    Checking oco_ref v0.2.1
+    Checking serde_qs v0.15.0
+    Checking url v2.5.7
+    Checking codee v0.3.4
+    Checking leptos_hot_reload v0.8.5
+    Checking leptos_config v0.8.7
+    Checking gloo-net v0.6.0
+    Checking gloo-net v0.5.0
+    Checking reactive_graph v0.2.9
+    Checking server_fn v0.8.8
+    Checking reactive_stores v0.3.0
+    Checking tachys v0.2.10
+    Checking leptos_server v0.8.5
+    Checking leptos_dom v0.8.7
+    Checking leptos v0.8.12
+    Checking leptos_router v0.8.9
+    Checking common v0.1.0 (C:\Users\Trinity\Documents\daydream\Day_Dream\common)
+    Checking leptos_meta v0.8.5
+warning: unused import: `once_cell::sync::Lazy`
+ --> common\src\lib.rs:8:5
+  |
+8 | use once_cell::sync::Lazy;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `common` (lib) generated 1 warning (run `cargo fix --lib -p common` to apply 1 suggestion)
+    Checking frontend v0.1.0 (C:\Users\Trinity\Documents\daydream\Day_Dream\frontend)
+error[E0425]: cannot find value `Router` in this scope
+  --> frontend\src\app.rs:16:10
+   |
+16 |         <Router>
+   |          ^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Router;
+   |
+ 1 + use leptos_router::components::Router;
+   |
+
+error[E0425]: cannot find value `Routes` in this scope
+  --> frontend\src\app.rs:18:18
+   |
+18 |                 <Routes>
+   |                  ^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Routes;
+   |
+ 1 + use leptos_router::components::Routes;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:19:22
+   |
+19 |                     <Route path="/" view=Home/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:20:22
+   |
+20 |                     <Route path="/daydream" view=Daydream/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:21:22
+   |
+21 |                     <Route path="/foundations" view=Foundations/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:22:22
+   |
+22 |                     <Route path="/planning" view=Planning/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:23:22
+   |
+23 |                     <Route path="/design" view=Design/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:24:22
+   |
+24 |                     <Route path="/evaluation" view=Evaluation/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:25:22
+   |
+25 |                     <Route path="/systems-thinking" view=SystemsThinkingPage/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:26:22
+   |
+26 |                     <Route path="/authoring" view=Authoring/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0425]: cannot find value `Route` in this scope
+  --> frontend\src\app.rs:27:22
+   |
+27 |                     <Route path="/*any" view=|| view! { <div class="text-center p-10">"Page Not Found"</div> }/>
+   |                      ^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::components::Route;
+   |
+ 1 + use leptos_router::components::Route;
+   |
+
+error[E0412]: cannot find type `Children` in this scope
+  --> frontend\src\app.rs:35:21
+   |
+35 | fn Layout(children: Children) -> impl IntoView {
+   |                     ^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these type aliases
+   |
+ 1 + use crate::app::children::Children;
+   |
+ 1 + use leptos::children::Children;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\app.rs:36:46
+   |
+36 |     let (_is_menu_open, _set_is_menu_open) = create_signal(false);
+   |                                              ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::app::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0412]: cannot find type `WriteSignal` in this scope
+ --> frontend\src\components\authoring\node_canvas.rs:9:24
+  |
+9 |     set_selected_node: WriteSignal<Option<NodeData>>,
+  |                        ^^^^^^^^^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+1 + use crate::components::authoring::node_canvas::reactive::signal::WriteSignal;
+  |
+1 + use leptos::prelude::WriteSignal;
+  |
+
+error[E0412]: cannot find type `ReadSignal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:10:12
+   |
+10 |     nodes: ReadSignal<Vec<NodeData>>,
+   |            ^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::ReadSignal;
+   |
+ 1 + use leptos::prelude::ReadSignal;
+   |
+
+error[E0412]: cannot find type `WriteSignal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:11:16
+   |
+11 |     set_nodes: WriteSignal<Vec<NodeData>>,
+   |                ^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::WriteSignal;
+   |
+ 1 + use leptos::prelude::WriteSignal;
+   |
+
+error[E0412]: cannot find type `ReadSignal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:12:18
+   |
+12 |     connections: ReadSignal<Vec<common::expert::Connection>>,
+   |                  ^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::ReadSignal;
+   |
+ 1 + use leptos::prelude::ReadSignal;
+   |
+
+error[E0412]: cannot find type `WriteSignal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:13:22
+   |
+13 |     set_connections: WriteSignal<Vec<common::expert::Connection>>,
+   |                      ^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::WriteSignal;
+   |
+ 1 + use leptos::prelude::WriteSignal;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:28:30
+   |
+28 |     let (nodes, set_nodes) = create_signal(Vec::<NodeData>::new());
+   |                              ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:29:42
+   |
+29 |     let (connections, set_connections) = create_signal(Vec::<common::expert::Connection>::new());
+   |                                          ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find function `create_effect` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:32:5
+   |
+32 |     create_effect(move |_| {
+   |     ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::effect::create_effect;
+   |
+ 1 + use leptos::prelude::create_effect;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:40:36
+   |
+40 |     let (dragging, set_dragging) = create_signal::<Option<(String, f64, f64)>>(None);
+   |                                    ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::node_canvas::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find value `Suspense` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:83:14
+   |
+83 |             <Suspense fallback=move || view! { <div class="text-white p-4">"Loading Graph..."</div> }>
+   |              ^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::node_canvas::suspense::Suspense;
+   |
+ 1 + use leptos::suspense::Suspense;
+   |
+
+error[E0425]: cannot find value `For` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:86:22
+   |
+86 |                     <For
+   |                      ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 1 + use crate::components::authoring::node_canvas::attr::For;
+   |
+ 1 + use crate::components::authoring::node_canvas::control_flow::For;
+   |
+ 1 + use leptos::attr::For;
+   |
+ 1 + use leptos::control_flow::For;
+   |
+
+error[E0425]: cannot find value `For` in this scope
+   --> frontend\src\components\authoring\node_canvas.rs:117:18
+    |
+117 |                 <For
+    |                  ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+  1 + use crate::components::authoring::node_canvas::attr::For;
+    |
+  1 + use crate::components::authoring::node_canvas::control_flow::For;
+    |
+  1 + use leptos::attr::For;
+    |
+  1 + use leptos::control_flow::For;
+    |
+
+error[E0412]: cannot find type `Signal` in this scope
+ --> frontend\src\components\authoring\property_editor.rs:6:20
+  |
+6 |     selected_node: Signal<Option<StoryNode>>,
+  |                    ^^^^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+1 + use crate::components::authoring::property_editor::reactive::wrappers::read::Signal;
+  |
+1 + use leptos::prelude::Signal;
+  |
+
+error[E0412]: cannot find type `WriteSignal` in this scope
+ --> frontend\src\components\authoring\property_editor.rs:7:24
+  |
+7 |     set_selected_node: WriteSignal<Option<StoryNode>>,
+  |                        ^^^^^^^^^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+1 + use crate::components::authoring::property_editor::reactive::signal::WriteSignal;
+  |
+1 + use leptos::prelude::WriteSignal;
+  |
+
+error[E0412]: cannot find type `Callback` in this scope
+ --> frontend\src\components\authoring\property_editor.rs:8:14
+  |
+8 |     on_save: Callback<StoryNode>,
+  |              ^^^^^^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+1 + use crate::components::authoring::property_editor::callback::Callback;
+  |
+1 + use leptos::callback::Callback;
+  |
+
+error[E0425]: cannot find function `event_target_value` in this scope
+  --> frontend\src\components\authoring\property_editor.rs:35:54
+   |
+35 | ...                   new_node.title = event_target_value(&e);
+   |                                        ^^^^^^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::property_editor::leptos_dom::helpers::event_target_value;
+   |
+ 1 + use crate::components::authoring::property_editor::tachys::dom::event_target_value;
+   |
+ 1 + use leptos::prelude::event_target_value;
+   |
+
+error[E0425]: cannot find function `event_target_value` in this scope
+  --> frontend\src\components\authoring\property_editor.rs:47:56
+   |
+47 | ...                   new_node.content = event_target_value(&e);
+   |                                          ^^^^^^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::components::authoring::property_editor::leptos_dom::helpers::event_target_value;
+   |
+ 1 + use crate::components::authoring::property_editor::tachys::dom::event_target_value;
+   |
+ 1 + use leptos::prelude::event_target_value;
+   |
+
+error[E0412]: cannot find type `Callback` in this scope
+ --> frontend\src\components\authoring\story_node.rs:8:33
+  |
+8 |     #[prop(into)] on_mousedown: Callback<web_sys::MouseEvent>,
+  |                                 ^^^^^^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+1 + use crate::components::authoring::story_node::callback::Callback;
+  |
+1 + use leptos::callback::Callback;
+  |
+
+error[E0412]: cannot find type `Children` in this scope
+ --> frontend\src\components\glass_panel.rs:5:15
+  |
+5 |     children: Children,
+  |               ^^^^^^^^ not found in this scope
+  |
+help: consider importing one of these type aliases
+  |
+1 + use crate::components::glass_panel::children::Children;
+  |
+1 + use leptos::children::Children;
+  |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\pages\authoring.rs:10:30
+   |
+10 |     let (nodes, set_nodes) = create_signal(Vec::<StoryNode>::new());
+   |                              ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::pages::authoring::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\pages\authoring.rs:11:42
+   |
+11 |     let (connections, set_connections) = create_signal(Vec::<Connection>::new());
+   |                                          ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::pages::authoring::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+  --> frontend\src\pages\authoring.rs:12:46
+   |
+12 |     let (selected_node, set_selected_node) = create_signal::<Option<StoryNode>>(None);
+   |                                              ^^^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::pages::authoring::reactive::signal::create_signal;
+   |
+ 1 + use leptos::prelude::create_signal;
+   |
+
+error[E0425]: cannot find function `spawn_local` in this scope
+  --> frontend\src\pages\authoring.rs:26:9
+   |
+26 |         spawn_local(async move {
+   |         ^^^^^^^^^^^ not found in this scope
+   |
+help: consider importing one of these functions
+   |
+ 1 + use crate::pages::authoring::reactive::spawn_local;
+   |
+ 1 + use crate::pages::authoring::task::spawn_local;
+   |
+ 1 + use leptos::task::spawn_local;
+   |
+
+error[E0425]: cannot find function `create_signal` in this scope
+   --> frontend\src\pages\daydream.rs:101:34
+    |
+101 |     let (history, set_history) = create_signal(vec!["Welcome to the Daydream Initiative terminal.".to_string()]);
+    |                                  ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing one of these functions
+    |
+  1 + use crate::pages::daydream::reactive::signal::create_signal;
+    |
+  1 + use leptos::prelude::create_signal;
+    |
+
+error[E0425]: cannot find function `create_signal` in this scope
+   --> frontend\src\pages\daydream.rs:102:34
+    |
+102 |     let (command, set_command) = create_signal(String::new());
+    |                                  ^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing one of these functions
+    |
+  1 + use crate::pages::daydream::reactive::signal::create_signal;
+    |
+  1 + use leptos::prelude::create_signal;
+    |
+
+error[E0425]: cannot find function `spawn_local` in this scope
+   --> frontend\src\pages\daydream.rs:109:13
+    |
+109 |             spawn_local(async move {
+    |             ^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing one of these functions
+    |
+  1 + use crate::pages::daydream::reactive::spawn_local;
+    |
+  1 + use crate::pages::daydream::task::spawn_local;
+    |
+  1 + use leptos::task::spawn_local;
+    |
+
+error[E0425]: cannot find value `For` in this scope
+   --> frontend\src\pages\daydream.rs:144:22
+    |
+144 |                     <For
+    |                      ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+  1 + use crate::pages::daydream::attr::For;
+    |
+  1 + use crate::pages::daydream::control_flow::For;
+    |
+  1 + use leptos::attr::For;
+    |
+  1 + use leptos::control_flow::For;
+    |
+
+error[E0425]: cannot find function `event_target_value` in this scope
+   --> frontend\src\pages\daydream.rs:156:64
+    |
+156 | ...                   on:input=move |ev| set_command.set(event_target_value(&ev))
+    |                                                          ^^^^^^^^^^^^^^^^^^ not found in this scope
+    |
+help: consider importing one of these functions
+    |
+  1 + use crate::pages::daydream::leptos_dom::helpers::event_target_value;
+    |
+  1 + use crate::pages::daydream::tachys::dom::event_target_value;
+    |
+  1 + use leptos::prelude::event_target_value;
+    |
+
+warning: unexpected `cfg` condition value: `ssr`
+ --> frontend\src\components\reflection_form.rs:3:7
+  |
+3 | #[cfg(feature = "ssr")]
+  |       ^^^^^^^^^^^^^^^
+  |
+  = note: expected values for `feature` are: `axum`, `leptos_axum`, and `tokio`
+  = help: consider adding `ssr` as a feature in `Cargo.toml`
+  = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+  = note: `#[warn(unexpected_cfgs)]` on by default
+
+warning: unexpected `cfg` condition value: `ssr`
+ --> frontend\src\components\reflection_form.rs:6:7
+  |
+6 | #[cfg(feature = "ssr")]
+  |       ^^^^^^^^^^^^^^^
+  |
+  = note: expected values for `feature` are: `axum`, `leptos_axum`, and `tokio`
+  = help: consider adding `ssr` as a feature in `Cargo.toml`
+  = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unused import: `leptos::*`
+ --> frontend\src\components\reflection_form.rs:1:5
+  |
+1 | use leptos::*;
+  |     ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::components::glass_panel::GlassPanel`
+ --> frontend\src\pages\foundations.rs:4:5
+  |
+4 | use crate::components::glass_panel::GlassPanel; // Ensure GlassPanel is imported if needed by the page itself
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::components::glass_panel::GlassPanel`
+ --> frontend\src\pages\planning.rs:5:5
+  |
+5 | use crate::components::glass_panel::GlassPanel; // Ensure GlassPanel is imported if needed by the page itself
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unexpected `cfg` condition value: `ssr`
+ --> frontend\src\server_functions.rs:3:7
+  |
+3 | #[cfg(feature = "ssr")]
+  |       ^^^^^^^^^^^^^^^
+  |
+  = note: expected values for `feature` are: `axum`, `leptos_axum`, and `tokio`
+  = help: consider adding `ssr` as a feature in `Cargo.toml`
+  = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unused import: `leptos::*`
+ --> frontend\src\server_functions.rs:1:5
+  |
+1 | use leptos::*;
+  |     ^^^^^^^^^
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\app.rs:27:49
+    |
+ 27 |                     <Route path="/*any" view=|| view! { <div class="text-center p-10">"Page Not Found"</div> }/>
+    |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |     fn child(self, child: NewChild) -> Self::Output;
+    |        ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\app.rs:38:5
+    |
+ 38 |       view! {
+    |  _____^
+ 39 | |         <div class="relative min-h-screen font-inter overflow-hidden selection:bg-cyan-500 selection:text-white">
+ 40 | |             // Aurora Background
+ 41 | |             <div class="fixed inset-0 z-0 bg-slate-900">
+...   |
+ 81 | |         </div>
+ 82 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="group relative flex flex-col h-full overflow-hidden rounded-xl bg-slate-800/50 border border-white/5 hover:border-cya...
+  8 | |             <div class="p-6 flex-grow space-y-4">
+...   |
+ 47 | |         </div>
+ 48 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `class` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+  --> frontend\src\components\artifact_card.rs:12:55
+   |
+ 6 | /     view! {
+ 7 | |         <div class="group relative flex flex-col h-full overflow-hidden rounded-xl bg-slate-800/50 border border-white/5 hover:border-cya...
+ 8 | |             <div class="p-6 flex-grow space-y-4">
+...  |
+11 | |                     <div class="p-3 rounded-lg bg-slate-700/50 text-cyan-400 group-hover:text-white group-hover:bg-cyan-500 transition-co...
+12 | |                         <div inner_html=artifact.icon class="w-6 h-6"></div>
+   | |                                                      -^^^^^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+   | |______________________________________________________|
+   |
+   |
+  ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\attribute\global.rs:25:8
+   |
+25 |       fn class(self, value: C) -> Self::Output;
+   |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ClassAttribute` which provides `class` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use leptos::prelude::ClassAttribute;
+   |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:16:62
+    |
+ 16 |   ...   {artifact.tags.into_iter().map(|tag| view! {
+    |  ____________________________________________^
+ 17 | | ...       <span class="px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-full bg-white/5 text-slate-400 border border-whit...
+ 18 | | ...           {tag}
+ 19 | | ...       </span>
+ 20 | | ...   }).collect_view()}
+    | |_______^ method not found in `leptos::html::HtmlElement<leptos::html::Span, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Span, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="group relative flex flex-col h-full overflow-hidden rounded-xl bg-slate-800/50 border border-white/5 hover:border-cya...
+  8 | |             <div class="p-6 flex-grow space-y-4">
+...   |
+ 47 | |         </div>
+ 48 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<H3, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<H3, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="group relative flex flex-col h-full overflow-hidden rounded-xl bg-slate-800/50 border border-white/5 hover:border-cya...
+  8 | |             <div class="p-6 flex-grow space-y-4">
+...   |
+ 47 | |         </div>
+ 48 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::P, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::P, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:37:30
+    |
+ 37 |   ...   Some(url) => view! {
+    |  ____________________^
+ 38 | | ...       <div class="p-4 border-t border-white/5 bg-white/5 mt-auto">
+ 39 | | ...           <a href=url.clone() target="_blank" class="flex items-center justify-center w-full text-sm font-semibold text-cyan-400 grou...
+ 40 | | ...               {artifact.link_text.clone()}
+...   |
+ 43 | | ...       </div>
+ 44 | | ...   }.into_view(),
+    | |_______^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\artifact_card.rs:37:30
+    |
+ 37 |   ...   Some(url) => view! {
+    |  ____________________^
+ 38 | | ...       <div class="p-4 border-t border-white/5 bg-white/5 mt-auto">
+ 39 | | ...           <a href=url.clone() target="_blank" class="flex items-center justify-center w-full text-sm font-semibold text-cyan-400 grou...
+ 40 | | ...               {artifact.link_text.clone()}
+...   |
+ 43 | | ...       </div>
+ 44 | | ...   }.into_view(),
+    | |_______^ method not found in `leptos::html::HtmlElement<leptos::html::A, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::A, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0425]: cannot find function `create_resource` in this scope
+  --> frontend\src\components\authoring\node_canvas.rs:16:26
+   |
+16 |     let graph_resource = create_resource(
+   |                          ^^^^^^^^^^^^^^^ not found in this scope
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\node_canvas.rs:70:5
+    |
+ 70 |       view! {
+    |  _____^
+ 71 | |         <div
+ 72 | |             class="w-full h-full bg-slate-900 relative overflow-hidden"
+ 73 | |             on:mousemove=on_mousemove
+...   |
+133 | |         </div>
+134 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\node_canvas.rs:83:40
+    |
+ 83 |             <Suspense fallback=move || view! { <div class="text-white p-4">"Loading Graph..."</div> }>
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |     fn child(self, child: NewChild) -> Self::Output;
+    |        ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\node_canvas.rs:70:5
+    |
+ 70 |       view! {
+    |  _____^
+ 71 | |         <div
+ 72 | |             class="w-full h-full bg-slate-900 relative overflow-hidden"
+ 73 | |             on:mousemove=on_mousemove
+...   |
+133 | |         </div>
+134 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<Svg, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Svg, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `attr` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\node_canvas.rs:106:33
+    |
+106 |   ...                   view! {
+    |  _______________________^
+107 | | ...                       <path d=d stroke="#06b6d4" stroke-width="2" fill="none" />
+108 | | ...                   }
+    | |_______________________^ method not found in `leptos::html::HtmlElement<leptos::svg::Path, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\attribute\custom.rs:195:8
+    |
+195 |       fn attr(
+    |          ---- the method is available for `leptos::html::HtmlElement<leptos::svg::Path, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `CustomAttribute` which provides `attr` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::CustomAttribute;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\property_editor.rs:10:5
+    |
+ 10 |       view! {
+    |  _____^
+ 11 | |         <div class="w-80 bg-slate-800 border-l border-white/10 p-4 flex flex-col h-full overflow-y-auto">
+ 12 | |             <h2 class="text-xl font-bold text-cyan-400 mb-4">"Properties"</h2>
+...   |
+ 72 | |         </div>
+ 73 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\property_editor.rs:15:31
+    |
+ 15 |                   Some(node) => view! {
+    |  _______________________________^
+ 16 | |                     <div class="space-y-4">
+ 17 | |                         <div>
+ 18 | |                             <label class="block text-sm font-medium text-gray-400 mb-1">"Node ID"</label>
+...   |
+ 64 | |                     </div>
+ 65 | |                 }.into_view(),
+    | |_________________^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `class` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+  --> frontend\src\components\authoring\property_editor.rs:21:33
+   |
+15 |                   Some(node) => view! {
+   |  _______________________________-
+16 | |                     <div class="space-y-4">
+17 | |                         <div>
+18 | |                             <label class="block text-sm font-medium text-gray-400 mb-1">"Node ID"</label>
+19 | |                             <input
+20 | |                                 type="text"
+21 | |                                 class="w-full bg-slate-900 border border-white/10 rounded px-3 py-2 text-gray-500 cursor-not-allowed"
+   | |                                -^^^^^ method not found in `leptos::html::HtmlElement<Input, (), ()>`
+   | |________________________________|
+   |
+   |
+  ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\attribute\global.rs:25:8
+   |
+25 |       fn class(self, value: C) -> Self::Output;
+   |          ----- the method is available for `leptos::html::HtmlElement<Input, (), ()>` here
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ClassAttribute` which provides `class` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use leptos::prelude::ClassAttribute;
+   |
+
+error[E0599]: no method named `class` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+  --> frontend\src\components\authoring\property_editor.rs:31:33
+   |
+15 |   ...   Some(node) => view! {
+   |  _____________________-
+16 | | ...       <div class="space-y-4">
+17 | | ...           <div>
+18 | | ...               <label class="block text-sm font-medium text-gray-400 mb-1">"Node ID"</label>
+...  |
+30 | | ...                   type="text"
+31 | | ...                   class="w-full bg-slate-900 border border-white/10 rounded px-3 py-2 text-white focus:border-cyan-500 focus:outline-...
+   | |                      -^^^^^ method not found in `leptos::html::HtmlElement<Input, (), ()>`
+   | |______________________|
+   |
+   |
+  ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\attribute\global.rs:25:8
+   |
+25 |       fn class(self, value: C) -> Self::Output;
+   |          ----- the method is available for `leptos::html::HtmlElement<Input, (), ()>` here
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `ClassAttribute` which provides `class` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use leptos::prelude::ClassAttribute;
+   |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\property_editor.rs:15:31
+    |
+ 15 |                   Some(node) => view! {
+    |  _______________________________^
+ 16 | |                     <div class="space-y-4">
+ 17 | |                         <div>
+ 18 | |                             <label class="block text-sm font-medium text-gray-400 mb-1">"Node ID"</label>
+...   |
+ 64 | |                     </div>
+ 65 | |                 }.into_view(),
+    | |_________________^ method not found in `leptos::html::HtmlElement<Textarea, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Textarea, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\property_editor.rs:15:31
+    |
+ 15 |                   Some(node) => view! {
+    |  _______________________________^
+ 16 | |                     <div class="space-y-4">
+ 17 | |                         <div>
+ 18 | |                             <label class="block text-sm font-medium text-gray-400 mb-1">"Node ID"</label>
+...   |
+ 64 | |                     </div>
+ 65 | |                 }.into_view(),
+    | |_________________^ method not found in `leptos::html::HtmlElement<Button, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Button, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\property_editor.rs:66:25
+    |
+ 66 |                   None => view! {
+    |  _________________________^
+ 67 | |                     <div class="text-gray-500 italic text-center mt-10">
+ 68 | |                         "Select a node to edit its properties."
+ 69 | |                     </div>
+ 70 | |                 }.into_view()
+    | |_________________^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\authoring\story_node.rs:10:5
+    |
+ 10 |       view! {
+    |  _____^
+ 11 | |         <div
+ 12 | |             class="absolute bg-slate-800 border border-cyan-500/30 rounded-lg shadow-lg w-48 p-3 cursor-move hover:border-cyan-400 transi...
+ 13 | |             style=format!("left: {}px; top: {}px;", node.x, node.y)
+...   |
+ 24 | |         </div>
+ 25 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\design_process.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+  8 | |             <div class="border-l-4 border-purple-500 pl-6 py-4 mb-8">
+  9 | |                 <h2 class="text-4xl font-extrabold text-white tracking-tight">"Instructional Design Process"</h2>
+...   |
+ 98 | |         </div>
+ 99 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\design_process.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+  8 | |             <div class="border-l-4 border-purple-500 pl-6 py-4 mb-8">
+  9 | |                 <h2 class="text-4xl font-extrabold text-white tracking-tight">"Instructional Design Process"</h2>
+...   |
+ 98 | |         </div>
+ 99 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::P, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::P, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\design_process.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+  8 | |             <div class="border-l-4 border-purple-500 pl-6 py-4 mb-8">
+  9 | |                 <h2 class="text-4xl font-extrabold text-white tracking-tight">"Instructional Design Process"</h2>
+...   |
+ 98 | |         </div>
+ 99 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Span, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Span, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\ethical_legal.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-emerald-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Ethical & Legal Architecture"</h2>
+...   |
+ 83 | | </div>
+ 84 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\formative_eval.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+  8 | |             <div class="border-l-4 border-teal-500 pl-6 py-4 mb-8">
+  9 | |                 <h2 class="text-4xl font-extrabold text-white tracking-tight">"The Ethical Self-Audit"</h2>
+...   |
+ 73 | |         </div>
+ 74 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\formative_eval.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+  8 | |             <div class="border-l-4 border-teal-500 pl-6 py-4 mb-8">
+  9 | |                 <h2 class="text-4xl font-extrabold text-white tracking-tight">"The Ethical Self-Audit"</h2>
+...   |
+ 73 | |         </div>
+ 74 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::P, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::P, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\glass_panel.rs:8:5
+    |
+  8 |       view! {
+    |  _____^
+  9 | |         <div class=format!("relative overflow-hidden rounded-2xl p-8 md:p-10 bg-slate-800/40 backdrop-blur-xl border border-white/10 shad...
+ 10 | |             {children()}
+ 11 | |         </div>
+ 12 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\learner_analysis.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-rose-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Learner Analysis"</h2>
+...   |
+ 71 | | </div>
+ 72 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\motivational_design.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-pink-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Motivational Design"</h2>
+...   |
+ 70 | | </div>
+ 71 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\systems_thinking.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-blue-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Systems Thinking in ID"</h2>
+...   |
+ 69 | | </div>
+ 70 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\tech_analysis.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-violet-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Strategic Tech Analysis"</h2>
+...   |
+ 68 | | </div>
+ 69 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\tech_skills.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-cyan-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"The Learning Systems Architect"</h2>
+...   |
+ 67 | | </div>
+ 68 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\theoretical_synthesis.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="space-y-12 animate-fade-in relative">
+  7 | | <div class="border-l-4 border-indigo-500 pl-6 py-4 mb-8">
+  8 | | <h2 class="text-4xl font-extrabold text-white tracking-tight">"Theoretical Synthesis"</h2>
+...   |
+ 71 | | </div>
+ 72 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\components\visual_design.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="space-y-12 animate-fade-in relative">
+...   |
+ 96 | |         </div>
+ 97 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\authoring.rs:41:5
+    |
+ 41 |       view! {
+    |  _____^
+ 42 | |         <div class="h-[calc(100vh-4rem)] flex flex-col">
+ 43 | |             <div class="bg-slate-800 border-b border-white/10 p-4 flex justify-between items-center">
+ 44 | |                 <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+...   |
+ 93 | |         </div>
+ 94 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\authoring.rs:41:5
+    |
+ 41 |       view! {
+    |  _____^
+ 42 | |         <div class="h-[calc(100vh-4rem)] flex flex-col">
+ 43 | |             <div class="bg-slate-800 border-b border-white/10 p-4 flex justify-between items-center">
+ 44 | |                 <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+...   |
+ 93 | |         </div>
+ 94 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<Button, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Button, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\daydream.rs:37:5
+    |
+ 37 |       view! {
+    |  _____^
+ 38 | |         <div class="max-w-6xl mx-auto space-y-12 animate-fade-in p-6">
+ 39 | |             // Hero Section
+ 40 | |             <div class="text-center space-y-6">
+...   |
+ 95 | |         </div>
+ 96 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `collect_view` found for struct `std::iter::Map<I, F>` in the current scope
+   --> frontend\src\pages\daydream.rs:83:24
+    |
+ 81 |                       {artifacts.into_iter().map(|artifact| view! {
+    |  ______________________-
+ 82 | |                         <ArtifactCard artifact=artifact />
+ 83 | |                     }).collect_view()}
+    | |_______________________-^^^^^^^^^^^^
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\leptos-0.8.12\src\into_view.rs:242:8
+    |
+242 |       fn collect_view(self) -> Vec<Self::View>;
+    |          ------------ the method is available for `std::iter::Map<std::vec::IntoIter<Artifact>, {closure@frontend\src\pages\daydream.rs:81:48: 81:58}>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+help: trait `CollectView` which provides `collect_view` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::CollectView;
+    |
+help: there is a method `collect` with a similar name
+    |
+ 83 -                     }).collect_view()}
+ 83 +                     }).collect()}
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\daydream.rs:140:5
+    |
+140 |       view! {
+    |  _____^
+141 | |         <GlassPanel>
+142 | |             <div class="flex flex-col h-96">
+143 | |                 <div class="flex-grow overflow-y-auto bg-black/50 p-4 rounded-t-lg font-mono text-sm text-green-400 space-y-2">
+...   |
+168 | |         </GlassPanel>
+169 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\daydream.rs:147:51
+    |
+147 |                         children=move |(_, line)| view! { <p>{line}</p> }
+    |                                                   ^^^^^^^^^^^^^^^^^^^^^^^ method not found in `leptos::html::HtmlElement<leptos::html::P, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |     fn child(self, child: NewChild) -> Self::Output;
+    |        ----- the method is available for `leptos::html::HtmlElement<leptos::html::P, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `class` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\daydream.rs:154:29
+    |
+140 | /     view! {
+141 | |         <GlassPanel>
+142 | |             <div class="flex flex-col h-96">
+143 | |                 <div class="flex-grow overflow-y-auto bg-black/50 p-4 rounded-t-lg font-mono text-sm text-green-400 space-y-2">
+...   |
+153 | |                             type="text"
+154 | |                             class="flex-grow bg-transparent border-b border-purple-500/50 text-white focus:outline-none focus:border-purp...
+    | |                            -^^^^^ method not found in `leptos::html::HtmlElement<Input, (), ()>`
+    | |____________________________|
+    |
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\attribute\global.rs:25:8
+    |
+ 25 |       fn class(self, value: C) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Input, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+help: trait `ClassAttribute` which provides `class` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ClassAttribute;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\daydream.rs:140:5
+    |
+140 |       view! {
+    |  _____^
+141 | |         <GlassPanel>
+142 | |             <div class="flex flex-col h-96">
+143 | |                 <div class="flex-grow overflow-y-auto bg-black/50 p-4 rounded-t-lg font-mono text-sm text-green-400 space-y-2">
+...   |
+168 | |         </GlassPanel>
+169 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<Button, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<Button, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\design.rs:8:1
+    |
+  8 |   view! {
+    |  _^
+  9 | | <div class="max-w-5xl mx-auto w-full space-y-20 animate-fade-in p-6">
+ 10 | | <div class="text-center space-y-6">
+ 11 | | <h1 class="text-4xl font-bold text-white">"Design & Development"</h1>
+...   |
+ 21 | | </div>
+ 22 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\evaluation.rs:5:1
+    |
+  5 |   view! {
+    |  _^
+  6 | | <div class="max-w-5xl mx-auto w-full space-y-20 animate-fade-in p-6">
+  7 | | <div class="text-center space-y-6">
+  8 | | <h1 class="text-4xl font-bold text-white">"Evaluation & Implementation"</h1>
+...   |
+ 12 | | </div>
+ 13 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\foundations.rs:7:1
+    |
+  7 |   view! {
+    |  _^
+  8 | | <div class="max-w-5xl mx-auto w-full space-y-20 animate-fade-in p-6">
+  9 | | <div class="text-center space-y-6">
+ 10 | | <h1 class="text-4xl font-bold text-white">"Professional Foundations"</h1>
+...   |
+ 16 | | </div>
+ 17 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\home.rs:6:5
+    |
+  6 |       view! {
+    |  _____^
+  7 | |         <div class="max-w-5xl mx-auto w-full space-y-10 animate-fade-in p-6">
+...   |
+ 65 | |         </div>
+ 66 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\planning.rs:8:1
+    |
+  8 |   view! {
+    |  _^
+  9 | | <div class="max-w-5xl mx-auto w-full space-y-20 animate-fade-in p-6">
+ 10 | | <div class="text-center space-y-6">
+ 11 | | <h1 class="text-4xl font-bold text-white">"Planning & Analysis"</h1>
+...   |
+ 19 | | </div>
+ 20 | | }
+    | |_^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+error[E0599]: no method named `child` found for struct `leptos::html::HtmlElement<E, At, Ch>` in the current scope
+   --> frontend\src\pages\systems_thinking.rs:5:5
+    |
+  5 |       view! {
+    |  _____^
+  6 | |         <div class="p-4 text-white">
+  7 | |             "Systems Thinking Page - Under Construction"
+  8 | |         </div>
+  9 | |     }
+    | |_____^ method not found in `leptos::html::HtmlElement<leptos::html::Div, (), ()>`
+    |
+   ::: C:\Users\Trinity\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tachys-0.2.10\src\html\element\mod.rs:273:8
+    |
+273 |       fn child(self, child: NewChild) -> Self::Output;
+    |          ----- the method is available for `leptos::html::HtmlElement<leptos::html::Div, (), ()>` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+    = note: this error originates in the macro `view` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: trait `ElementChild` which provides `child` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use leptos::prelude::ElementChild;
+    |
+
+Some errors have detailed explanations: E0412, E0425, E0599.
+For more information about an error, try `rustc --explain E0412`.
+warning: `frontend` (lib) generated 7 warnings
+error: could not compile `frontend` (lib) due to 91 previous errors; 7 warnings emitted

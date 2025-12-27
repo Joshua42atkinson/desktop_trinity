@@ -1,0 +1,28 @@
+{
+  "type": "model",
+  "owner": "openai",
+  "name": "gpt-oss-120b",
+  "dependencies": [
+    {
+      "type": "model",
+      "purpose": "baseModel",
+      "modelKeys": [
+        "lmstudio-community/gpt-oss-120b-GGUF",
+        "lmstudio-community/gpt-oss-120b-mlx-8bit"
+      ],
+      "sources": [
+        {
+          "type": "huggingface",
+          "user": "lmstudio-community",
+          "repo": "gpt-oss-120b-GGUF"
+        },
+        {
+          "type": "huggingface",
+          "user": "lmstudio-community",
+          "repo": "gpt-oss-120b-mlx-8bit"
+        }
+      ]
+    }
+  ],
+  "revision": 3
+}

@@ -1,0 +1,85 @@
+#!/bin/bash
+# Trinity/llama_llama Development Helper
+# Quick access to the local AI assistant for development tasks
+
+set -e
+
+LLAMA_URL="http://localhost:8081"
+
+# Check if server is running
+check_server() {
+    if ! curl -s "$LLAMA_URL/health" | grep -q "ready"; then
+        echo "⚠️  llama_llama server not running!"
+        echo "Start with: cd /home/joshua/antigravity/llama_llama && ./run.sh"
+        exit 1
+    fi
+}
+
+# Ask a quick question
+ask() {
+    check_server
+    local question="$*"
+    curl -s -X POST "$LLAMA_URL/v1/chat/completions" \
+        -H "Content-Type: application/json" \
+        -d "{\"messages\":[{\"role\":\"user\",\"content\":\"$question\"}],\"max_tokens\":1024}" \
+        | jq -r '.choices[0].message.content'
+}
+
+# Review Rust code
+review() {
+    check_server
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "File not found: $file"
+        exit 1
+    fi
+    local code=$(cat "$file" | head -200 | sed 's/"/\\"/g' | tr '\n' '\\n')
+    curl -s -X POST "$LLAMA_URL/v1/chat/completions" \
+        -H "Content-Type: application/json" \
+        -d "{\"messages\":[{\"role\":\"user\",\"content\":\"Review this Rust code for bugs and improvements:\\n$code\"}],\"max_tokens\":1024}" \
+        | jq -r '.choices[0].message.content'
+}
+
+# Explain code
+explain() {
+    check_server
+    local file="$1"
+    if [[ ! -f "$file" ]]; then
+        echo "File not found: $file"
+        exit 1
+    fi
+    local code=$(cat "$file" | head -150 | sed 's/"/\\"/g' | tr '\n' '\\n')
+    curl -s -X POST "$LLAMA_URL/v1/chat/completions" \
+        -H "Content-Type: application/json" \
+        -d "{\"messages\":[{\"role\":\"user\",\"content\":\"Explain what this code does:\\n$code\"}],\"max_tokens\":512}" \
+        | jq -r '.choices[0].message.content'
+}
+
+# Fix a TODO
+fix_todo() {
+    check_server
+    local context="$*"
+    curl -s -X POST "$LLAMA_URL/v1/chat/completions" \
+        -H "Content-Type: application/json" \
+        -d "{\"messages\":[{\"role\":\"user\",\"content\":\"How should I implement this TODO in Rust? Be specific with code: $context\"}],\"max_tokens\":1024}" \
+        | jq -r '.choices[0].message.content'
+}
+
+# Main
+case "${1:-help}" in
+    ask)     shift; ask "$@" ;;
+    review)  shift; review "$@" ;;
+    explain) shift; explain "$@" ;;
+    todo)    shift; fix_todo "$@" ;;
+    status)  check_server && echo "✅ llama_llama ready" ;;
+    *)
+        echo "🦙 Trinity AI Helper"
+        echo ""
+        echo "Usage:"
+        echo "  $0 status              Check server status"
+        echo "  $0 ask <question>      Ask a question"
+        echo "  $0 review <file>       Review Rust code"
+        echo "  $0 explain <file>      Explain code"
+        echo "  $0 todo <description>  Get implementation for a TODO"
+        ;;
+esac

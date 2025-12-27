@@ -1,0 +1,25 @@
+# JSON Grammar for GBNF (Grammar-Based Sampling)
+# Used for structured output tasks (assessments, rubrics, etc.)
+
+root ::= value
+
+value ::= 
+    object |
+    array |
+    string |
+    number |
+    "true" |
+    "false" |
+    "null"
+
+object ::= "{" ws? (pair ("," ws? pair)*)? ws? "}"
+pair ::= string ws? ":" ws? value
+
+array ::= "[" ws? (value ("," ws? value)*)? ws? "]"
+
+string ::= "\"" string-char* "\""
+string-char ::= [^"\\] | "\\" ["\\/bfnrt] | "\\u" [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F]
+
+number ::= "-"? ("0" | [1-9] [0-9]*) ("." [0-9]+)? ([eE] [+-]? [0-9]+)?
+
+ws ::= [ \t\n\r]*

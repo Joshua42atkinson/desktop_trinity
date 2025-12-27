@@ -1,0 +1,502 @@
+./docs/scope_creep/self_coding.md:1. Workspace scanner (find TODOs/FIXMEs)
+./docs/README.md:- **`//`** - Implementation notes, TODOs, internal reasoning
+./docs/README.md:| `// TODO:` | Feature to implement |
+./docs/USABILITY_TODO.md:# Trinity Educational AI OS — Usability Audit & TODO
+./docs/OVERNIGHT_TASK.md:// TODO: Future improvement needed
+./target/doc/src/trinity_kernel/resource.rs.html:<a href=#103 id=103 data-nosnippet>103</a>            gpu_memory_used_bytes: <span class="number">0</span>, <span class="comment">// TODO: Read from ROCm
+./target/doc/src/trinity_kernel/orchestrator.rs.html:<a href=#188 id=188 data-nosnippet>188</a>        // TODO: Track agent status and return actually idle ones
+./target/doc/src/trinity_kernel/orchestrator.rs.html:<a href=#446 id=446 data-nosnippet>446</a>                <span class="comment">// Placeholder - would scan for TODOs, issues, etc.
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-43e4131740796f99/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-49b4f0c49812def5/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-2232acfe2ec3b4ba/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-2c43b755de9532f5/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-9c6ea0bf81155e2c/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-aefa8831b17e363f/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-791edda8e7e6378a/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml-metal.h:// TODO: remove in the future
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO: support for clang
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: show sample usage
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:        // TODO: consider SoA
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/include/llama.h:    // TODO: extend in the future
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/debug/build/llama-cpp-sys-2-2b6df033db6c5449/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml-metal.h:// TODO: remove in the future
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO: support for clang
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:// TODO: convert to enum https://github.com/ggml-org/llama.cpp/pull/16187#discussion_r2388538726
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: temporary until model loading of ggml examples is refactored
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: when we start computing gradient, make a copy instead of view
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: this is very likely wrong for some cases! - needs more testing
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: needs to be adapted to ggml_flash_attn_ext
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    *  TODO: currently only lower, right, non-unitriangular variant is implemented
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO these functions were sandwiched in the old optimization interface, is there a better place for them?
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml.h:    // TODO: currently, only a few functions are in the base ggml API, while the rest are in the CPU backend
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/ggml-opt.h:    GGML_API enum ggml_opt_optimizer_type ggml_opt_context_optimizer_type(ggml_opt_context_t); //TODO consistent naming scheme
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: show sample usage
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    enum llama_token_type { //TODO: remove, required until per token attributes are available from GGUF file
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: simplify (https://github.com/ggml-org/llama.cpp/pull/9294#pullrequestreview-2286561979)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:        // TODO: consider SoA
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:        int8_t       *  logits;   // TODO: rename this to "output"
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: update API to start accepting pointers to params structs (https://github.com/ggml-org/llama.cpp/discussions/9172)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    LLAMA_API  enum llama_pooling_type   llama_pooling_type(const struct llama_context * ctx); // TODO: rename to llama_get_pooling_type
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: rename to avoid confusion with llama_get_embeddings()
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: deprecate in favor of llama_get_logits_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: deprecate in favor of llama_get_embeddings_ith() (ref: https://github.com/ggml-org/llama.cpp/pull/14853#issuecomment-3113143522)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: In the future, llama_sampler will be utilized to offload the sampling to the backends (e.g. GPU).
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:        // TODO: API for internal libllama usage for appending the sampling to an existing ggml_cgraph
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/include/llama.h:    // TODO: extend in the future
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:                # TODO: why do we squeeze here?
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:                        # TODO: use Q4_K and Q6_K
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: should these be marked as UNUSED instead? (maybe not)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO @ngxson : this is a hack to support both vision and audio encoders
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: how to determine special FIM tokens automatically?
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: multiply by the scale directly instead of inverting it twice
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # (TODO): Is there a better way?
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:                # (TODO): fixme
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:            # TODO: this is a hack, should be fixed
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: these special tokens should be exported only for the CodeGemma family
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: implement self.prediction_coefs.weight.clamp_(...)
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: does this really matter?
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: Extend this if the prefix(es) need to be configurable
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO: remove this once image support is implemented for Chameleon
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:    # TODO: remove once MXFP4 is supported more generally
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:        # TODO(tarek): for dynamic resolution image_size is not specified, setting here for compatibility
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:    # TODO: uncomment U64, U32, and U16, ref: https://github.com/pytorch/pytorch/issues/58734
+./target/release/build/llama-cpp-sys-2-114ff97d79f87d3d/out/bin/convert_hf_to_gguf.py:    # TODO @ngxson : this won't work correctly if the model has both audio & vision encoders
+./crates/trinity-skills/src/web.rs:        // TODO: Improve extraction logic (remove scripts, styles, etc.)
+./crates/trinity-skills/src/media/image_gen.rs:        // TODO: Implement actual SDXL inference with candle
+./crates/trinity-body/src/bridge.rs:                    vram_used_gb: 0.0, // TODO: Get from GPU
+./crates/trinity-body/src/panels/tasks.rs:        // TODO: Implement ListPendingTasks loop.
+./crates/trinity-body/src/agent_systems.rs:                // TODO: Actually spawn particle entities
+./crates/trinity-brain/src/main.rs:        // TODO: Actually update orchestrator config
+./crates/trinity-brain/src/main.rs:                         // Estimate duration since we don't have it in Failed event (TODO: add it)
+./crates/trinity-brain/src/main.rs:                    // TODO: Handle failure (remove from map, fail runtime)
+./crates/trinity-kernel/src/wasm_sandbox.rs:        // TODO: Actually compile and instantiate the Wasm module using wasmtime
+./crates/trinity-kernel/src/wasm_sandbox.rs:        // TODO: Actually call the Wasm function
+./crates/trinity-kernel/src/todo_parser.rs://! # TODO Parser — Self-Improvement Task Extraction
+./crates/trinity-kernel/src/todo_parser.rs://! "Trinity reads its own conscience. The TODO file is the moral compass;
+./crates/trinity-kernel/src/todo_parser.rs://! This module parses markdown TODO/roadmap files into structured
+./crates/trinity-kernel/src/todo_parser.rs:/// A parsed TODO item from markdown
+./crates/trinity-kernel/src/todo_parser.rs:    /// Parse a markdown file into TODO items
+./crates/trinity-kernel/src/todo_parser.rs:            .with_description(format!("Auto-generated from TODO: {}", self.title))
+./crates/trinity-kernel/src/todo_parser.rs:    /// Infer TaskType from the TODO item content
+./crates/trinity-kernel/src/todo_parser.rs:                "You are a Rust expert. Complete this TODO item:\n\n{}\n\nProvide the implementation.",
+./crates/trinity-kernel/src/todo_parser.rs:/// Parse a TODO file and return actionable tasks
+./crates/trinity-kernel/src/todo_parser.rs:/// Get only incomplete items from a TODO file
+./crates/trinity-kernel/src/todo_parser.rs:# Test TODO
+./crates/trinity-kernel/src/npu_backend.rs:        // TODO: Initialize RyzenAI SDK when available
+./crates/trinity-kernel/src/npu_backend.rs:        // TODO: Use RyzenAI loader with W4ABF16 format
+./crates/trinity-kernel/src/npu_backend.rs:        // TODO: Actual RyzenAI inference call
+./crates/trinity-kernel/src/npu_backend.rs:        // TODO: Query actual NPU metrics via RyzenAI SDK
+./crates/trinity-kernel/src/orchestrator.rs:                // Placeholder - would scan for TODOs, issues, etc.
+./crates/trinity-kernel/src/agent_graph.rs:        // For now, simple sequential execution (TODO: parallel with topological sort)
+./crates/trinity-kernel/src/rpc_pool.rs:            // TODO: Actual TCP connection with TCP_NODELAY
+./crates/trinity-kernel/src/rpc_pool.rs:        // TODO: Actually send data over RPC
+./crates/trinity-kernel/src/rpc_pool.rs:        // TODO: Actually retrieve data over RPC
+./SOURCE_CODE_DUMP.md:        // TODO: Track agent status and return actually idle ones
+./SOURCE_CODE_DUMP.md:                // Placeholder - would scan for TODOs, issues, etc.
+./SOURCE_CODE_DUMP.md:            cache.retain(|_, _| true); // TODO: selective removal
+./SOURCE_CODE_DUMP.md:            gpu_memory_used_bytes: 0, // TODO: Read from ROCm
+./SOURCE_CODE_DUMP.md://! # TODO Parser — Self-Improvement Task Extraction
+./SOURCE_CODE_DUMP.md://! "Trinity reads its own conscience. The TODO file is the moral compass;
+./SOURCE_CODE_DUMP.md://! This module parses markdown TODO/roadmap files into structured
+./SOURCE_CODE_DUMP.md:/// A parsed TODO item from markdown
+./SOURCE_CODE_DUMP.md:    /// Parse a markdown file into TODO items
+./SOURCE_CODE_DUMP.md:            .with_description(format!("Auto-generated from TODO: {}", self.title))
+./SOURCE_CODE_DUMP.md:    /// Infer TaskType from the TODO item content
+./SOURCE_CODE_DUMP.md:                "You are a Rust expert. Complete this TODO item:\n\n{}\n\nProvide the implementation.",
+./SOURCE_CODE_DUMP.md:/// Parse a TODO file and return actionable tasks
+./SOURCE_CODE_DUMP.md:/// Get only incomplete items from a TODO file
+./SOURCE_CODE_DUMP.md:# Test TODO
+./SOURCE_CODE_DUMP.md:        // TODO: Implement actual SDXL inference with candle
+./SOURCE_CODE_DUMP.md:        // TODO: Actually update orchestrator config
+./SOURCE_CODE_DUMP.md:                         // Estimate duration since we don't have it in Failed event (TODO: add it)
+./SOURCE_CODE_DUMP.md:                    // TODO: Handle failure (remove from map, fail runtime)
+./SOURCE_CODE_DUMP.md:            instructions: "The coder.rs file has a placeholder TODO. Replace it with actual Brain RPC integration. \
+./SOURCE_CODE_DUMP.md:                    vram_used_gb: 0.0, // TODO: Get from GPU
+./SOURCE_CODE_DUMP.md:                // TODO: Actually spawn particle entities
+./SOURCE_CODE_DUMP.md:        // TODO: Implement ListPendingTasks loop.

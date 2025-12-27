@@ -1,0 +1,169 @@
+# Rust Grammar for GBNF (Grammar-Based Sampling)
+# This grammar constrains LLM output to valid Rust-like syntax
+# Used by Trinity's Brain for code generation tasks
+#
+# GBNF Format Reference: llama.cpp grammar specification
+# This is a simplified grammar focused on common Rust patterns
+
+root ::= rust-item+
+
+rust-item ::= 
+    function-def |
+    struct-def |
+    enum-def |
+    impl-block |
+    use-stmt |
+    const-def |
+    comment |
+    ws
+
+# Function definitions
+function-def ::= doc-comment? visibility? "async "? "fn " identifier type-params? "(" params? ")" return-type? where-clause? block
+
+visibility ::= ("pub " | "pub(crate) " | "pub(super) ")?
+
+type-params ::= "<" type-param ("," ws? type-param)* ">"
+type-param ::= lifetime | identifier (":" ws? trait-bounds)?
+
+lifetime ::= "'" identifier
+
+trait-bounds ::= trait-bound ("+" ws? trait-bound)*
+trait-bound ::= identifier type-args?
+
+return-type ::= ws? "->" ws? type-expr
+
+where-clause ::= ws? "where" ws clause-item ("," ws? clause-item)*
+clause-item ::= identifier ":" ws? trait-bounds
+
+params ::= param ("," ws? param)* ","?
+param ::= ("&" "mut "? | "mut ")? identifier ":" ws? type-expr
+
+type-expr ::= 
+    "&" lifetime? ws? "mut "? type-expr |
+    "impl " trait-bounds |
+    "dyn " trait-bounds |
+    "[" type-expr (";" ws? number)? "]" |
+    "(" type-expr? ("," ws? type-expr)* ")" |
+    identifier type-args? |
+    "Box<" type-expr ">" |
+    "Vec<" type-expr ">" |
+    "Option<" type-expr ">" |
+    "Result<" type-expr "," ws? type-expr ">" |
+    "Arc<" type-expr ">" |
+    "Rc<" type-expr ">"
+
+type-args ::= "<" type-expr ("," ws? type-expr)* ">"
+
+# Struct definitions
+struct-def ::= doc-comment? visibility? "struct " identifier type-params? where-clause? (struct-body | ";")
+struct-body ::= ws? "{" ws? struct-fields? ws? "}"
+struct-fields ::= struct-field ("," ws? struct-field)* ","?
+struct-field ::= doc-comment? visibility? identifier ":" ws? type-expr
+
+# Enum definitions
+enum-def ::= doc-comment? visibility? "enum " identifier type-params? where-clause? ws? "{" ws? enum-variants? ws? "}"
+enum-variants ::= enum-variant ("," ws? enum-variant)* ","?
+enum-variant ::= doc-comment? identifier enum-variant-data?
+enum-variant-data ::= "(" type-expr ("," ws? type-expr)* ")" | struct-body
+
+# Impl blocks
+impl-block ::= "impl" type-params? ws (trait-bounds ws "for" ws)? type-expr where-clause? ws? "{" ws? impl-items? ws? "}"
+impl-items ::= impl-item (ws impl-item)*
+impl-item ::= function-def | const-def
+
+# Use statements
+use-stmt ::= "use " use-path ";"
+use-path ::= (identifier "::")* (identifier | "*" | "{" use-list "}")
+use-list ::= use-item ("," ws? use-item)*
+use-item ::= identifier (" as " identifier)?
+
+# Constants
+const-def ::= visibility? "const " identifier ":" ws? type-expr ws? "=" ws? expr ";"
+
+# Expressions (simplified - for basic code gen)
+expr ::= 
+    block |
+    if-expr |
+    match-expr |
+    closure |
+    method-chain |
+    binary-expr |
+    unary-expr |
+    literal |
+    path-expr |
+    "(" expr ")"
+
+block ::= "{" ws? (stmt ws?)* expr? "}"
+
+stmt ::= 
+    let-stmt |
+    expr-stmt |
+    return-stmt |
+    comment
+
+let-stmt ::= "let " "mut "? pattern (":" ws? type-expr)? ws? "=" ws? expr ";"
+expr-stmt ::= expr ";"
+return-stmt ::= "return" (ws expr)? ";"
+
+pattern ::= 
+    identifier |
+    "_" |
+    "(" pattern ("," ws? pattern)* ")" |
+    identifier "{" field-pattern ("," ws? field-pattern)* "}"
+    
+field-pattern ::= identifier (":" ws? pattern)?
+
+if-expr ::= "if " expr ws? block (ws? "else" ws? (if-expr | block))?
+
+match-expr ::= "match " expr ws? "{" ws? match-arms ws? "}"
+match-arms ::= match-arm ("," ws? match-arm)* ","?
+match-arm ::= pattern (ws? "if" ws expr)? ws? "=>" ws? expr
+
+closure ::= "|" params? "|" ws? (type-expr ws?)? (expr | block)
+
+method-chain ::= primary ("." identifier "(" args? ")")*
+primary ::= path-expr | literal | "(" expr ")"
+
+binary-expr ::= expr ws? binary-op ws? expr
+binary-op ::= "+" | "-" | "*" | "/" | "%" | "&&" | "||" | "==" | "!=" | "<" | ">" | "<=" | ">=" | "<<" | ">>" | "&" | "|" | "^"
+
+unary-expr ::= unary-op expr
+unary-op ::= "!" | "-" | "&" | "&mut " | "*"
+
+path-expr ::= (identifier "::")* identifier type-args?
+
+args ::= expr ("," ws? expr)* ","?
+
+literal ::= 
+    string-lit |
+    char-lit |
+    number |
+    bool-lit |
+    "None" |
+    "Some(" expr ")" |
+    "Ok(" expr ")" |
+    "Err(" expr ")" |
+    vec-lit |
+    struct-lit
+
+string-lit ::= "\"" string-char* "\""
+string-char ::= [^"\\] | "\\" [nrt\\"]
+
+char-lit ::= "'" ([^'\\] | "\\" [nrt\\'0]) "'"
+
+number ::= "-"? [0-9]+ ("." [0-9]+)? ("_" [0-9]+)* ("u8" | "u16" | "u32" | "u64" | "usize" | "i8" | "i16" | "i32" | "i64" | "isize" | "f32" | "f64")?
+
+bool-lit ::= "true" | "false"
+
+vec-lit ::= "vec![" (expr ("," ws? expr)*)? "]"
+
+struct-lit ::= path-expr ws? "{" ws? field-init ("," ws? field-init)* ","? ws? "}"
+field-init ::= identifier (":" ws? expr)?
+
+# Comments & Documentation
+doc-comment ::= ("///" [^\n]* "\n" ws?)+
+comment ::= "//" [^\n]* "\n" | "/*" [^*]* "*/"
+
+# Lexical elements
+identifier ::= [a-zA-Z_] [a-zA-Z0-9_]*
+ws ::= [ \t\n\r]+

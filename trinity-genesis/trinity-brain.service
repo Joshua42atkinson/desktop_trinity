@@ -1,0 +1,39 @@
+[Unit]
+Description=Trinity AI Brain - Always-On LLM Inference Server
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=joshua
+WorkingDirectory=/home/joshua/antigravity/trinity-genesis
+
+# Environment for AMD Strix Halo
+Environment="HSA_OVERRIDE_GFX_VERSION=11.0.3"
+Environment="GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
+Environment="ROCR_VISIBLE_DEVICES=0"
+Environment="RUST_LOG=info"
+
+# Model Profile (rust_coder, planner, fast, code_assistant)
+Environment="TRINITY_PROFILE=rust_coder"
+
+# ============================================================================
+# ZOMBIE PROTOCOL: Brain has built-in ZombieReaper that runs on startup
+# No need for ExecStartPre - the Rust code handles cleanup
+# ============================================================================
+
+# Start the brain (ZombieReaper runs first thing inside)
+ExecStart=/home/joshua/antigravity/trinity-genesis/target/release/trinity-brain
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Memory limits (for safety)
+MemoryMax=110G
+
+# Graceful shutdown timeout
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

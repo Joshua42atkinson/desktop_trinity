@@ -1,0 +1,27 @@
+# This file configures Docker to run your PostgreSQL database.
+# Running `docker-compose up` in this folder will automatically
+# create and run a database container with these settings.
+
+version: '3.8'
+services:
+  db:
+    # Use pgvector for vector similarity search (RAG embeddings)
+    image: pgvector/pgvector:pg16
+    restart: always
+    environment:
+      # Sets the default user, password, and database name
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: daydream_db
+    ports:
+      # Maps your computer's port 5432 to the container's port 5432
+      # This lets your `backend` connect to `localhost:5432`
+      - "5432:5432"
+    volumes:
+      # This makes the database data "persistent"
+      # It stores the data in a local volume named `postgres_data`
+      # so it won't be lost if you restart the container.
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
