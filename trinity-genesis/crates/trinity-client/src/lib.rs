@@ -24,7 +24,9 @@ mod ui;
 use editor::EditorPlugin;
 use game::avatar::AvatarPlugin;
 use game::vaam::VaaMPlugin;
-use game::vaam::{CognitiveWeight, VocabularyItem};
+
+use game::vaam::{CognitiveWeight, SemanticSocket, VocabularyItem};
+use game::weigh_station::WeighStationPlugin; // Added plugin import
 use iron_road_physics::VocabularyTier;
 use ui::authoring::AuthoringPlugin;
 use ui::glass::GlassUiPlugin;
@@ -50,8 +52,9 @@ pub fn run() {
             PlayPlugin,
             AvatarPlugin,
             EditorPlugin,
-            VaaMPlugin,    // Physics of Language
-            GlassUiPlugin, // Body UI
+            VaaMPlugin,         // Physics of Language
+            GlassUiPlugin,      // Body UI
+            WeighStationPlugin, // Brain UI/Link
         ))
         .insert_resource(bridge::BrainConnection {
             connected: false,

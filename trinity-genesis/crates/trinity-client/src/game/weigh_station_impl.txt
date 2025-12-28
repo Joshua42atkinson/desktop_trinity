@@ -1,3 +1,26 @@
+
+fn spawn_weighed_words(
+    mut commands: Commands,
+    mut events: EventReader<WeighResult>,
+) {
+    for res in events.read() {
+        if let Some(physics) = &res.physics {
+            info!("✨ Spawning Weighed Word: {}", physics.word);
+            commands.spawn((
+                VocabularyItem {
+                    word: physics.word.clone(),
+                    definition: physics.definition.clone(),
+                    tier: physics.tier,
+                    tags: physics.tags.clone(),
+                },
+                CognitiveWeight {
+                    base_mass: physics.mass,
+                    effective_mass: physics.mass,
+                },
+            ));
+        }
+    }
+}
 use crate::game::vaam::{CognitiveWeight, VocabularyItem};
 use bevy::{prelude::*, tasks::{AsyncComputeTaskPool, Task}};
 use futures_lite::future;
@@ -165,27 +188,4 @@ async fn weigh_word_async(word: &str) -> Option<WordPhysics> {
     }
     
     None
-}
-
-fn spawn_weighed_words(
-    mut commands: Commands,
-    mut events: EventReader<WeighResult>,
-) {
-    for res in events.read() {
-        if let Some(physics) = &res.physics {
-            info!("✨ Spawning Weighed Word: {}", physics.word);
-            commands.spawn((
-                VocabularyItem {
-                    word: physics.word.clone(),
-                    definition: physics.definition.clone(),
-                    tier: physics.tier,
-                    tags: physics.tags.clone(),
-                },
-                CognitiveWeight {
-                    base_mass: physics.mass,
-                    effective_mass: physics.mass,
-                },
-            ));
-        }
-    }
 }

@@ -8391,6 +8391,7 @@ dependencies = [
  "console_error_panic_hook",
  "crossbeam-channel",
  "futures",
+ "futures-lite 2.6.1",
  "getrandom 0.2.16",
  "getrandom 0.3.4",
  "iron-road-physics",
