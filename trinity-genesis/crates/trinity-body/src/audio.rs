@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Audio Player System for Trinity Body
 //!
 //! Handles playback of synthesized speech from VoiceResponse audio packets.

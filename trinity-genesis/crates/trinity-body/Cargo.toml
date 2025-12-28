@@ -2,7 +2,7 @@
 name = "trinity-body"
 version.workspace = true
 edition.workspace = true
-description = "Laptop node binary - Bevy 3D UI with animated avatars for Trinity Genesis"
+description = "Trinity AI Agent System"
 
 [[bin]]
 name = "trinity-body"

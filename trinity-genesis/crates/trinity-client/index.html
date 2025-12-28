@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity Genesis | HUD</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000; 
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        canvas { 
+            display: block; 
+            width: 100vw; 
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading" style="color: #0f0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        INITIALIZING SYSTEM...
+    </div>
+    <script type="module">
+        import init from './trinity_client.js';
+        
+        async function run() {
+            try {
+                await init();
+                document.getElementById('loading').remove();
+            } catch (e) {
+                console.error("System Failure:", e);
+                document.getElementById('loading').innerText = "SYSTEM FAILURE: " + e;
+            }
+        }
+        run();
+    </script>
+</body>
+</html>

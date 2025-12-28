@@ -4,13 +4,23 @@ members = [
     "crates/trinity-protocol",
     "crates/trinity-brain",
     "crates/trinity-body",
-    "crates/trinity-skills", "crates/trinity-coder", "crates/trinity-cli",
+    "crates/trinity-skills",
+    "crates/trinity-coder",
+    "crates/trinity-cli",
+    "crates/trinity-client",
+    "crates/iron-road-physics",
+]
+exclude = [
+    "quadradical-tools/calculator",  # WASM plugins compiled separately
+    "quadradical-tools/code_editor",
 ]
 resolver = "2"
 
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
+authors = ["Joshua <joshua@trinity-ai.com>"]
+description = "Trinity AI Agent System - The backbone of the Ask_Pete Initiative"
 license = "GPL-3.0"
 repository = "https://github.com/joshua42/trinity-genesis"
 

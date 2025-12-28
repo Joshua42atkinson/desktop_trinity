@@ -1,0 +1,52 @@
+[package]
+name = "trinity-client"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+bevy = { version = "0.13", default-features = false, features = [
+    "bevy_asset",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_pbr",
+    "bevy_gltf",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_text",
+    "bevy_ui",
+    "multi-threaded",
+    "png",
+    "hdr",
+    "x11",
+    "tonemapping_luts",
+    "webgl2",             # Important for Web compatibility
+] }
+bevy_web_asset = "0.9" # Load assets from HTTP
+wasm-bindgen = "0.2"
+web-sys = "0.3"
+log = "0.4"
+console_error_panic_hook = "0.1"
+
+# Networking
+reqwest = { version = "0.11", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+getrandom = { version = "0.2", features = [
+    "js",
+] } # Pinning 0.2 with JS for WASM
+uuid = { version = "1.0", features = ["v4", "js"] }
+
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"   # Optimize for size

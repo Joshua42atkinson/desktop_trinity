@@ -1,0 +1,8 @@
+[build]
+target = "crates/trinity-client/index.html"
+dist = "static"
+public_url = "/"
+
+[[hooks]]
+stage = "post_build"
+command = "ls -la static"

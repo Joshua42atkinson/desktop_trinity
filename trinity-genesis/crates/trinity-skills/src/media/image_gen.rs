@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Image Generation via Stable Diffusion (SDXL)
 //!
 //! Uses candle-transformers for native Rust inference.

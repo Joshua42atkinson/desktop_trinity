@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # Agent Graph - Deterministic Workflow DAGs
 //!
 //! ## Philosophy
@@ -442,6 +446,7 @@ impl AgentGraph {
                 task_id: Uuid::new_v4(),
                 result: output.clone(),
                 duration_ms: 0, // Graph-level timing tracked separately
+                tokens_consumed: 0, // Placeholder - graph nodes don't track tokens
             });
         }
 

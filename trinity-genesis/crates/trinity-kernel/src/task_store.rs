@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # Task Store (Persistent Task Queue)
 //!
 //! ## Philosophy
@@ -15,7 +19,7 @@ use rusqlite::{params, Connection};
 use std::path::Path;
 use std::sync::Mutex;
 
-use crate::runtime::{AutonomousTask, TaskPriority, TaskStatus, TaskType};
+use trinity_protocol::task::{AutonomousTask, TaskPriority, TaskStatus, TaskType};
 
 /// Persistent store for autonomous tasks
 pub struct TaskStore {
@@ -101,8 +105,8 @@ impl TaskStore {
                 status_str,
                 task_type_json,
                 task.created_at.to_rfc3339(),
-                task.started_at.map(|t| t.to_rfc3339()),
-                task.completed_at.map(|t| t.to_rfc3339()),
+                task.started_at.map(|t: chrono::DateTime<chrono::Utc>| t.to_rfc3339()),
+                task.completed_at.map(|t: chrono::DateTime<chrono::Utc>| t.to_rfc3339()),
                 task.assigned_agent,
             ],
         )
@@ -170,6 +174,8 @@ impl TaskStore {
                         completed_at: None,
                         task_type,
                         assigned_agent,
+                        token_limit: None,
+                        token_usage: 0,
                     })
                 },
             )

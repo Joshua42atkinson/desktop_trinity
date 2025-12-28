@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Autopoietic Loop - Self-Modifying Code Engine
 //!
 //! ## Philosophy (The Soul)

@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -233,4 +237,90 @@ pub struct WriteResponse {
     pub word_count: u32,
     /// Path where saved (if any)
     pub saved_path: Option<String>,
+}
+
+// ============================================================================
+// Assessment Generation Types (Educator Skill)
+// ============================================================================
+
+/// Type of assessment to generate
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum AssessmentType {
+    /// Multiple choice quiz
+    Quiz,
+    /// Hands-on lab project
+    Lab,
+    /// Coding challenge
+    Challenge,
+}
+
+/// Difficulty level for assessments
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum Difficulty {
+    Beginner,
+    Intermediate,
+    Advanced,
+    Expert,
+}
+
+/// Request for assessment generation (Educator skill)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AssessmentRequest {
+    /// Topic for the assessment
+    pub topic: String,
+    /// Type of assessment to generate
+    pub assessment_type: AssessmentType,
+    /// Difficulty level
+    pub difficulty: Difficulty,
+    /// Target audience description
+    pub target_audience: String,
+}
+
+impl AssessmentRequest {
+    pub fn new(topic: impl Into<String>, audience: impl Into<String>) -> Self {
+        Self {
+            topic: topic.into(),
+            assessment_type: AssessmentType::Quiz,
+            difficulty: Difficulty::Intermediate,
+            target_audience: audience.into(),
+        }
+    }
+
+    pub fn with_type(mut self, assessment_type: AssessmentType) -> Self {
+        self.assessment_type = assessment_type;
+        self
+    }
+
+    pub fn with_difficulty(mut self, difficulty: Difficulty) -> Self {
+        self.difficulty = difficulty;
+        self
+    }
+}
+
+/// A quiz question with multiple choice options
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QuizQuestion {
+    pub question: String,
+    pub options: Vec<String>,
+    pub correct_answer_idx: usize,
+    pub explanation: String,
+}
+
+/// A hands-on lab project
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LabProject {
+    pub title: String,
+    pub objective: String,
+    pub steps: Vec<String>,
+    pub starter_code: Option<String>,
+    pub solution: Option<String>,
+}
+
+/// Response from assessment generation
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum AssessmentResponse {
+    /// A quiz with questions
+    Quiz { questions: Vec<QuizQuestion> },
+    /// A lab project
+    Lab(LabProject),
 }

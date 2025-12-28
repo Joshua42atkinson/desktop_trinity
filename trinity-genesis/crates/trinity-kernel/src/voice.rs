@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Voice Output System for Trinity Genesis
 //!
 //! Defines the voice synthesis interface with emotion/style control,

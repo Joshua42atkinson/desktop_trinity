@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 use clap::{Parser, Subcommand};
 use std::net::SocketAddr;
 use tarpc::{client, context, tokio_serde::formats::Bincode};
@@ -66,6 +70,13 @@ enum Commands {
         /// Mutation to apply (append marker comment)
         #[arg(short, long, default_value = "// Autopoietic test marker")]
         code: String,
+    },
+    /// Ingest research documents from a directory
+    IngestResearch {
+        #[arg(short, long)]
+        src: String,
+        #[arg(short, long)]
+        dest: String,
     },
 }
 
@@ -361,7 +372,107 @@ async fn main() -> Result<()> {
             
             println!("\n✅ Successfully ingested {}/{} tasks into Quadradical.", submitted, items.len());
         }
+        Commands::IngestResearch { src, dest } => {
+            use walkdir::WalkDir;
+            use std::fs;
+            use std::io::Read;
+            use std::path::Path;
+
+            println!("📚 Ingesting research from: {}", src);
+            println!("   Destination: {}", dest);
+
+            fs::create_dir_all(&dest)?;
+
+            let mut count = 0;
+
+            for entry in WalkDir::new(&src).into_iter().filter_map(|e| e.ok()) {
+                let path = entry.path();
+                if path.is_file() {
+                    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+                    let content = if ext.eq_ignore_ascii_case("docx") && !path.file_name().unwrap_or_default().to_string_lossy().starts_with("~$") {
+                         extract_docx(path).ok()
+                    } else if ext.eq_ignore_ascii_case("pdf") {
+                         extract_pdf(path).ok()
+                    } else {
+                        None
+                    };
+
+                    if let Some(text) = content {
+                        let filename = path.file_stem().unwrap_or_default().to_string_lossy();
+                        let safe_name = filename.replace(" ", "_").replace("&", "and").replace("(", "").replace(")", "");
+                        let out_path = Path::new(&dest).join(format!("{}.md", safe_name));
+                        
+                        let markdown = format!("# {}\n\n**Source:** `{}`\n\n---\n\n{}", filename, path.display(), text);
+                        fs::write(&out_path, markdown)?;
+                        println!("   [+] Processed: {}", filename);
+                        count += 1;
+                    }
+                }
+            }
+            println!("✅ Ingestion complete. Processed {} documents.", count);
+        }
     }
 
     Ok(())
+}
+
+fn extract_docx(path: &std::path::Path) -> Result<String> {
+    use std::io::Read;
+    let file = std::fs::File::open(path)?;
+    let mut archive = zip::ZipArchive::new(file)?;
+    let mut xml_file = archive.by_name("word/document.xml")?;
+    let mut xml_content = String::new();
+    xml_file.read_to_string(&mut xml_content)?;
+
+    let mut reader = quick_xml::Reader::from_str(&xml_content);
+    reader.trim_text(true);
+
+    let mut txt = Vec::new();
+    let mut buf = Vec::new();
+    let mut pending_text = false;
+
+    // A very loose, hacky XML parse similar to python script
+    // Just looking for text in <w:t> tags and newlines in <w:p>
+    loop {
+        match reader.read_event_into(&mut buf) {
+            Ok(quick_xml::events::Event::Start(e)) => {
+                if e.name().as_ref() == b"w:p" {
+                    txt.push("\n\n".to_string());
+                } else if e.name().as_ref() == b"w:t" {
+                    pending_text = true;
+                }
+            }
+            Ok(quick_xml::events::Event::Text(e)) if pending_text => {
+                txt.push(e.unescape()?.into_owned());
+                pending_text = false;
+            }
+            Ok(quick_xml::events::Event::End(e)) => {
+                if e.name().as_ref() == b"w:t" {
+                    pending_text = false;
+                }
+            }
+            Ok(quick_xml::events::Event::Eof) => break,
+            Err(e) => return Err(e.into()),
+            _ => {}
+        }
+        buf.clear();
+    }
+
+    Ok(txt.join(""))
+}
+
+fn extract_pdf(path: &std::path::Path) -> Result<String> {
+    // Shell out to pdftotext for "Pure Code" simplicity vs importing heavy pdf libs
+    use std::process::Command;
+    let output = Command::new("pdftotext")
+        .arg("-layout")
+        .arg(path)
+        .arg("-")
+        .output()?;
+    
+    if output.status.success() {
+        Ok(String::from_utf8_lossy(&output.stdout).to_string())
+    } else {
+        anyhow::bail!("pdftotext failed")
+    }
 }

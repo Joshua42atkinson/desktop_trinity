@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Zombie Reaper - GPU Memory Stability Service
 //!
 //! Strix Halo's AMDGPU driver can hold onto memory handles from previous

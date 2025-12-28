@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Input Injector - Wayland-Compatible Input Injection
 //!
 //! Provides input injection capabilities for automating UI interactions.

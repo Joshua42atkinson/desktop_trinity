@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Unified Memory System (Rusqlite Backed)
 //!
 //! Vector + relational memory storage for Trinity Genesis.

@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! UI Panels for Trinity Body
 //!
 //! Modular panel components for the Bevy UI.

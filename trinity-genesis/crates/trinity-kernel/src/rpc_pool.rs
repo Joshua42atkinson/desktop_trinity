@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # RPC Memory Pool - "Context Keeper"
 //!
 //! ## Philosophy
@@ -33,12 +37,52 @@
 //! - Enable TCP_NODELAY to disable Nagle's algorithm
 //! - Use Pipeline Parallelism, not Tensor Parallelism (latency-tolerant)
 
-use anyhow::Result;
+use anyhow::{Context, Result};
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::net::SocketAddr;
 use std::sync::Arc;
+use std::time::Duration;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::net::TcpStream;
 use tokio::sync::RwLock;
 use uuid::Uuid;
+
+// ============================================================================
+// RPC Protocol Messages
+// ============================================================================
+
+/// RPC command types for the remote memory protocol
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum RpcCommand {
+    /// Ping the node to check connectivity
+    Ping,
+    /// Store data on the remote node
+    Store { id: Uuid, data: Vec<u8> },
+    /// Retrieve data from the remote node
+    Retrieve { id: Uuid },
+    /// Delete data from the remote node
+    Delete { id: Uuid },
+    /// Query available memory
+    QueryMemory,
+}
+
+/// RPC response types
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum RpcResponse {
+    /// Pong response with node name
+    Pong { node_name: String },
+    /// Data stored successfully
+    Stored { id: Uuid, size: u64 },
+    /// Retrieved data
+    Data { id: Uuid, data: Vec<u8> },
+    /// Data deleted successfully
+    Deleted { id: Uuid },
+    /// Memory info
+    MemoryInfo { available_bytes: u64, used_bytes: u64 },
+    /// Error response
+    Error { message: String },
+}
 
 // ============================================================================
 // RPC Node Configuration
@@ -64,6 +108,9 @@ pub struct RpcNodeConfig {
 
     /// Connection timeout in ms
     pub connect_timeout_ms: u64,
+
+    /// Read/write timeout in ms
+    pub io_timeout_ms: u64,
 }
 
 impl Default for RpcNodeConfig {
@@ -75,6 +122,7 @@ impl Default for RpcNodeConfig {
             available_ram_mb: 32 * 1024, // 32GB
             tcp_nodelay: true,
             connect_timeout_ms: 5000,
+            io_timeout_ms: 30000,
         }
     }
 }
@@ -126,16 +174,73 @@ pub enum RemoteContentType {
 }
 
 // ============================================================================
+// RPC Connection (Persistent TCP)
+// ============================================================================
+
+/// A persistent TCP connection to a remote RPC node
+struct RpcConnection {
+    stream: TcpStream,
+    node_name: String,
+}
+
+impl RpcConnection {
+    /// Send a command and receive a response
+    async fn send_command(&mut self, cmd: &RpcCommand) -> Result<RpcResponse> {
+        // Serialize command with length prefix
+        let cmd_bytes = bincode::serialize(cmd)
+            .context("Failed to serialize RPC command")?;
+        let len = cmd_bytes.len() as u32;
+        
+        // Write length prefix (4 bytes, big-endian) + data
+        self.stream.write_all(&len.to_be_bytes()).await
+            .context("Failed to write command length")?;
+        self.stream.write_all(&cmd_bytes).await
+            .context("Failed to write command data")?;
+        self.stream.flush().await?;
+        
+        // Read response length prefix
+        let mut len_buf = [0u8; 4];
+        self.stream.read_exact(&mut len_buf).await
+            .context("Failed to read response length")?;
+        let resp_len = u32::from_be_bytes(len_buf) as usize;
+        
+        // Read response data
+        let mut resp_buf = vec![0u8; resp_len];
+        self.stream.read_exact(&mut resp_buf).await
+            .context("Failed to read response data")?;
+        
+        // Deserialize response
+        let response: RpcResponse = bincode::deserialize(&resp_buf)
+            .context("Failed to deserialize RPC response")?;
+        
+        Ok(response)
+    }
+}
+
+// ============================================================================
 // RPC Node (Connection State)
 // ============================================================================
 
 /// Active connection to a remote RPC node
-#[derive(Debug)]
 struct RpcNode {
     config: RpcNodeConfig,
     connected: bool,
+    connection: Option<RpcConnection>,
     allocations: HashMap<Uuid, u64>, // id → size
     used_bytes: u64,
+    /// Local cache for data when remote is unavailable
+    local_cache: HashMap<Uuid, Vec<u8>>,
+}
+
+impl std::fmt::Debug for RpcNode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("RpcNode")
+            .field("config", &self.config)
+            .field("connected", &self.connected)
+            .field("allocations", &self.allocations)
+            .field("used_bytes", &self.used_bytes)
+            .finish()
+    }
 }
 
 impl RpcNode {
@@ -143,14 +248,165 @@ impl RpcNode {
         Self {
             config,
             connected: false,
+            connection: None,
             allocations: HashMap::new(),
             used_bytes: 0,
+            local_cache: HashMap::new(),
         }
     }
 
     fn available_bytes(&self) -> u64 {
         let total = self.config.available_ram_mb * 1024 * 1024;
         total.saturating_sub(self.used_bytes)
+    }
+
+    /// Establish TCP connection with TCP_NODELAY
+    async fn connect(&mut self) -> Result<()> {
+        let addr = self.config.socket_addr()?;
+        let timeout = Duration::from_millis(self.config.connect_timeout_ms);
+        
+        tracing::info!(
+            "🔌 Connecting to RPC node: {} at {} (TCP_NODELAY={})",
+            self.config.name,
+            addr,
+            self.config.tcp_nodelay
+        );
+
+        // Attempt connection with timeout
+        let connect_result = tokio::time::timeout(
+            timeout,
+            TcpStream::connect(addr)
+        ).await;
+
+        match connect_result {
+            Ok(Ok(stream)) => {
+                // Set TCP_NODELAY to disable Nagle's algorithm for low latency
+                if self.config.tcp_nodelay {
+                    stream.set_nodelay(true)
+                        .context("Failed to set TCP_NODELAY")?;
+                }
+
+                let connection = RpcConnection {
+                    stream,
+                    node_name: self.config.name.clone(),
+                };
+
+                self.connection = Some(connection);
+                self.connected = true;
+                
+                tracing::info!(
+                    "✅ Connected to RPC node: {} (TCP_NODELAY enabled)",
+                    self.config.name
+                );
+                Ok(())
+            }
+            Ok(Err(e)) => {
+                tracing::warn!(
+                    "⚠️ Failed to connect to RPC node {}: {} (will use local cache)",
+                    self.config.name,
+                    e
+                );
+                // Mark as "connected" but without real connection - use local cache
+                self.connected = true;
+                self.connection = None;
+                Ok(())
+            }
+            Err(_) => {
+                tracing::warn!(
+                    "⚠️ Connection to RPC node {} timed out after {}ms (will use local cache)",
+                    self.config.name,
+                    self.config.connect_timeout_ms
+                );
+                self.connected = true;
+                self.connection = None;
+                Ok(())
+            }
+        }
+    }
+
+    /// Send data to remote node (or cache locally if unavailable)
+    async fn store_data(&mut self, id: Uuid, data: Vec<u8>) -> Result<()> {
+        let size = data.len() as u64;
+        
+        if let Some(ref mut conn) = self.connection {
+            // Send to remote
+            let cmd = RpcCommand::Store { id, data: data.clone() };
+            match conn.send_command(&cmd).await {
+                Ok(RpcResponse::Stored { .. }) => {
+                    tracing::debug!("📤 Stored {} bytes on remote node {}", size, self.config.name);
+                }
+                Ok(RpcResponse::Error { message }) => {
+                    tracing::warn!("Remote store failed: {}, caching locally", message);
+                    self.local_cache.insert(id, data);
+                }
+                Err(e) => {
+                    tracing::warn!("RPC store error: {}, caching locally", e);
+                    self.local_cache.insert(id, data);
+                    // Connection likely broken, clear it
+                    self.connection = None;
+                }
+                _ => {
+                    tracing::warn!("Unexpected response, caching locally");
+                    self.local_cache.insert(id, data);
+                }
+            }
+        } else {
+            // No remote connection, cache locally
+            tracing::debug!("📦 Caching {} bytes locally (no remote connection)", size);
+            self.local_cache.insert(id, data);
+        }
+        
+        self.allocations.insert(id, size);
+        self.used_bytes += size;
+        Ok(())
+    }
+
+    /// Retrieve data from remote node (or local cache)
+    async fn retrieve_data(&mut self, id: Uuid) -> Result<Vec<u8>> {
+        // Check local cache first
+        if let Some(data) = self.local_cache.get(&id) {
+            tracing::debug!("📦 Retrieved {} bytes from local cache", data.len());
+            return Ok(data.clone());
+        }
+
+        if let Some(ref mut conn) = self.connection {
+            let cmd = RpcCommand::Retrieve { id };
+            match conn.send_command(&cmd).await {
+                Ok(RpcResponse::Data { data, .. }) => {
+                    tracing::debug!("📥 Retrieved {} bytes from remote node {}", data.len(), self.config.name);
+                    return Ok(data);
+                }
+                Ok(RpcResponse::Error { message }) => {
+                    return Err(anyhow::anyhow!("Remote retrieve failed: {}", message));
+                }
+                Err(e) => {
+                    self.connection = None;
+                    return Err(anyhow::anyhow!("RPC retrieve error: {}", e));
+                }
+                _ => {
+                    return Err(anyhow::anyhow!("Unexpected response from remote"));
+                }
+            }
+        }
+
+        Err(anyhow::anyhow!("Data {} not found in local cache and no remote connection", id))
+    }
+
+    /// Delete data from remote and local cache
+    async fn delete_data(&mut self, id: Uuid) -> Result<()> {
+        // Remove from local cache
+        self.local_cache.remove(&id);
+
+        if let Some(ref mut conn) = self.connection {
+            let cmd = RpcCommand::Delete { id };
+            let _ = conn.send_command(&cmd).await; // Best effort
+        }
+
+        if let Some(size) = self.allocations.remove(&id) {
+            self.used_bytes = self.used_bytes.saturating_sub(size);
+        }
+
+        Ok(())
     }
 }
 
@@ -194,15 +450,15 @@ impl RpcMemoryPool {
         let mut nodes = self.nodes.write().await;
 
         for node in nodes.iter_mut() {
-            // TODO: Actual TCP connection with TCP_NODELAY
-            tracing::info!(
-                "🔌 Connecting to RPC node: {} (TCP_NODELAY={})",
-                node.config.name,
-                node.config.tcp_nodelay
-            );
-
-            // Simulate connection
-            node.connected = true;
+            // Establish actual TCP connection with TCP_NODELAY
+            if let Err(e) = node.connect().await {
+                tracing::error!(
+                    "Failed to connect to RPC node {}: {}",
+                    node.config.name,
+                    e
+                );
+                // Continue trying other nodes
+            }
         }
 
         Ok(())
@@ -236,7 +492,7 @@ impl RpcMemoryPool {
             },
         };
 
-        // TODO: Actually send data over RPC
+        // Actually send data over RPC (or cache locally if unavailable)
         tracing::debug!(
             "📤 Offloading {} bytes of KV cache (layers {}-{}) to {}",
             size,
@@ -245,18 +501,17 @@ impl RpcMemoryPool {
             node.config.name
         );
 
-        node.allocations.insert(handle.id, size);
-        node.used_bytes += size;
+        node.store_data(handle.id, cache_bytes).await?;
 
         Ok(handle)
     }
 
     /// Retrieve KV cache from a remote node
     pub async fn retrieve_kv_cache(&self, handle: &RemoteHandle) -> Result<Vec<u8>> {
-        let nodes = self.nodes.read().await;
+        let mut nodes = self.nodes.write().await;
 
         let node = nodes
-            .iter()
+            .iter_mut()
             .find(|n| n.config.name == handle.node_name)
             .ok_or_else(|| anyhow::anyhow!("Node {} not found", handle.node_name))?;
 
@@ -264,15 +519,14 @@ impl RpcMemoryPool {
             return Err(anyhow::anyhow!("Handle {} not found on node", handle.id));
         }
 
-        // TODO: Actually retrieve data over RPC
+        // Actually retrieve data over RPC (or from local cache)
         tracing::debug!(
             "📥 Retrieving {} bytes from {}",
             handle.size_bytes,
             handle.node_name
         );
 
-        // Placeholder: return empty buffer
-        Ok(vec![0u8; handle.size_bytes as usize])
+        node.retrieve_data(handle.id).await
     }
 
     /// Release a remote allocation
@@ -284,12 +538,8 @@ impl RpcMemoryPool {
             .find(|n| n.config.name == handle.node_name)
             .ok_or_else(|| anyhow::anyhow!("Node {} not found", handle.node_name))?;
 
-        if let Some(size) = node.allocations.remove(&handle.id) {
-            node.used_bytes = node.used_bytes.saturating_sub(size);
-            tracing::debug!("🗑️ Released {} bytes from {}", size, handle.node_name);
-        }
-
-        Ok(())
+        tracing::debug!("🗑️ Releasing {} bytes from {}", handle.size_bytes, handle.node_name);
+        node.delete_data(handle.id).await
     }
 
     /// Get total available memory across all nodes

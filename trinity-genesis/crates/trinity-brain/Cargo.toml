@@ -2,7 +2,7 @@
 name = "trinity-brain"
 version.workspace = true
 edition.workspace = true
-description = "Desktop node binary - LLM inference server for Trinity Genesis"
+description = "Trinity AI Agent System"
 
 [[bin]]
 name = "trinity-brain"
@@ -42,3 +42,5 @@ tracing-subscriber = { workspace = true }
 uuid = { workspace = true }
 chrono = { workspace = true }
 dirs = { workspace = true }
+axum = "0.8.8"
+tower-http = { version = "0.6.8", features = ["fs", "cors"] }

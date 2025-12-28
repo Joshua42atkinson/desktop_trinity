@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Text-to-Speech Engine for Trinity Genesis
 //!
 //! Provides synthesized speech from text using local ONNX models.

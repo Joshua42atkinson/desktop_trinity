@@ -2,7 +2,7 @@
 name = "trinity-protocol"
 version.workspace = true
 edition.workspace = true
-description = "Shared RPC protocol definitions for Trinity Genesis Brain<->Body communication"
+description = "Trinity AI Agent System"
 
 [dependencies]
 # RPC
@@ -21,7 +21,8 @@ uuid = { workspace = true }
 chrono = { workspace = true }
 
 # Internal crates
-trinity-kernel = { workspace = true }
+# Internal crates
+# trinity-kernel = { workspace = true } (Removed to break cycle)
 
 [dev-dependencies]
 tokio = { workspace = true }

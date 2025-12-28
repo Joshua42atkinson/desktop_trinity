@@ -1,0 +1,78 @@
+services:
+
+  # ==========================================
+  # 2. LLM SERVICE (Vulkan Accelerated)
+  # ==========================================
+  llama-service:
+    image: ghcr.io/ggerganov/llama.cpp:server-vulkan
+    container_name: trinity_llama
+    restart: unless-stopped
+    ports:
+      - "8081:8080" # API Port
+    devices:
+      - /dev/dri:/dev/dri # Vulkan access
+    volumes:
+      - /home/joshua/.lmstudio/models:/models # Mount local models
+    command: >
+      -m /models/Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF/Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf -c 32768 -ngl 999 --host 0.0.0.0 --port 8080
+    networks:
+      - trinity-net
+
+  # ==========================================
+  # 3. SPEACHES (STT/TTS Engine)
+  # ==========================================
+  speaches:
+    image: ghcr.io/speaches-ai/speaches:latest
+    container_name: trinity_speaches
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - WHISPER_COMPUTE_TYPE=int8
+    volumes:
+      - trinity_cache:/root/.cache/huggingface
+    networks:
+      - trinity-net
+
+  # ==========================================
+  # 4. COMFYUI (Generative Studio - ROCm)
+  # ==========================================
+  comfyui:
+    image: rocm/pytorch:latest # Base image, will need custom install script in entrypoint or derived image
+    container_name: trinity_comfy
+    restart: unless-stopped
+    ports:
+      - "8188:8188"
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./comfyui_data:/app/ComfyUI/output
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=11.5.1
+    networks:
+      - trinity-net
+
+  # ==========================================
+  # 5. VECTOR DB (RAG Memory)
+  # ==========================================
+  vector-db:
+    image: chromadb/chroma
+    container_name: trinity_chroma
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    volumes:
+      - trinity_vectors:/chroma/chroma
+    networks:
+      - trinity-net
+
+volumes:
+  trinity_data:
+  trinity_cache:
+  trinity_vectors:
+
+
+networks:
+  trinity-net:
+    driver: bridge

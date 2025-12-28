@@ -1,3 +1,14 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// 📡 ZONE: PROTOCOL (Shared) | Context: /antigravity/CONTEXT.md
+// ═══════════════════════════════════════════════════════════════════════════════
+// VISION: Pure Rust • Type-Safe • Stable API (don't break compatibility!)
+// Shared types used by Brain, Body, and all other zones.
+// ═══════════════════════════════════════════════════════════════════════════════
+
 //! # Trinity Protocol (The Language)
 //!
 //! ## Philosophy (Architectonics)
@@ -23,5 +34,5 @@ pub use artifact::{
 pub use brain::BrainServiceClient;
 pub use memory::MemoryServiceClient;
 pub use stream::{AgentConfig, AgentStatus, ModelTier, OrchestratorConfig, StreamEvent};
-pub use task::TaskServiceClient;
+pub use task::*;
 pub use types::*;

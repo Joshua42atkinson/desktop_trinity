@@ -2,7 +2,7 @@
 name = "trinity-coder"
 version.workspace = true
 edition.workspace = true
-description = "Specialized Coder node - Running Overthinking Rustacean Behemoth"
+description = "Trinity AI Agent System"
 
 [[bin]]
 name = "trinity-coder"

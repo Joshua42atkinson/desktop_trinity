@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Integration tests for the Autopoietic Engine
 //!
 //! Tests the full mutation cycle: staging → compile → backup → promote

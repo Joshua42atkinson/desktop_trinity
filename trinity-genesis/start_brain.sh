@@ -29,9 +29,13 @@ echo "⚙️  Setting environment for Strix Halo (Vulkan Mode)..."
 # Enable GPU for 73B model performance (Strix Halo Unified Memory)
 export TRINITY_GPU_LAYERS=-1
 echo "   TRINITY_GPU_LAYERS=-1 (GPU OFFLOAD ENABLED)"
-# Use rust_coder profile for the 73B Overthinking Rustacean
-export TRINITY_PROFILE=rust_coder
-echo "   TRINITY_PROFILE set to: $TRINITY_PROFILE (73B Model)"
+# Use nemotron profile for the NVIDIA Nemotron 3 Nano
+export TRINITY_PROFILE=nemotron
+# Enable Hybrid Architecture: Use local Llama for planning + LM Studio for Nemotron
+export TRINITY_HYBRID_MODE=1
+export TRINITY_JR_URL="http://localhost:1234/v1"
+echo "   TRINITY_PROFILE set to: $TRINITY_PROFILE (Hybrid Mode Active)"
+echo "   TRINITY_JR_URL: $TRINITY_JR_URL (Connecting to LM Studio)"
 # Phase 2 Stability: Limit threads to prevent CPU starvation on Strix Halo
 export OMP_NUM_THREADS=8
 export GGML_VK_DISABLE_INTEGER_DOT_PRODUCT=1
@@ -42,15 +46,14 @@ export GGML_VULKAN_DEVICE=0
 unset HSA_OVERRIDE_GFX_VERSION
 unset HIP_VISIBLE_DEVICES
 export ROCM_PATH=/opt/rocm
-
-# Step 3: Verify model exists
-MODEL_PATH="/home/joshua/antigravity/models/Overthinking-Rustacean-Behemoth.Q4_K_M.gguf"
+# Step 3: Verify model exists (safeguard)
+MODEL_PATH="/home/joshua/.lmstudio/models/lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF/NVIDIA-Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf"
 if [ ! -f "$MODEL_PATH" ]; then
     echo "❌ Model not found: $MODEL_PATH"
-    echo "   Please ensure Overthinking-Rustacean-Behemoth is downloaded"
+    echo "   Please ensure NVIDIA-Nemotron-3-Nano-30B is downloaded"
     exit 1
 fi
-echo "✓ Model found: Overthinking-Rustacean-Behemoth (73B)"
+echo "✓ Model found: Nemotron 3 Nano (A3B)"
 
 # Step 4: Build if needed
 echo "🔨 Building Trinity Brain (release mode)..."

@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Quadradical Brain Implementation (Trinity Jr.)
 //!
 //! Connects to the local Quadradical AI server (formerly llama_llama).

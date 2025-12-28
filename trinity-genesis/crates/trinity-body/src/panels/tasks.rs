@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Task Queue Panel
 //!
 //! Displays and manages autonomous tasks in the queue.

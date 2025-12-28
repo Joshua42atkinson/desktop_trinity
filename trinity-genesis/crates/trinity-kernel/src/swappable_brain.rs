@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # Swappable Brain — Safe Model Hot-Swapping for Unified Memory
 //!
 //! ## Philosophy
@@ -31,19 +35,33 @@ pub struct ModelProfile {
 impl ModelProfile {
     /// Rustacean Behemoth 73B — Specialized Rust Coder
     pub fn rust_coder() -> Self {
+        let t_config = crate::config::TrinityConfig::load_profile("rust_coder");
         Self {
-            name: "Rustacean Behemoth (73B Q4)".to_string(),
-            config: DesktopBrainConfig::solo_coder(),
-            estimated_vram_gb: 45.0, // ~45GB for Q4_K_M
+            name: "Strand Rust Coder (14B)".to_string(),
+            config: DesktopBrainConfig {
+                 model_path: t_config.model.model_path.to_string_lossy().to_string(),
+                 context_size: t_config.model.context_size as u32,
+                 n_gpu_layers: -1,
+                 hsa_override: "11.5.1".to_string(),
+                 max_tokens: 8192,
+            },
+            estimated_vram_gb: 12.0, // Updated for 14B model
         }
     }
 
     /// Llama 4 Scout — High-IQ Planner
     pub fn planner() -> Self {
+        let t_config = crate::config::TrinityConfig::load_profile("planner");
         Self {
             name: "Llama 4 Scout (17B MoE)".to_string(),
-            config: DesktopBrainConfig::planner(),
-            estimated_vram_gb: 12.0, // Much smaller
+            config: DesktopBrainConfig {
+                 model_path: t_config.model.model_path.to_string_lossy().to_string(),
+                 context_size: t_config.model.context_size as u32,
+                 n_gpu_layers: -1,
+                 hsa_override: "11.5.1".to_string(),
+                 max_tokens: 4096,
+            },
+            estimated_vram_gb: 12.0, 
         }
     }
 

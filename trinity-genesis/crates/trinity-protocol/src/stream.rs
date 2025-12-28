@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Streaming Protocol - Agent Event Types for RPC
 //!
 //! These types are used to stream agent events from Brain to Body

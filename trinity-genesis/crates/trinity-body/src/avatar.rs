@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Avatar System for Trinity Body
 //!
 //! Animated 3D avatars representing AI agents with particle effects

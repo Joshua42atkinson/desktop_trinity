@@ -14,8 +14,10 @@ Environment="GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
 Environment="ROCR_VISIBLE_DEVICES=0"
 Environment="RUST_LOG=info"
 
-# Model Profile (rust_coder, planner, fast, code_assistant)
-Environment="TRINITY_PROFILE=rust_coder"
+# Model Profile (rust_coder, planner, fast, code_assistant, nemotron)
+Environment="TRINITY_PROFILE=nemotron"
+Environment="TRINITY_HYBRID_MODE=1"
+Environment="TRINITY_JR_URL=http://localhost:1234/v1"
 
 # ============================================================================
 # ZOMBIE PROTOCOL: Brain has built-in ZombieReaper that runs on startup

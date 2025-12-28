@@ -1,3 +1,14 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🧠 ZONE: BRAIN | Workflow: /brain-dev | Context: /antigravity/CONTEXT.md
+// ═══════════════════════════════════════════════════════════════════════════════
+// VISION: Pure Rust • Bevy ECS • AMD Strix Halo • Minimal Dependencies
+// This crate handles LLM inference, memory, and task orchestration.
+// ═══════════════════════════════════════════════════════════════════════════════
+
 //! # Trinity Kernel (The Will)
 //!
 //! ## Philosophy (Architectonics)

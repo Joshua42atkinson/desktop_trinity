@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Desktop Brain - Native LLM Inference using llama.cpp and ROCm/HIP
 //!
 //! Provides the primary inference backend for Trinity Genesis on AMD Strix Halo hardware.
@@ -52,67 +56,7 @@ impl Default for DesktopBrainConfig {
     }
 }
 
-impl DesktopBrainConfig {
-    /// =============================================================================
-    /// STRIX HALO PRESET - PRODUCTION BRAIN
-    /// =============================================================================
-    /// AMD Strix Halo: 128GB unified RAM, 96-124GB VRAM via GTT override
-    /// 
-    /// ## KEY FIXES (Documented here so we don't repeat troubleshooting!)
-    /// 
-    /// 1. MULTI-PART MODELS: Point to FIRST file (-00001-of-00002), llama.cpp
-    ///    automatically loads subsequent parts from same directory.
-    /// 
-    /// 2. GPU LAYERS: Use -1 which converts to u32::MAX = offload ALL layers
-    /// 
-    /// 3. ENVIRONMENT (set in new()):
-    ///    - HSA_OVERRIDE_GFX_VERSION=11.5.1 (critical for gfx1151)
-    ///    - HIP_VISIBLE_DEVICES=0 
-    ///    - ROCR_VISIBLE_DEVICES=0
-    /// 
-    /// 4. ZOMBIE PROCESSES: Always kill trinity-brain/llama processes before start
-    ///    Run: pkill -9 -f trinity-brain
-    /// 
-    /// 5. SUPPORTED ARCHITECTURES: llama, qwen, glm4 work. mistral3 does NOT.
-    /// 
-    /// Strix Halo: PLANNER Profile (Llama 4 Scout - High IQ, 17B MoE)
-    pub fn planner() -> Self {
-        Self {
-            model_path: "/home/joshua/antigravity/models/Llama-4-Scout-17B-16E-Instruct-GGUF/Llama-4-Scout-17B-16E-Instruct-Q4_K_M-00001-of-00002.gguf".to_string(),
-            context_size: 16384, // 16k Context (Safe for 17B on Strix Halo)
-            n_gpu_layers: -1,
-            hsa_override: "11.5.1".to_string(),
-            max_tokens: 4096, // Planning needs thought, but not novels
-        }
-    }
-
-    /// Strix Halo: WORKER Profile (Overthinking Rustacean Behemoth - 73B)
-    pub fn worker() -> Self {
-         Self {
-            model_path: "/home/joshua/antigravity/models/Overthinking-Rustacean-Behemoth.Q4_K_M.gguf".to_string(),
-            context_size: 32768, // 32k Context (Safe limit for dual 70B setup)
-            n_gpu_layers: -1,
-            hsa_override: "11.5.1".to_string(),
-            max_tokens: 4096, // Coding needs space
-        }
-    }
-
-    /// Strix Halo: SOLO Profile (Overthinking Rustacean Behemoth - 73B)
-    /// Runs a single massive model for both Planning and Coding.
-    pub fn solo_coder() -> Self {
-         Self {
-            model_path: "/home/joshua/antigravity/models/Overthinking-Rustacean-Behemoth.Q4_K_M.gguf".to_string(),
-            context_size: 32768, // 32k Context (Safe for 128GB Unified Memory with 73B model)
-            n_gpu_layers: -1,
-            hsa_override: "11.5.1".to_string(),
-            max_tokens: 8192,
-        }
-    }
-
-    pub fn strix_halo() -> Self {
-        Self::solo_coder()
-    }
-}
+// Hardcoded presets removed in favor of dynamic config.rs loading
 
 // ============================================================================
 // Brain State (internal)
@@ -194,10 +138,7 @@ impl DesktopBrain {
         }
     }
 
-    /// Create with Strix Halo optimized settings
-    pub fn strix_halo() -> Self {
-        Self::new(DesktopBrainConfig::strix_halo())
-    }
+
 
     /// Count tokens in text (for pre-flight task validation)
     /// Returns 0 if model not loaded

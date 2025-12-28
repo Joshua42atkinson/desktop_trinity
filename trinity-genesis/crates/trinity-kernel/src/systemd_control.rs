@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Systemd Control via D-Bus
 //!
 //! Provides integration with systemd for service management.

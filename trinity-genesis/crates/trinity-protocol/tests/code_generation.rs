@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Tests for grammar-constrained code generation RPC
 //!
 //! Verifies that the CodeRequest/CodeResponse types work correctly

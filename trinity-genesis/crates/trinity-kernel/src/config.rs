@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Trinity Configuration
 //!
 //! Configuration management for Trinity Genesis.
@@ -92,28 +96,69 @@ impl Default for TrinityConfig {
 }
 
 impl TrinityConfig {
-    /// Load config for Strix Halo desktop (Brain node)
-    pub fn strix_halo_brain() -> Self {
+    /// Load configuration for a specific profile
+    pub fn load_profile(profile: &str) -> Self {
+        let (model_path, ctx_size) = match profile {
+            "planner" => (
+                "/home/joshua/antigravity/models/Llama-4-Scout-17B-16E-Instruct-Q4_K_M-00001-of-00002.gguf",
+                32768
+            ),
+            "fast" => (
+                "/home/joshua/antigravity/models/GLM-4.6V-Flash-GGUF/GLM-4.6V-Flash-Q4_K_M.gguf",
+                8192
+            ),
+             "code_assistant" => (
+                "/home/joshua/antigravity/models/Devstral-Small-2-24B-Instruct-2512-GGUF/Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+                32768
+            ),
+            "nemotron" => (
+                "/home/joshua/.lmstudio/models/lmstudio-community/NVIDIA-Nemotron-3-Nano-30B-A3B-GGUF/NVIDIA-Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf",
+                32768
+            ),
+            "rust_coder" | _ => (
+                "/home/joshua/.lmstudio/models/Fortytwo-Network/Strand-Rust-Coder-14B-v1-GGUF/Fortytwo_Strand-Rust-Coder-14B-v1-Q4_K_M.gguf",
+                32768
+            ),
+        };
+        println!(
+            "   DEBUG [config.rs] profile: {}, path: {}",
+            profile, model_path
+        );
+
         Self {
             node_type: NodeType::Brain,
             model: ModelConfig {
-                model_path: PathBuf::from("/home/joshua/antigravity/models/qwen-235b-q3.gguf"),
-                n_gpu_layers: 999,
-                context_size: 32768,
-                batch_size: 512,
+                model_path: PathBuf::from(model_path),
+                n_gpu_layers: 999, // Strix Halo: Always full offload
+                context_size: ctx_size,
+                batch_size: 2048,
                 n_threads: 16,
             },
             memory: MemoryConfig {
-                vector_store_path: PathBuf::from("/home/joshua/.trinity/vectors"),
+                vector_store_path: PathBuf::from(format!(
+                    "{}/.trinity/vectors",
+                    std::env::var("HOME").unwrap_or("/home/joshua".to_string())
+                )),
                 embedding_dim: 384,
                 max_recall: 20,
             },
             network: NetworkConfig {
                 listen_addr: "0.0.0.0:9000".to_string(),
                 brain_addr: None,
-                body_addr: Some("100.84.217.60:9000".to_string()),
+                body_addr: None,
             },
         }
+    }
+
+    /// Load default Strix Halo configuration
+    pub fn strix_halo_brain() -> Self {
+        Self::load_profile("rust_coder")
+    }
+
+    /// Get the active configuration
+    pub fn active() -> Self {
+        let profile = std::env::var("TRINITY_PROFILE").unwrap_or_else(|_| "rust_coder".to_string());
+        Self::load_profile(&profile)
     }
 
     /// Load config for laptop (Body node)

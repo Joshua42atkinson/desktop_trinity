@@ -1,6 +1,10 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 use crate::stream::{AgentConfig, AgentStatus, OrchestratorConfig, StreamEvent};
 use crate::task::{QueueStatus, TaskInfo, TaskResult, TaskType};
-use crate::types::{ChatMessage, CodeRequest, CodeResponse, ImageRequest, ImageResponse, ModelInfo, ProtocolError, VoicePacket, VoiceResponse, WriteRequest, WriteResponse};
+use crate::types::{AssessmentRequest, AssessmentResponse, ChatMessage, CodeRequest, CodeResponse, ImageRequest, ImageResponse, ModelInfo, ProtocolError, VoicePacket, VoiceResponse, WriteRequest, WriteResponse};
 use uuid::Uuid;
 
 #[tarpc::service]
@@ -32,6 +36,10 @@ pub trait BrainService {
 
     /// Generate a document using the Writer skill
     async fn generate_document(request: WriteRequest) -> Result<WriteResponse, ProtocolError>;
+
+    /// Generate an educational assessment using the Educator skill
+    async fn generate_assessment(request: AssessmentRequest) -> Result<AssessmentResponse, ProtocolError>;
+
 
     // ------------------------------------------------------------------------
     // Autonomous Task Features

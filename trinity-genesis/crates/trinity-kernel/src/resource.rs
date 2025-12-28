@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Resource Manager - Hardware-Aware Resource Economy
 //!
 //! Intelligent management of memory, GPU, and CPU resources for always-on operation.

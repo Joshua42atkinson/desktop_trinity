@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 use tarpc::{client, context, tokio_serde::formats::Bincode};
 use tokio_util::codec::LengthDelimitedCodec;
 use trinity_protocol::{brain::BrainServiceClient, task::TaskType};

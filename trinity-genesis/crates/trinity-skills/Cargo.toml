@@ -2,7 +2,7 @@
 name = "trinity-skills"
 version.workspace = true
 edition.workspace = true
-description = "Agent skill plugins for Trinity Genesis - coder, writer, artist, etc."
+description = "Trinity AI Agent System"
 
 [features]
 default = []

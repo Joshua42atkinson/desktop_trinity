@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # Trinity Brain (The Mind)
 //! 
 //! ## Philosophy (Architectonics)
@@ -23,14 +27,22 @@ use tokio::sync::Mutex;
 use tokio_util::codec::LengthDelimitedCodec;
 use tracing_subscriber;
 use futures::StreamExt;
+use trinity_kernel::WasmSandbox;
+use axum::{
+    routing::get_service,
+    Router,
+};
+use tower_http::services::ServeDir;
+
 
 // use uuid::Uuid; // Fully qualified usage in signatures
 // use chrono;
 
 use trinity_kernel::{Brain, DesktopBrain, DesktopBrainConfig, AutonomousRuntime, AdvancedMemory, MemoryConfig, MemorySource, TtsEngine, SpeakingResponse, TaskStore, ResourceManager};
-use trinity_protocol::{brain::BrainService, ChatMessage, VoicePacket, VoiceResponse, EmotionData, AvatarState, ImageRequest, ImageResponse};
+use trinity_protocol::{brain::BrainService, ChatMessage, VoicePacket, VoiceResponse, EmotionData, AvatarState, ImageRequest, ImageResponse, AssessmentRequest, AssessmentResponse, AssessmentType, Difficulty};
 use trinity_skills::{ImageGenerator, ToolExecutor};
 use trinity_kernel::runtime::AutonomousTask;
+use trinity_kernel::todo_parser;
 
 #[derive(Clone)]
 struct BrainServer {
@@ -400,6 +412,30 @@ MEMORY CONTEXT:
         }
     }
 
+    async fn generate_assessment(self, _: context::Context, request: trinity_protocol::types::AssessmentRequest) -> Result<trinity_protocol::types::AssessmentResponse, trinity_protocol::types::ProtocolError> {
+        tracing::info!("Generating {:?} assessment for: '{}' (audience: {})", 
+            request.assessment_type, 
+            request.topic.chars().take(50).collect::<String>(),
+            request.target_audience);
+        
+        // Create Educator skill
+        let educator = trinity_skills::educator::Educator::new();
+        
+        // 3. Create Request (Direct pass-through as types are shared)
+        let educator_request = request;
+
+        // 4. Execute Skill
+        tracing::info!("🎓 Educator: Generating assessment for '{}'...", educator_request.topic);
+        let response = educator.generate(self.brain.as_ref(), educator_request).await
+            .map_err(|e| trinity_protocol::types::ProtocolError {
+                code: 500,
+                message: format!("Internal Assessment Error: {}", e),
+            })?;
+
+        Ok(response)
+
+    }
+
     async fn submit_task(self, _: context::Context, name: String, task_type: trinity_protocol::task::TaskType, priority: u8) -> Result<uuid::Uuid, trinity_protocol::types::ProtocolError> {
         tracing::info!("Received task submission: {}", name);
         
@@ -540,7 +576,15 @@ async fn main() -> anyhow::Result<()> {
         
         // 1. Initialize Local Planner
         println!("   [Planner] Loading Local Llama 4 Scout (Vulkan)...");
-        let planner_config = DesktopBrainConfig::planner();
+        let t_config = trinity_kernel::config::TrinityConfig::load_profile("planner");
+        let planner_config = DesktopBrainConfig {
+            model_path: t_config.model.model_path.to_string_lossy().to_string(),
+            context_size: t_config.model.context_size as u32,
+            n_gpu_layers: -1,
+            hsa_override: "11.5.1".to_string(),
+            max_tokens: 4096,
+        };
+        println!("   [Planner] Config Path: {}", planner_config.model_path);
         let planner = Arc::new(DesktopBrain::new(planner_config));
         
         // 2. Initialize Remote Worker
@@ -562,62 +606,20 @@ async fn main() -> anyhow::Result<()> {
         
     } else {
         // --- SOLO MODE (Traditional) ---
-        // Solo Brain Mode - One powerful model for all tasks
-        // Profiles: rust_coder, planner, fast, code_assistant
-        let config = match profile.as_str() {
-            "planner" => {
-                println!("🧠 Loading Planner (Llama 4 Scout 17B)...");
-                DesktopBrainConfig::planner()
-            }
-            "fast" => {
-                println!("⚡ Loading Fast Model (GLM-4.6V-Flash)...");
-                let gpu_layers = std::env::var("TRINITY_GPU_LAYERS")
-                    .ok()
-                    .and_then(|v| v.parse::<i32>().ok())
-                    .unwrap_or(0); // Default to CPU-only for safety
-                DesktopBrainConfig {
-                    model_path: "/home/joshua/antigravity/models/GLM-4.6V-Flash-GGUF/GLM-4.6V-Flash-Q4_K_M.gguf".to_string(),
-                    context_size: 8192, // Smaller context for faster loading
-                    n_gpu_layers: gpu_layers,
-                    hsa_override: "11.5.1".to_string(),
-                    max_tokens: 2048,
-                }
-            }
-            "code_assistant" => {
-                println!("💻 Loading Code Assistant (Devstral 24B)...");
-                DesktopBrainConfig {
-                    model_path: "/home/joshua/antigravity/models/Devstral-Small-2-24B-Instruct-2512-GGUF/Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf".to_string(),
-                    context_size: 32768,
-                    n_gpu_layers: -1,
-                    hsa_override: "11.5.1".to_string(),
-                    max_tokens: 4096,
-                }
-            }
-            _ => {
-                // Default: rust_coder (Rustacean Behemoth 73B)
-                println!("🦀 Loading Rust Specialist (Overthinking Rustacean Behemoth 73B)...");
-                
-                // Allow tuning via env vars for stability testing
-                // Use ResourceManager recommendation unless explicitly overridden
-                let gpu_layers = std::env::var("TRINITY_GPU_LAYERS")
-                    .ok()
-                    .and_then(|v| v.parse::<i32>().ok())
-                    .unwrap_or_else(|| recommended_gpu_layers as i32);
-                    
-                let ctx_size = std::env::var("TRINITY_CTX_SIZE")
-                    .ok()
-                    .and_then(|v| v.parse::<u32>().ok())
-                    .unwrap_or(32768);
-
-                let mut config = DesktopBrainConfig::solo_coder();
-                config.n_gpu_layers = gpu_layers;
-                config.context_size = ctx_size;
-                
-                println!("   ⚙️ Config: {} layers on GPU (ResourceManager: {}), {} context", 
-                    gpu_layers, recommended_gpu_layers, ctx_size);
-                config
-            }
+        // Load profile from Config
+        println!("🦀 Loading Profile: {}...", profile);
+        let trinity_config = trinity_kernel::config::TrinityConfig::load_profile(&profile);
+        
+        // Map TrinityConfig -> DesktopBrainConfig
+        let config = DesktopBrainConfig {
+            model_path: trinity_config.model.model_path.to_string_lossy().to_string(),
+            context_size: trinity_config.model.context_size as u32,
+            n_gpu_layers: -1, // Force full offload for Strix Halo (config usually has 999)
+            hsa_override: "11.5.1".to_string(),
+            max_tokens: if profile == "fast" { 2048 } else { 8192 }, // Dynamic based on profile type
         };
+
+        println!("   ⚙️ Config: {} context, Model: {}", config.context_size, config.model_path);
         
         let brain = Arc::new(DesktopBrain::new(config));
         let name = format!("Solo: {} ({})", profile, brain.name());
@@ -633,6 +635,10 @@ async fn main() -> anyhow::Result<()> {
             eprintln!("⚠️ WARNING: Model failed to load!");
             eprintln!("   Profile: {}", profile);
             eprintln!("   Check: Model file exists at expected path");
+            // Attempt to get more info if possible
+            if let Err(e) = trinity_kernel::config::TrinityConfig::load_profile(&profile).model.model_path.metadata() {
+                eprintln!("   FS Error: {}", e);
+            }
         }
     } else {
         println!("✅ Brain ready: {}", model_name);
@@ -704,10 +710,51 @@ async fn main() -> anyhow::Result<()> {
     let tools = Arc::new(Mutex::new(ToolExecutor::with_config(tools_config)));
     println!("   ✅ Tools ready (workspace: {})", workspace_dir.display());
 
+    // 7.5 Initialize WASM Sandbox
+    println!("📦 Initializing WASM Sandbox...");
+    let sandbox = Arc::new(Mutex::new(WasmSandbox::with_workspace(workspace_dir.clone())?));
+    {
+        // Load Plugins
+        let sb = sandbox.clone();
+        let mut guard = sb.lock().await;
+        // Re-derive plugin dir since workspace_dir was moved
+        let plugin_dir = guard.workspace_path().join("plugins");
+        
+        // Load Code Editor
+        let editor_path = plugin_dir.join("code_editor.wasm");
+        if editor_path.exists() {
+            guard.load_module_from_file(editor_path).await?;
+            println!("   ✅ Loaded plugin: code_editor");
+        } else {
+            println!("   ⚠️ Plugin not found: {}", editor_path.display());
+        }
+
+        // Load Calculator
+        let calc_path = plugin_dir.join("calculator.wasm");
+        if calc_path.exists() {
+            guard.load_module_from_file(calc_path).await?;
+             println!("   ✅ Loaded plugin: calculator");
+        }
+    }
+
+    // 8. Start Web Server (Axum) for Bevy Client
+    println!("🌍 Starting Web Server (Axum) on http://0.0.0.0:3000...");
+    let app = Router::new()
+        .fallback_service(ServeDir::new("/home/joshua/antigravity/trinity-genesis/static")); 
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
+    tokio::spawn(async move {
+        // axum 0.7+
+        let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+        axum::serve(listener, app).await.unwrap();
+    });
+
+
     println!("🎼 Initializing Orchestrator (Solo-Brain)...");
     let orchestrator = Arc::new(trinity_kernel::orchestrator::Orchestrator::new(
         brain_planner.clone(), // Joshua (Planner) gets the Big Brain
         brain_worker.clone(), // Jessica (Worker) gets the Worker Brain
+        sandbox.clone(),      // Shared WASM Sandbox
         2
     ));
 
@@ -787,16 +834,16 @@ async fn main() -> anyhow::Result<()> {
     // 8. Event Bridging for UI (Orchestrator -> Event Buffer)
     let event_buffer = Arc::new(Mutex::new(Vec::new()));
     let buffer_clone = event_buffer.clone();
-    let ORCH = orchestrator.clone();
+    let orch = orchestrator.clone();
     
     // Subscribe to Orchestrator events and push to buffer for UI polling
-    let mut bridge_rx = ORCH.subscribe();
+    let mut bridge_rx = orch.subscribe();
     
     tokio::spawn(async move {
         loop {
             if let Ok(event) = bridge_rx.recv().await {
                 let stream_event = match event {
-                    trinity_kernel::orchestrator::AgentEvent::AgentIdle { agent_id } => {
+                    trinity_kernel::orchestrator::AgentEvent::AgentIdle { agent_id: _agent_id } => {
                        // We can infer idle state here if needed, or just ignore
                        // Actually, let's map it so UI knows agent is done
                         trinity_protocol::stream::StreamEvent::AgentStatusUpdate {
@@ -827,10 +874,7 @@ async fn main() -> anyhow::Result<()> {
                                 metadata["file_path"].as_str().unwrap_or("")
                             ),
                             "quiz" => {
-                                // Content is JSON list of questions
-                                let questions = serde_json::from_str(&content).unwrap_or_default();
-                                // We don't have a specific Quiz variant in Artifact enum yet, so we use Text for now
-                                // OR we should add it. Wait, Artifact has 'Steps' which could work.
+                                // Content is JSON quiz data - use Text artifact for now
                                 trinity_protocol::artifact::Artifact::Text { 
                                     content: format!("Quiz generated: {}", content), 
                                     streaming: false 
@@ -895,6 +939,48 @@ async fn main() -> anyhow::Result<()> {
     // This is the "self-coding" mode - tasks come from trinity-body or CLI.
     println!("🤖 Autonomous Runtime: Ready (waiting for tasks via RPC)");
     println!("   💡 Submit tasks via trinity-body UI or trinity-cli");
+
+    // 11. Start Autonomous Building Loop (Ouroboros)
+    println!("🎼 Ouroboros: Initializing Building Loop...");
+    let build_runtime = runtime.clone();
+    let build_workspace = workspace_dir.clone();
+    
+    tokio::spawn(async move {
+        // Give the server time to fully stabilize
+        tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+        
+        tracing::info!("🤖 Building Loop active: Scanning for self-improvement opportunities...");
+        
+        loop {
+            // Only scan if the queue is empty to avoid overwhelming the system
+            let status = build_runtime.status();
+            if status.pending == 0 && status.is_running {
+                match todo_parser::scan_workspace_for_todos(&build_workspace) {
+                    Ok(items) => {
+                        let pending_items: Vec<_> = items.into_iter()
+                            .filter(|i| !i.complete)
+                            .collect();
+                            
+                        if !pending_items.is_empty() {
+                            tracing::info!("🤖 Building Loop: Found {} pending tasks. Enqueuing top priorities...", pending_items.len());
+                            
+                            // Take top 3 priorities to avoid flood
+                            for item in pending_items.into_iter().take(3) {
+                                let task = item.to_autonomous_task();
+                                build_runtime.enqueue(task);
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        tracing::error!("🤖 Building Loop: Workspace scan failed: {}", e);
+                    }
+                }
+            }
+            
+            // Cycle every 5 minutes
+            tokio::time::sleep(std::time::Duration::from_secs(300)).await;
+        }
+    });
 
     loop {
         let (stream, addr) = listener.accept().await?;

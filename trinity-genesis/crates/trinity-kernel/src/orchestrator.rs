@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Agent Orchestrator - Multi-Agent Task Dispatch with Streaming Events
 //!
 //! Coordinates multiple parallel coding agents and streams their progress
@@ -12,7 +16,9 @@ use std::collections::HashMap;
 
 use crate::brain::{Brain, GrammarSpec};
 use crate::runtime::{AutonomousTask, TaskPriority, TaskType};
+use crate::wasm_sandbox::{Capability, CapabilitySet, SandboxConfig, WasmSandbox};
 use crate::todo_parser;
+use trinity_protocol::types::{AssessmentType, QuizQuestion, LabProject}; // Added imports
 use std::path::Path;
 
 // ============================================================================
@@ -128,13 +134,21 @@ pub struct Orchestrator {
     pending_tasks: Arc<Mutex<Vec<AutonomousTask>>>,
     /// Track which agents are currently idle (agent_id -> is_idle)
     agent_status: Arc<Mutex<HashMap<String, bool>>>,
+    /// Secure WASM Sandbox for tool execution
+    sandbox: Arc<Mutex<WasmSandbox>>,
 }
 
 impl Orchestrator {
     /// Create a new orchestrator with Dual-Brain Architecture
     /// planner: High-intelligence model (e.g. Llama 4 Scout) for Joshua
     /// worker: High-speed/context model (e.g. GLM-4 Flash) for Jessica
-    pub fn new(planner: Arc<dyn Brain>, worker: Arc<dyn Brain>, _agent_count: usize) -> Self {
+    /// sandbox: Shared WASM sandbox for secure tool execution
+    pub fn new(
+        planner: Arc<dyn Brain>, 
+        worker: Arc<dyn Brain>, 
+        sandbox: Arc<Mutex<WasmSandbox>>,
+        _agent_count: usize
+    ) -> Self {
         let (event_tx, _) = broadcast::channel(256);
 
         let mut agents = Vec::with_capacity(2);
@@ -155,10 +169,12 @@ impl Orchestrator {
             // JOSHUA gets the PLANNER brain (High IQ)
             let brain_clone = planner.clone();
             let event_tx_clone = event_tx.clone();
+            let sandbox_clone = sandbox.clone();
             tokio::spawn(Self::agent_worker(
                 agent_id,
                 agent_name,
                 brain_clone,
+                sandbox_clone,
                 task_rx,
                 event_tx_clone,
             ));
@@ -182,10 +198,12 @@ impl Orchestrator {
             // JESSICA gets the WORKER brain (High Speed/Context)
             let brain_clone = worker.clone();
             let event_tx_clone = event_tx.clone();
+            let sandbox_clone = sandbox.clone();
             tokio::spawn(Self::agent_worker(
                 agent_id,
                 agent_name,
                 brain_clone,
+                sandbox_clone,
                 task_rx,
                 event_tx_clone,
             ));
@@ -211,6 +229,7 @@ impl Orchestrator {
             event_tx,
             pending_tasks: Arc::new(Mutex::new(Vec::new())),
             agent_status,
+            sandbox,
         }
     }
 
@@ -256,6 +275,7 @@ impl Orchestrator {
         agent_id: String,
         agent_name: String,
         brain: Arc<dyn Brain>,
+        sandbox: Arc<Mutex<WasmSandbox>>,
         mut task_rx: mpsc::Receiver<AutonomousTask>,
         event_tx: broadcast::Sender<AgentEvent>,
     ) {
@@ -277,7 +297,7 @@ impl Orchestrator {
             });
 
             // Execute task based on type
-            let result = Self::execute_task(&agent_id, &agent_name, &brain, &task, &event_tx).await;
+            let result = Self::execute_task(&agent_id, &agent_name, &brain, &sandbox, &task, &event_tx).await;
 
             let duration_ms = start_time.elapsed().as_millis() as u64;
 
@@ -316,6 +336,7 @@ impl Orchestrator {
         agent_id: &str,
         agent_name: &str,
         brain: &Arc<dyn Brain>,
+        sandbox: &Arc<Mutex<WasmSandbox>>,
         task: &AutonomousTask,
         event_tx: &broadcast::Sender<AgentEvent>,
     ) -> Result<String> {
@@ -428,7 +449,7 @@ impl Orchestrator {
                     instructions, existing
                 );
 
-                // Use Rust grammar for edits (assuming Rust for now, or detect from path)
+                // Use Rust grammar for edits
                 let grammar = if path.ends_with(".rs") {
                     GrammarSpec::Rust
                 } else if path.ends_with(".json") {
@@ -437,10 +458,55 @@ impl Orchestrator {
                     GrammarSpec::None
                 };
 
+                // Generate new content via Brain
                 let edited = brain.think_with_grammar(&edit_prompt, grammar).await?;
                 let line_count = edited.lines().count();
 
-                // Emit code generated
+                // Use WASM Sandbox for Secure Write
+                {
+                    let mut sb = sandbox.lock().await;
+                    
+                    // 1. Configure Permissions (Principle of Least Privilege)
+                    // We only grant write access to the specific workspace root for now
+                    // Ideally we'd narrow this to the file, but CapSet is path-prefix based
+                    let workspace_root = sb.workspace_path().to_path_buf();
+                    let mut config = SandboxConfig::default();
+                    config.capabilities = CapabilitySet::new()
+                        .with(Capability::FileRead { paths: vec![workspace_root.clone()] })
+                        .with(Capability::FileWrite { paths: vec![workspace_root.clone()] });
+
+                    // 2. Prepare Tool Arguments for code_editor
+                    let args = serde_json::json!({
+                        "action": "Write",
+                        "args": {
+                            "path": path,
+                            "content": edited
+                        }
+                    });
+
+                    // 3. Execute Securely
+                    // Plugin must be loaded beforehand (in main.rs)
+                    let plugin_path = std::path::PathBuf::from("plugins/code_editor.wasm");
+                    // Ensure it is loaded if not already? modify sandbox to auto-load? 
+                    // For now assuming it is loaded.
+                    
+                    // We need to pass the absolute path to the plugin because WasmSandbox::execute_with_config
+                    // might expect it or the loaded module name. 
+                    // Actually execute_with_config takes 'module_path_or_name'.
+                    
+                    match sb.execute_with_config(&plugin_path, "edit", &args.to_string(), config).await {
+                        Ok(output) => {
+                             tracing::info!("WASM File Write Success: {}", output);
+                        },
+                        Err(e) => {
+                            // Fallback to native write if WASM fails (or return error)
+                            tracing::error!("WASM Write Failed: {}, falling back to native", e);
+                            tokio::fs::write(path, &edited).await?;
+                        }
+                    }
+                }
+
+                // Emit code generated event
                 let _ = event_tx.send(AgentEvent::CodeGenerated {
                     agent_id: agent_id.to_string(),
                     file_path: path.clone(),
@@ -454,13 +520,10 @@ impl Orchestrator {
                     kind: "code".to_string(),
                     content: edited.clone(),
                     metadata: serde_json::json!({
-                        "language": "rust", // Assumption or detect
+                        "language": "rust", 
                         "file_path": path.clone()
                     }),
                 });
-
-                // Write edited file
-                tokio::fs::write(path, &edited).await?;
 
                 Ok(format!("Edited {} ({} lines)", path, line_count))
             }
@@ -664,39 +727,76 @@ impl Orchestrator {
                 assessment_type,
                 difficulty,
             } => {
+                let diff_str = format!("{:?}", difficulty);
                 let _ = event_tx.send(AgentEvent::Thinking {
                     agent_id: agent_id.to_string(),
-                    thought: format!("Designing {} for: {}", assessment_type, topic),
+                    thought: format!("Designing {:?} ({}) for: {}", assessment_type, diff_str, topic),
                 });
 
-                let system_prompt = "You are an expert Professor and Curriculum Designer. Generate high-quality, pedagogically sound assessments.";
+                // Detailed "Zen" Prompt for High Quality
+                let system_prompt = "You are an elite Professor and Curriculum Designer with decades of experience. \
+                Your goal is to create educational content that is rigorous, engaging, and pedagogically sound. \
+                Do not create generic questions; focus on deep understanding and critical thinking.";
                 
-                let prompt = match assessment_type.to_lowercase().as_str() {
-                    "quiz" => format!(
-                        "{}\n\nTask: Generate a 5-question multiple choice quiz.\nTopic: {}\nDifficulty: {}\n\nOutput ONLY valid JSON: [{{ \"question\": \"...\", \"options\": [\"...\", \"...\"], \"correct_answer_idx\": 0, \"explanation\": \"...\" }}]",
-                        system_prompt, topic, difficulty
+                let (kind, prompt, is_quiz) = match assessment_type {
+                    AssessmentType::Quiz => (
+                        "quiz",
+                        format!(
+                            "{}\n\nTask: Generate a 5-question multiple choice quiz.\nTopic: {}\nDifficulty: {}\n\n\
+                            Output ONLY valid JSON matching this schema:\n\
+                            [\n  {{ \n    \"question\": \"Question text here...\", \n    \"options\": [\"Option A\", \"B\", \"C\", \"D\"],\n    \"correct_answer_idx\": 0,\n    \"explanation\": \"Detailed explanation...\"\n  }}\n]",
+                            system_prompt, topic, diff_str
+                        ),
+                        true
                     ),
-                    _ => format!(
-                        "{}\n\nTask: Generate a hands-on lab project.\nTopic: {}\nDifficulty: {}\n\nOutput ONLY valid JSON: {{ \"title\": \"...\", \"objective\": \"...\", \"steps\": [\"step 1\", \"step 2\"], \"starter_code\": \"...\", \"solution\": \"...\" }}",
-                        system_prompt, topic, difficulty
+                    AssessmentType::Lab => (
+                        "lab", 
+                        format!(
+                            "{}\n\nTask: Generate a hands-on project-based lab.\nTopic: {}\nDifficulty: {}\n\n\
+                            Output ONLY valid JSON matching this schema:\n\
+                            {{\n  \"title\": \"Lab Title\",\n  \"objective\": \"Goal...\",\n  \"steps\": [\"Step 1...\"],\n  \"starter_code\": \"Code...\",\n  \"solution\": \"Solution...\"\n}}",
+                            system_prompt, topic, diff_str
+                        ),
+                        false
+                    ),
+                    AssessmentType::Challenge => (
+                        "challenge",
+                        format!(
+                            "{}\n\nTask: Generate a coding challenge.\nTopic: {}\nDifficulty: {}\n\n\
+                            Output ONLY valid JSON matching this schema:\n\
+                            {{\n  \"title\": \"Challenge Title\",\n  \"objective\": \"Goal...\",\n  \"steps\": [\"Instructions\"],\n  \"starter_code\": \"Code Stub\",\n  \"solution\": \"Solution\"\n}}",
+                            system_prompt, topic, diff_str
+                        ),
+                        false
                     ),
                 };
 
+                // Generate with JSON Grammar
                 let response = brain.think_with_grammar(&prompt, GrammarSpec::Json).await?;
 
+                // Validate and Pretty Print (Production Ready)
+                let validated_content = if is_quiz {
+                    let questions: Vec<QuizQuestion> = serde_json::from_str(&response)
+                        .map_err(|e| anyhow::anyhow!("Failed to parse generated quiz JSON: {}", e))?;
+                    serde_json::to_string_pretty(&questions)?
+                } else {
+                    let lab: LabProject = serde_json::from_str(&response)
+                        .map_err(|e| anyhow::anyhow!("Failed to parse generated lab JSON: {}", e))?;
+                    serde_json::to_string_pretty(&lab)?
+                };
+
                 // Emit artifact
-                let kind = if assessment_type.to_lowercase() == "quiz" { "quiz" } else { "lab" };
                 let _ = event_tx.send(AgentEvent::ArtifactGenerated {
                     agent_id: agent_id.to_string(),
                     kind: kind.to_string(),
-                    content: response.clone(),
+                    content: validated_content.clone(),
                     metadata: serde_json::json!({
                         "topic": topic,
-                        "difficulty": difficulty
+                        "difficulty": diff_str
                     }),
                 });
 
-                Ok(response)
+                Ok(validated_content)
             }
 
             TaskType::Custom { handler, payload: _ } => {

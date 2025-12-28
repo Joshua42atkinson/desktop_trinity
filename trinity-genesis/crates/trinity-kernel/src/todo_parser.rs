@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! # TODO Parser — Self-Improvement Task Extraction
 //!
 //! ## Philosophy

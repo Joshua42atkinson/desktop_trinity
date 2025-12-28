@@ -1,3 +1,14 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎮 ZONE: BODY | Workflow: /body-dev | Context: /antigravity/CONTEXT.md
+// ═══════════════════════════════════════════════════════════════════════════════
+// VISION: Pure Rust • Bevy ECS • AMD Strix Halo • Premium Aesthetics
+// This crate is the visual interface - Avatar, HUD, and user interaction.
+// ═══════════════════════════════════════════════════════════════════════════════
+
 //! # Trinity Body (The Avatar)
 //!
 //! ## Philosophy (Architectonics)

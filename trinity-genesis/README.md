@@ -1,65 +1,40 @@
-# Trinity Genesis
+# Trinity AI OS
 
-> A pure-Rust, closest-to-metal AI Operating System with animated avatar UI.
+> **"The Tool for New AI Educational Environments."**
 
-## Architecture
+## Vision: Constructivism over Rote Memorization
 
-```
-Desktop (Brain) ←─ Tarpc/Tailscale ─→ Laptop (Body)
-     │                                      │
-     ├── LLM Inference (Qwen 235B)         ├── Bevy 3D UI
-     ├── ROCm/HIPBLAS                       ├── Animated Avatars
-     └── 128GB RAM / 96GB VRAM             └── Chat Interface
-```
+Trinity is a **Pure-Rust, Local-First AI Operating System** designed for public school classrooms. It is not just an educational game; it is the **Authoring Tool** that empowers Instructional Designers and Teachers to build **Constructivist Video Game Experiences** (like "Iron Road" or "Ask Pete") without needing a team of software engineers.
 
-## Crates
+We believe that:
 
-| Crate | Description |
-|-------|-------------|
-| `trinity-kernel` | Core library: Brain trait, memory, device detection |
-| `trinity-protocol` | Tarpc RPC service definitions |
-| `trinity-brain` | Desktop inference server binary |
-| `trinity-body` | Laptop Bevy UI binary |
-| `trinity-skills` | Agent specialist plugins (coder, writer, etc.) |
+1. **Data Sovereignty is Non-Negotiable**: Student data must never leave the classroom. Trinity runs 100% locally on standard hardware (targeting AMD Strix Halo / High-end Consumer PCs).
+2. **Learning is Kinetic**: Education is not about "downloading" facts (rote memorization); it is about "constructing" schemas through action, play, and struggle (Constructivism).
+3. **Tools Shape Minds**: By giving teachers a "Video Game UI" to design curriculum, we change the nature of what is taught from "static content" to "dynamic systems."
 
-## Building
+## The Architecture
 
-```bash
-# Full workspace
-cargo build --workspace
+Trinity is built on a unified, high-performance Rust stack to ensure stability, safety, and speed.
 
-# Brain node (desktop)
-cargo build -p trinity-brain --release
+- **The Mind (Backend)**: `trinity-brain` (Axum + Llama-cpp-2).
+  - A local AI Orchestrator that acts as a "Socratic Mirror," guiding students and helping teachers design content.
+- **The Face (Frontend)**: `trinity-client` (Bevy Engine).
+  - A Native/WASM Video Game Interface. It serves as both the **Classroom Dashboard** for students and the **"Level Editor"** for teachers.
+- **The Logic (Physics)**: "Coal & Steam" Economy.
+  - An internal simulation of Cognitive Load Theory, modeled as a physics engine.
 
-# Body node (laptop)
-cargo build -p trinity-body --release
-```
+## Usage
 
-## Running
+Trinity is designed to be deployed on a single classroom computer (The "Server") which students connect to, or run continuously on personal devices.
 
-**Desktop (Brain Node):**
+### For Teachers (Instructional Designers)
 
-```bash
-cd trinity-genesis
-cargo run -p trinity-brain --release
-# Listens on 0.0.0.0:9000
-```
+Use Trinity's **Agentic UI** to describe a lesson plan. The AI Agent assists in scaffolding the "Game Level" (Curriculum), ensuring it meets pedagogical standards (ZPD, Cognitive Load constraints).
 
-**Laptop (Body Node):**
+### For Students
 
-```bash
-cd trinity-genesis
-cargo run -p trinity-body --release
-# Connects to Brain at 100.115.247.4:9000
-```
-
-## Network (Tailscale)
-
-| Node | IP Address | Role |
-|------|------------|------|
-| trinity (desktop) | 100.115.247.4 | Brain - LLM inference |
-| quadratical (laptop) | 100.84.217.60 | Body - UI client |
+Log in to a gamified dashboard where "Vocabulary" is inventory and "Learning" is movement.
 
 ## License
 
-GPL-3.0
+**FOSS (Free and Open Source Software)**. Built for the public good, forever free for public education.

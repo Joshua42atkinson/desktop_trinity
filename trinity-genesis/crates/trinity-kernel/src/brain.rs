@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Brain Trait - LLM Inference Interface
 //!
 //! Defines the abstract interface for LLM inference backends.

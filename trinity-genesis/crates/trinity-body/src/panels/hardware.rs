@@ -1,3 +1,7 @@
+// Trinity AI Agent System
+// Copyright (c) Joshua
+// Shared under license for Ask_Pete (Purdue University)
+
 //! Hardware Monitor Panel
 //!
 //! Displays system resource usage from both Brain and Body nodes.
