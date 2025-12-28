@@ -35,3 +35,6 @@ rustflags = [
 [env]
 # AMD Strix Halo GPU architecture override
 HSA_OVERRIDE_GFX_VERSION = "11.0.0"
+
+[target.wasm32-unknown-unknown]
+rustflags = ["--cfg=web_sys_unstable_apis"]

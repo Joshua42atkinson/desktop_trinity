@@ -31,7 +31,9 @@ pub struct StreamToken {
 // ============================================================================
 
 /// Grammar specification for constrained output generation.
+///
 /// When specified, the LLM can only generate tokens that conform to the grammar.
+/// This acts as a robust filter to ensure valid structured output.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum GrammarSpec {
     /// No grammar constraint - free-form output
@@ -46,6 +48,9 @@ pub enum GrammarSpec {
 
 impl GrammarSpec {
     /// Get the grammar file path relative to assets directory
+    ///
+    /// # Returns
+    /// An accurate path string to the GBNF grammar file, or None.
     pub fn grammar_path(&self) -> Option<&'static str> {
         match self {
             GrammarSpec::None => None,
@@ -59,47 +64,86 @@ impl GrammarSpec {
 
 /// The Brain trait defines the core thinking capabilities.
 ///
-/// It abstracts the underlying inference engine, supporting:
-/// - Desktop: llama-cpp-2 with ROCm/HIPBLAS
-/// - Web: Candle with WebGPU
+/// It abstracts the underlying inference engine, supporting multiple backends
+/// while providing a unified interface for the high-level agent logic.
+///
+/// # Implementations
+/// - `DesktopBrain`: Uses `llama-cpp-2` with ROCm/HIPBLAS acceleration.
+/// - `MockBrain`: Simulated responses for testing.
 #[async_trait]
 pub trait Brain: Send + Sync {
-    /// Generate text from a prompt (blocking)
+    /// Generate text from a prompt (blocking).
+    ///
+    /// This is the simplest inference method, waiting for the full response.
+    ///
+    /// # Arguments
+    /// * `prompt` - The input prompt text.
+    ///
+    /// # Returns
+    /// The comprehensive generated string.
     async fn think(&self, prompt: &str) -> Result<String>;
 
     /// Generate text with grammar constraints.
-    /// When grammar is not `GrammarSpec::None`, output is constrained to valid syntax.
-    /// This prevents hallucinated code and ensures parseable output.
+    ///
+    /// # Arguments
+    /// * `prompt` - The input prompt text.
+    /// * `grammar` - The specific grammar to constrain output to.
+    ///
+    /// # Returns
+    /// A string guaranteed to parse according to the grammar (or an error).
     async fn think_with_grammar(&self, prompt: &str, grammar: GrammarSpec) -> Result<String> {
         // Default implementation ignores grammar (for backends that don't support it)
         let _ = grammar;
         self.think(prompt).await
     }
 
-    /// Generate text with streaming (tokens sent via channel)
+    /// Generate text with streaming (tokens sent via channel).
+    ///
+    /// Use this for real-time feedback (e.g. typing effects).
+    ///
+    /// # Arguments
+    /// * `prompt` - The input prompt.
+    /// * `token_tx` - Async channel to send `StreamToken`s to.
+    ///
+    /// # Returns
+    /// The full concatenated string (for convenience) after streaming completes.
     async fn think_stream(
         &self,
         prompt: &str,
         token_tx: mpsc::Sender<StreamToken>,
     ) -> Result<String>;
 
-    /// Generate embeddings for a given text
+    /// Generate embeddings for a given text.
+    ///
+    /// Used for semantic search and memory retrieval.
+    ///
+    /// # Arguments
+    /// * `text` - The input text chunk.
+    ///
+    /// # Returns
+    /// A high-dimensional vector representing the semantic meaning.
     async fn embed(&self, text: &str) -> Result<Vec<f32>>;
 
-    /// Check if a model is loaded and ready
+    /// Check if a model is loaded and ready.
     fn is_ready(&self) -> bool;
 
-    /// Get the name of this brain implementation
+    /// Get the name of this brain implementation.
     fn name(&self) -> &'static str;
 
-    /// Count tokens in text (for pre-flight task validation)
-    /// Default implementation estimates ~4 chars per token
+    /// Count tokens in text (for pre-flight task validation).
+    ///
+    /// # Arguments
+    /// * `text` - The input text to measure.
+    ///
+    /// # Returns
+    /// Estimated token count.
     fn count_tokens(&self, text: &str) -> usize {
         text.len() / 4
     }
 
-    /// Get the batch limit (max tokens per decode call)
-    /// Default is 1536 (2048 - 512 reserved for system prompt)
+    /// Get the batch limit (max tokens per decode call).
+    ///
+    /// This prevents OOM errors during large batch processing.
     fn get_batch_limit(&self) -> u32 {
         1536
     }

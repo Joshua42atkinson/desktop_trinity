@@ -14,24 +14,45 @@ use std::path::Path;
 use std::sync::{Arc, Mutex};
 use uuid::Uuid;
 
-/// Memory fragment stored in the system
+/// Memory fragment stored in the system.
+///
+/// Represents a single unit of semantic memory (e.g., a conversation turn,
+/// a summarized document, or an observation).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MemoryEntry {
+    /// Unique identifier for the memory
     pub id: Uuid,
+    /// The actual text content
     pub content: String,
+    /// The vector embedding (typically 384 or 768 dimensions)
     pub embedding: Vec<f32>,
+    /// Origin of the memory (e.g., "user_chat", "book_text", "system_log")
     pub source_type: String,
+    /// Timestamp of creation (Unix epoch)
     pub created_at: i64,
 }
 
-/// Unified memory interface
+/// Unified memory interface wrapping a persistent SQLite vector store.
+///
+/// Combines relational filtering (via SQLite) with vector similarity search
+/// (via in-memory cosine similarity scanning).
+///
+/// # Performance Note
+/// Current implementation performs a full table scan and computes cosine similarity
+/// in Rust. This is efficient for <100k items but will need an index (e.g. LanceDB) later.
 pub struct UnifiedMemory {
     conn: Arc<Mutex<Connection>>,
     embedding_dim: usize,
 }
 
 impl UnifiedMemory {
-    /// Create or open a memory store at the given path
+    /// Create or open a memory store at the given path.
+    ///
+    /// # Arguments
+    /// * `path` - File path to the SQLite database (e.g., `memories.db`).
+    ///
+    /// # Returns
+    /// A thread-safe handle to the memory system.
     pub fn open(path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
         if let Some(parent) = path.parent() {
@@ -66,7 +87,15 @@ impl UnifiedMemory {
         })
     }
 
-    /// Store a memory with its embedding
+    /// Store a memory with its embedding.
+    ///
+    /// # Arguments
+    /// * `content` - The text to store.
+    /// * `embedding` - The computed vector embedding.
+    /// * `source` - Tag describing the source.
+    ///
+    /// # Returns
+    /// The UUID of the stored memory.
     pub fn store(&self, content: &str, embedding: &[f32], source: &str) -> Result<Uuid> {
         let id = Uuid::new_v4();
         let created_at = chrono::Utc::now().timestamp();
@@ -92,10 +121,17 @@ impl UnifiedMemory {
         Ok(id)
     }
 
-    /// Recall memories similar to the query embedding
+    /// Recall memories similar to the query embedding.
     ///
-    /// Note: This performs a full table scan and in-memory cosine similarity.
-    /// Provide enough RAM or limit the row count if dataset grows > 100k.
+    /// # Arguments
+    /// * `query_embedding` - Vector to search for.
+    /// * `limit` - Maximum number of results to return.
+    ///
+    /// # Returns
+    /// List of memories sorted by similarity (most similar first).
+    ///
+    /// # Note
+    /// This performs a full scan.
     pub fn recall(&self, query_embedding: &[f32], limit: usize) -> Result<Vec<MemoryEntry>> {
         let conn = self.conn.lock().unwrap();
 
@@ -141,7 +177,7 @@ impl UnifiedMemory {
         Ok(scored.into_iter().take(limit).map(|(_, e)| e).collect())
     }
 
-    /// Get total count of memories
+    /// Get total count of memories.
     pub fn count(&self) -> usize {
         let conn = self.conn.lock().unwrap();
         let count: i64 = conn
@@ -150,12 +186,12 @@ impl UnifiedMemory {
         count as usize
     }
 
-    /// Get embedding dimension
+    /// Get embedding dimension.
     pub fn embedding_dim(&self) -> usize {
         self.embedding_dim
     }
 
-    /// Clear all memories (useful for tests/reset)
+    /// Clear all memories (useful for tests/reset).
     pub fn clear(&self) -> Result<()> {
         let conn = self.conn.lock().unwrap();
         conn.execute("DELETE FROM memories", [])?;

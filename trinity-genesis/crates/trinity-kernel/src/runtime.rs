@@ -58,7 +58,16 @@ impl AutonomousRuntime {
         }
     }
 
-    /// Add a task to the queue (priority ordered)
+    /// Add a task to the queue (priority ordered).
+    ///
+    /// The queue is maintained in descending order of priority, ensuring critical
+    /// tasks are processed first. Stable sort is used for tasks of equal priority.
+    ///
+    /// # Arguments
+    /// * `task` - The task to enqueue.
+    ///
+    /// # Returns
+    /// The unique ID of the queued task.
     pub fn enqueue(&self, task: AutonomousTask) -> Uuid {
         let id = task.id;
         let mut queue = self.task_queue.lock().unwrap();
@@ -75,7 +84,9 @@ impl AutonomousRuntime {
         id
     }
 
-    /// Add a simple task by name and type
+    /// Add a simple task by name and type.
+    ///
+    /// Helper method for quick task submission.
     pub fn add_task(&self, name: &str, task_type: TaskType) -> Uuid {
         let task = AutonomousTask::new(name, task_type);
         self.enqueue(task)
@@ -98,7 +109,9 @@ impl AutonomousRuntime {
         *self.is_running.lock().unwrap()
     }
 
-    /// Start the runtime (mark as running)
+    /// Start the runtime (mark as running).
+    ///
+    /// This signals the background worker to begin processing tasks.
     pub fn start(&self) {
         let mut running = self.is_running.lock().unwrap();
         *running = true;
@@ -107,14 +120,19 @@ impl AutonomousRuntime {
         tracing::info!("Autonomous runtime started");
     }
 
-    /// Stop the runtime
+    /// Stop the runtime.
+    ///
+    /// Signals the background worker to pause after the current task completes.
     pub fn stop(&self) {
         let mut running = self.is_running.lock().unwrap();
         *running = false;
         tracing::info!("Autonomous runtime stopping...");
     }
 
-    /// Get queue status
+    /// Get queue status.
+    ///
+    /// Returns a snapshot of the current runtime state, including pending count,
+    /// failed count, and uptime.
     pub fn status(&self) -> QueueStatus {
         let queue = self.task_queue.lock().unwrap();
         let completed = self.completed_tasks.lock().unwrap();

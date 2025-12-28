@@ -4,20 +4,28 @@
 
 use serde::{Deserialize, Serialize};
 
+/// A single message in a chat conversation.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ChatMessage {
-    pub role: String, // "user" or "assistant"
+    /// Role of the speaker ("user", "assistant", "system")
+    pub role: String,
+    /// Text content of the message
     pub content: String,
+    /// Creation timestamp (Unix epoch)
     pub timestamp: i64,
 }
 
+/// Audio data packet for voice transmission.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VoicePacket {
+    /// Raw PCM audio data (usually 16-bit, mono)
     pub audio_data: Vec<u8>,
+    /// Sample rate in Hz (e.g. 24000)
     pub sample_rate: u32,
 }
 
-/// Emotion values for voice synthesis (0.0 - 1.0 each)
+/// Emotion values for voice synthesis (0.0 - 1.0 each).
+/// Defines the emotional coloring of the generated speech.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct EmotionData {
     pub happiness: f32,
@@ -27,16 +35,16 @@ pub struct EmotionData {
     pub surprise: f32,
 }
 
-/// Response from chat with voice synthesis
+/// Response from chat with associated metadata (voice, emotion, state).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VoiceResponse {
-    /// Text content of the response
+    /// Text content of the response.
     pub text: String,
-    /// Synthesized audio (WAV format, 16-bit PCM)
+    /// Synthesized audio (WAV format, 16-bit PCM), if requested.
     pub audio: Option<VoicePacket>,
-    /// Emotion for this response
+    /// Emotion detected for this response.
     pub emotion: EmotionData,
-    /// Avatar state hint
+    /// Avatar state hint (what animation to play).
     pub avatar_state: AvatarState,
 }
 
@@ -54,12 +62,18 @@ pub struct ModelInfo {
     pub context_size: u32,
 }
 
+/// Visual state for the 3D Avatar.
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 pub enum AvatarState {
+    /// Neutral loop
     Idle,
+    /// Processing/Reasoning animation
     Thinking,
+    /// Typing logic/Coding animation
     Coding,
+    /// Lip-sync speaking animation
     Speaking,
+    /// Low-power mode / idle
     Sleeping,
 }
 
@@ -196,12 +210,6 @@ pub enum WriteStyle {
     Formal,
     /// Casual / conversational
     Casual,
-}
-
-impl Default for WriteStyle {
-    fn default() -> Self {
-        WriteStyle::Technical
-    }
 }
 
 /// Request for document generation (Writer skill)

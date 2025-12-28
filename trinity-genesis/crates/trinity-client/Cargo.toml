@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-bevy = { version = "0.13", default-features = false, features = [
+bevy = { version = "0.14.2", default-features = false, features = [
     "bevy_asset",
     "bevy_winit",
     "bevy_core_pipeline",
@@ -17,28 +17,53 @@ bevy = { version = "0.13", default-features = false, features = [
     "bevy_sprite",
     "bevy_text",
     "bevy_ui",
-    "multi-threaded",
+    "bevy_state",         # REQUIRED for init_state
+    "multi_threaded",
     "png",
     "hdr",
     "x11",
     "tonemapping_luts",
     "webgl2",             # Important for Web compatibility
 ] }
-bevy_web_asset = "0.9" # Load assets from HTTP
+bevy_web_asset = "0.9" # Downgraded to 0.9 for Bevy 0.14 compatibility
 wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
 web-sys = "0.3"
 log = "0.4"
 console_error_panic_hook = "0.1"
+
+# Internal
+trinity-protocol = { workspace = true }
+iron-road-physics = { path = "../iron-road-physics", features = [
+    "bevy_reflect",
+    "serde",
+] }
+
+# Editor & Tools (Unified Client)
+bevy_egui = "0.29"       # Compatible with Bevy 0.14
+bevy-yoleck = "0.22"     # Compatible with Bevy 0.14
+bevy_editor_pls = "0.10" # Upgraded to 0.10
+# egui_node_graph = "0.5" # (Disabled)
 
 # Networking
 reqwest = { version = "0.11", features = ["json"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-getrandom = { version = "0.2", features = [
-    "js",
-] } # Pinning 0.2 with JS for WASM
+getrandom = { version = "0.2", features = ["js"] }
+getrandom-03 = { package = "getrandom", version = "0.3", features = [
+    "wasm_js",
+] }
 uuid = { version = "1.0", features = ["v4", "js"] }
+crossbeam-channel = "0.5" # Added for Bridge
+rand = "0.9.2"
 
+# Async
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+tokio = { version = "1", features = ["sync", "macros", "rt"] }
+futures = { workspace = true }
 
 [profile.dev]
 opt-level = 1
@@ -49,4 +74,4 @@ opt-level = 3
 [profile.release]
 lto = true
 codegen-units = 1
-opt-level = "z"   # Optimize for size
+opt-level = "z"

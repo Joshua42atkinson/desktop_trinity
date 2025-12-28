@@ -1,0 +1,10 @@
+
+### Component: Body (`trinity-client`)
+
+#### [MODIFY] [glass.rs](file:///home/joshua/antigravity/trinity-genesis/crates/trinity-client/src/ui/glass.rs)
+- Add `render_socket_panel` to display `SemanticSocket` entities.
+- Implement `dnd` (drag and drop) logic using `egui::DragValue` or custom response handling for `VocabularyItem` cards.
+- Detect drop on `SemanticSocket` and fire `LogisticsCheckEvent`.
+
+#### [MODIFY] [lib.rs](file:///home/joshua/antigravity/trinity-genesis/crates/trinity-client/src/lib.rs)
+- Update `setup_debug_vocab` to also spawn `SemanticSocket` entities so we have something to drop onto.

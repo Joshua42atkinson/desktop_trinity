@@ -22,7 +22,39 @@
 //! ## The Equation
 //! `Velocity = (Power * Steam_Efficiency) / (Mass * Friction)`
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "bevy_reflect", derive(bevy_reflect::Reflect))]
+pub enum VocabularyTier {
+    #[default]
+    Basic, // Tier 1: Daily speech (Mass: 1-10)
+    Academic,  // Tier 2: School speech (Mass: 10-50)
+    Hazardous, // Tier 3: Domain specific (Mass: 50-100)
+}
+
+impl VocabularyTier {
+    pub fn base_mass(&self) -> f32 {
+        match self {
+            Self::Basic => 5.0,
+            Self::Academic => 30.0,
+            Self::Hazardous => 80.0,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "bevy_reflect", derive(bevy_reflect::Reflect))]
+pub struct CognitiveLoad {
+    /// Intrinsic Load (1-100)
+    pub base_mass: f32,
+    /// Effective Load (Drops to 0 if mastered)
+    pub effective_mass: f32,
+}
+
+#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "bevy_reflect", derive(bevy_reflect::Reflect))]
 pub struct Train {
     /// Current store of motivation (Coal). Burned to create Steam.
     pub coal: f32,
@@ -58,7 +90,9 @@ impl Train {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "bevy_reflect", derive(bevy_reflect::Reflect))]
 pub struct Node {
     /// Intrinsic Cognitive Load (Difficulty).
     pub mass: f32,

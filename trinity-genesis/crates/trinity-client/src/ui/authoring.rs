@@ -1,10 +1,5 @@
-// Trinity AI Agent System
-// Copyright (c) Joshua
-// Shared under license for Ask_Pete (Purdue University)
-
-use bevy::prelude::*;
-
 use crate::AppState;
+use bevy::prelude::*;
 
 pub struct AuthoringPlugin;
 
@@ -30,7 +25,7 @@ fn setup_authoring_ui(mut commands: Commands) {
                     flex_direction: FlexDirection::Column,
                     ..default()
                 },
-                background_color: BackgroundColor(Color::rgba(0.2, 0.0, 0.0, 0.5)), // Red tint for "Danger/Creation"
+                background_color: BackgroundColor(Color::srgba(0.2, 0.0, 0.0, 0.5)),
                 ..default()
             },
             AuthoringRoot,
@@ -40,7 +35,7 @@ fn setup_authoring_ui(mut commands: Commands) {
                 "AUTHORING MODE // THE TRAIN YARD",
                 TextStyle {
                     font_size: 40.0,
-                    color: Color::GOLD,
+                    color: Color::srgb(1.0, 0.84, 0.0), // GOLD
                     ..default()
                 },
             ));
@@ -48,7 +43,7 @@ fn setup_authoring_ui(mut commands: Commands) {
                 "[Drag and Drop Nodes Here]",
                 TextStyle {
                     font_size: 20.0,
-                    color: Color::GRAY,
+                    color: Color::srgb(0.5, 0.5, 0.5), // GRAY
                     ..default()
                 },
             ));
@@ -56,6 +51,7 @@ fn setup_authoring_ui(mut commands: Commands) {
 }
 
 fn cleanup_authoring_ui(mut commands: Commands, query: Query<Entity, With<AuthoringRoot>>) {
+    // Correct way to despawn recursively
     for entity in &query {
         commands.entity(entity).despawn_recursive();
     }

@@ -25,39 +25,42 @@ use std::path::Path;
 // Agent Events (Streamed to UI)
 // ============================================================================
 
-/// Events streamed from agents to the Antigravity Window
+/// Events streamed from agents to the Antigravity Window.
+///
+/// These events represent the stream of consciousness and actions of the agents,
+/// allowing the user to see exactly what is happening in real-time.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum AgentEvent {
-    /// Agent started working on a task
+    /// Agent started working on a task.
     TaskStarted {
         agent_id: String,
         task_id: Uuid,
         task_name: String,
     },
-    /// Agent is thinking/reasoning
+    /// Agent is thinking/reasoning (Chain of Thought).
     Thinking {
         agent_id: String,
         thought: String,
     },
-    /// Agent generated code
+    /// Agent generated a block of code.
     CodeGenerated {
         agent_id: String,
         file_path: String,
         code_snippet: String,
         line_count: usize,
     },
-    /// Agent is running a command
+    /// Agent is running a shell command.
     CommandRunning {
         agent_id: String,
         command: String,
     },
-    /// Command output
+    /// Output (stdout/stderr) from a command.
     CommandOutput {
         agent_id: String,
         stdout: String,
         stderr: String,
     },
-    /// Task completed successfully
+    /// Task completed successfully.
     TaskCompleted {
         agent_id: String,
         task_id: Uuid,
@@ -65,18 +68,19 @@ pub enum AgentEvent {
         duration_ms: u64,
         tokens_consumed: u32,
     },
-    /// Task failed
+    /// Task failed with an error.
     TaskFailed {
         agent_id: String,
         task_id: Uuid,
         error: String,
         tokens_consumed: u32,
     },
-    /// Agent became idle
+    /// Agent is waiting for work.
     AgentIdle {
         agent_id: String,
     },
-    /// Generic artifact generated (Code, Text, Plan, etc.)
+    /// Generic artifact generated (Code, Text, Plan, etc.).
+    /// Used for diverse outputs like images, documents, or structured data.
     ArtifactGenerated {
         agent_id: String,
         kind: String, // "code", "text", "plan", etc.
@@ -89,11 +93,16 @@ pub enum AgentEvent {
 // Agent Handle
 // ============================================================================
 
-/// Handle to a running agent
+/// Handle to a running agent.
+///
+/// Provides a mechanism to assign tasks to a specific agent instance.
 #[derive(Clone)]
 pub struct AgentHandle {
+    /// Unique ID (e.g., "jessica-coder")
     pub id: String,
+    /// Display name (e.g., "Jessica")
     pub name: String,
+    /// The agent's primary role/specialization
     pub specialization: AgentSpecialization,
     task_tx: mpsc::Sender<AutonomousTask>,
 }
@@ -127,7 +136,11 @@ impl AgentHandle {
 // Orchestrator
 // ============================================================================
 
-/// Multi-agent orchestrator with streaming events
+/// Multi-agent orchestrator with streaming events.
+///
+/// The Orchestrator manages the lifecycle of agents, dispatches tasks,
+/// and broadcasts real-time events to the UI. It implements the "Dual-Brain"
+/// architecture (Planner + Worker).
 pub struct Orchestrator {
     agents: Vec<AgentHandle>,
     event_tx: broadcast::Sender<AgentEvent>,
@@ -139,10 +152,16 @@ pub struct Orchestrator {
 }
 
 impl Orchestrator {
-    /// Create a new orchestrator with Dual-Brain Architecture
-    /// planner: High-intelligence model (e.g. Llama 4 Scout) for Joshua
-    /// worker: High-speed/context model (e.g. GLM-4 Flash) for Jessica
-    /// sandbox: Shared WASM sandbox for secure tool execution
+    /// Create a new orchestrator with Dual-Brain Architecture.
+    ///
+    /// # Arguments
+    /// * `planner` - High-intelligence model (e.g. Llama 4 Scout) for "Joshua" (Reasoning/Planning).
+    /// * `worker` - High-speed/context model (e.g. GLM-4 Flash) for "Jessica" (Coding/Execution).
+    /// * `sandbox` - Shared WASM sandbox for secure tool execution.
+    /// * `_agent_count` - (Currently unused) Target number of agents.
+    ///
+    /// # Returns
+    /// An initialized Orchestrator with background worker tasks spawned.
     pub fn new(
         planner: Arc<dyn Brain>, 
         worker: Arc<dyn Brain>, 
@@ -243,7 +262,16 @@ impl Orchestrator {
         self.agents.len()
     }
 
-    /// Submit a task to the orchestrator
+    /// Submit a task to the orchestrator.
+    ///
+    /// If an agent is idle, the task is assigned immediately.
+    /// Otherwise, it is added to the pending queue.
+    ///
+    /// # Arguments
+    /// * `task` - The `AutonomousTask` to execute.
+    ///
+    /// # Returns
+    /// The unique ID of the submitted task.
     pub async fn submit(&self, task: AutonomousTask) -> Result<Uuid> {
         let task_id = task.id;
 
@@ -331,7 +359,21 @@ impl Orchestrator {
         tracing::info!("Agent {} stopped", agent_id);
     }
 
-    /// Execute a task
+    /// Execute a specific task with a given agent.
+    ///
+    /// This function handles the complex logic of:
+    /// 1. Building context/prompts based on task type.
+    /// 2. Calling the Brain for inference (Thinking).
+    /// 3. Executing tools (WASM, Shell) if needed.
+    /// 4. Broadcasting events for UI visualization.
+    ///
+    /// # Arguments
+    /// * `agent_id` - ID of the working agent.
+    /// * `agent_name` - Name of the working agent (affects persona).
+    /// * `brain` - The brain instance to use.
+    /// * `sandbox` - The tool sandbox.
+    /// * `task` - The task to execute.
+    /// * `event_tx` - Event broadcaster.
     async fn execute_task(
         agent_id: &str,
         agent_name: &str,
