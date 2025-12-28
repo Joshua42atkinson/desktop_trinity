@@ -83,16 +83,21 @@ Any AI picking up this project should prioritize these architectural pillars:
 ### Phase 1: The Physics Foundation (Current)
 
 - [x] **Core Physics**: `iron-road-physics` crate implementing the velocity equation.
-- [ ] **Logistics System**: Implement the d20 logic in Bevy (`logistics_check_system`).
-- [ ] **Visual Feedback**: "Glass" UI showing Friction and Velocity (Partially done).
+- [x] **Logistics System**: Implement the d20 logic in Bevy (`logistics_check_system`).
+- [x] **Visual Feedback**: "Glass" UI showing Friction and Velocity (Inventory/Socket Panel).
 
 ### Phase 2: The Data Pipeline (Weigh Station)
 
-- [ ] **Weigh Station Scaffold**: Create the pipeline to send words to Llama 4 Scout.
-- [ ] **Prompt Engineering**: "Analyze the word '{word}' for Mass and Tags."
-- [ ] **Persistence**: Database schema for `vocabulary_bank`.
+- [x] **Weigh Station Pipeline**: Async pipeline sending words to LLM for Physics analysis.
+- [x] **Prompt Engineering**: Schema-verified JSON responses for Word Physics.
+- [ ] **Persistence**: Database schema for `vocabulary_bank` (SQLite).
 
-### Phase 3: The Pedagogical Loop (Mastery)
+### Phase 3: Infrastructure (Tools)
+
+- [x] **Git Automation**: `sync_git.sh` for automated commits/pushes.
+- [ ] **WASM Plugin Registry**: Dynamic loading of Tool zone capabilities.
+
+### Phase 4: The Pedagogical Loop (Mastery)
 
 - [ ] **Mastery Component**: `MasteryStatus` tracking 3-stage learning.
 - [ ] **Rule of Three Logic**: System that updates mastery after 3 successful checks.
@@ -122,9 +127,17 @@ cd ~/antigravity/trinity-genesis
 cargo build --workspace
 
 # Run the Body (Client)
-cargo run -p trinity-body
+cargo run -p trinity-client
+
+# Sync to GitHub (SSH key required)
+./sync_git.sh
 
 # Quality checks
 cargo clippy --workspace -- -D warnings
 cargo test --workspace
 ```
+
+## 🛠️ Infrastructure Note: Git Auto-Sync
+
+A private SSH key `trinity_key` has been generated for automated pushes.
+Run `./sync_git.sh` from `trinity-genesis` to commit and push all current work.
