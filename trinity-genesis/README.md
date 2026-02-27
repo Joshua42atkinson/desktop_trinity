@@ -23,6 +23,11 @@ Trinity is built on a unified, high-performance Rust stack to ensure stability, 
 - **The Logic (Physics)**: "Coal & Steam" Economy.
   - An internal simulation of Cognitive Load Theory, modeled as a physics engine.
 
+## Documentation & Roadmap
+
+- **Master Context**: [CONTEXT.md](./CONTEXT.md) - The single source of truth for the project's vision and architecture.
+- **Critique & Roadmap**: [docs/CRITIQUE_AND_ROADMAP.md](./docs/CRITIQUE_AND_ROADMAP.md) - A clear assessment of current readiness and the path to 1.0.
+
 ## Usage
 
 Trinity is designed to be deployed on a single classroom computer (The "Server") which students connect to, or run continuously on personal devices.
