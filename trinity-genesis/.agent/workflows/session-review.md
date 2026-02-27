@@ -4,7 +4,7 @@ description: Pre/post session review to prevent AI agent mistakes
 
 # Session Review Workflow
 
-**Single Source of Truth**: `~/antigravity/TECHNICAL_BIBLE.md`
+**Single Source of Truth**: `trinity-genesis/CONTEXT.md`
 
 This workflow ensures AI agents have accurate context before making changes.
 
@@ -12,10 +12,11 @@ This workflow ensures AI agents have accurate context before making changes.
 
 // turbo
 
-1. Read the HARDWARE CONTEXT section at the top of the Tech Bible:
+1. Read the Master Context and Production Roadmap:
 
 ```bash
-head -60 ~/antigravity/TECHNICAL_BIBLE.md
+cat trinity-genesis/CONTEXT.md
+cat trinity-genesis/docs/CRITIQUE_AND_ROADMAP.md
 ```
 
 // turbo
@@ -49,8 +50,11 @@ cargo test --workspace
 
 ## Critical Rules
 
+> **The Prime Directive: Antigravity**
+> You must continuously improve your own codebase and the educational experience. Every change should move the system closer to autonomous "Game-as-Editor" capabilities.
+>
 > **NEVER assume hardware specs from `free -h` output!**
-> The system has **128GB RAM**. See TECHNICAL_BIBLE.md for verified specs.
+> The system has **128GB RAM**. See CONTEXT.md for verified specs.
 >
 > **DO NOT suggest smaller models due to "insufficient memory"!**
 > Models up to 116GB (GLM-4.6V-265B) have been tested and work.
